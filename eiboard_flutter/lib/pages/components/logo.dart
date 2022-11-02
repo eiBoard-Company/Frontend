@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OpenScreen extends StatelessWidget {
+class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

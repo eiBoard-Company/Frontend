@@ -10,16 +10,19 @@ class EiBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      // ignore: unnecessary_new
+    return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: Text(
-            'Hello World',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+        appBar: AppBar(
+          title: const Text(
+            "eiBoard",
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: LightStandardTheme.colorMain,
+        ),
+        body: const Center(
+          child: Image(
+            image: AssetImage('images/logoEiBoard.png'),
           ),
         ),
       ),
