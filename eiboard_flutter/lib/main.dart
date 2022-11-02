@@ -1,5 +1,5 @@
+import 'package:eiboard_flutter/pages/open_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 
 void main() {
   runApp(const EiBoard());
@@ -10,22 +10,9 @@ class EiBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: const Text(
-            "eiBoard",
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: LightStandardTheme.colorMain,
-        ),
-        body: const Center(
-          child: Image(
-            image: AssetImage('images/logoEiBoard.png'),
-          ),
-        ),
-      ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: OpenScreen(),
     );
   }
 }
