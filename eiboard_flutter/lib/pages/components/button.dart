@@ -1,4 +1,3 @@
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 //still need to implement
@@ -8,6 +7,6 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Button();
+    return const Button();
   }
 }

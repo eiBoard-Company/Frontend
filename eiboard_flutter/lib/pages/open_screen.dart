@@ -1,7 +1,6 @@
 import 'package:eiboard_flutter/pages/login_screen.dart';
 import 'package:eiboard_flutter/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../themes/light_standard_theme.dart';
 
 class OpenScreen extends StatelessWidget {
@@ -9,7 +8,7 @@ class OpenScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size; //getting size of screen
+    // Size size = MediaQuery.of(context).size; //getting size of screen  need to implement
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
