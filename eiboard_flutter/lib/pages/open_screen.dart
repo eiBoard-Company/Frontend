@@ -1,3 +1,4 @@
+import 'package:eiboard_flutter/pages/components/backend_rapla.dart';
 import 'package:eiboard_flutter/pages/login_screen.dart';
 import 'package:eiboard_flutter/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,8 @@ class OpenScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                HttpRequest req = HttpRequest();
+                req.fetchData();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
