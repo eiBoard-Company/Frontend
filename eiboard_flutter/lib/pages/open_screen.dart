@@ -1,8 +1,10 @@
 import 'package:eiboard_flutter/pages/components/backend_rapla.dart';
+import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/login_screen.dart';
 import 'package:eiboard_flutter/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
 import '../themes/light_standard_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OpenScreen extends StatelessWidget {
   const OpenScreen({Key? key}) : super(key: key);
@@ -17,31 +19,45 @@ class OpenScreen extends StatelessWidget {
                 child: Column(
           children: [
             const SizedBox(height: 40),
-            const Text(
+            Text(
               'WELCOME TO EIBOARD',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700),
+              ),
             ),
             const SizedBox(height: 30),
             const Text(
               'With eiBoard you can keep track',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
+                height: 1.3,
               ),
             ),
             const Text(
               'of all your assignments, classes,',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
+                height: 1.3,
               ),
             ),
             const Text(
               'appointments and todos.',
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
+                height: 1.3,
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Being organized has\nnever been so easy!'),
+            const Text(
+              'Being organized has\nnever been so easy!',
+              style: TextStyle(
+                fontSize: 16,
+                height: 1.3,
+              ),
+            ),
             const SizedBox(height: 20),
             const Image(
               height: 250,
@@ -49,8 +65,9 @@ class OpenScreen extends StatelessWidget {
               image: AssetImage('images/logoEiBoard.png'),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
+            Button(
+              "LOGIN",
+              () {
                 HttpRequest req = HttpRequest();
                 req.fetchData();
                 Navigator.push(
@@ -62,8 +79,6 @@ class OpenScreen extends StatelessWidget {
                   ),
                 );
               },
-              style: bsLogin,
-              child: const Text('LOGIN'),
             ),
             const SizedBox(height: 30),
             ElevatedButton(
@@ -78,8 +93,14 @@ class OpenScreen extends StatelessWidget {
                 );
               },
               style: bsSignUp,
-              child: const Text(
+              child: Text(
                 'SIGN UP',
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ],
@@ -94,21 +115,7 @@ class OpenScreen extends StatelessWidget {
         elevation: 0,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(200),
-          ),
-        ),
-        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
-  }
-
-  ButtonStyle get bsLogin {
-    return ElevatedButton.styleFrom(
-        minimumSize: const Size(302, 69),
-        backgroundColor: LightStandardTheme.colorPrimary,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(200),
+            Radius.circular(70),
           ),
         ),
         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
