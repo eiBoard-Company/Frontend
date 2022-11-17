@@ -1,5 +1,6 @@
 import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/components/button.dart';
+import 'package:eiboard_flutter/pages/test.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_screen.dart';
@@ -99,7 +100,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const CalendarScreen();
+                      return const test();
                     },
                   ),
                 );
