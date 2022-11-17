@@ -1,114 +1,116 @@
-import 'dart:collection';
-import 'dart:html';
-
 import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/test.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../themes/light_standard_theme.dart';
 
-class CalendarScreen extends State<test> {
-  List days = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
-  List<Widget> mywidgets = [];
-  final Map<Widget, bool> buttons = HashMap();
-  bool done = false;
-  int counter = 0;
+class CalendarScreen extends StatefulWidget {
+  const CalendarScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CalendarScreen> createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
+  DateTime selectedDate = DateTime.now();
+
+  int currentDateSelectedIndex = 0;
+  ScrollController scrollController = ScrollController();
+
+  List<String> listOfMonths = [
+    "January",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  List<String> listOfDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
   @override
   Widget build(BuildContext context) {
-    var now = DateTime.now();
-    List months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-
-    var i = 0;
-
-    var buttonActive = true;
-    Color c = Colors.white;
-    for (var d in days) {
-      var button;
-
-      button = TextButton(
-        onPressed: () => {},
-        /**     print(buttonActive),
-          setState(() => {
-                print(c),
-                buttonActive = !buttonActive,
-                c = buttonActive == true
-                    ? LightStandardTheme.colorSecondary
-                    : Colors.white,
-              }),
-        },*/
-        child: Text(d),
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                buttonActive = !buttonActive;
-
-                c = buttonActive == false
-                    ? LightStandardTheme.colorSecondary
-                    : Colors.white;
-              } //<-- SEE HERE
-              return c; // Defer to the widget's default.
-            },
-          ),
-        ),
-        // style: TextButton.styleFrom(
-
-        // shape:
-        //    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        //backgroundColor: c,
-
-        /** 
-          style: TextButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              backgroundColor: buttonActive == true
-                  ? LightStandardTheme.colorSecondary
-                  : Colors.white));
-                  */
-      );
-      buttons[button] = false;
-
-      i++;
-      if (!done) {
-        mywidgets.add(Expanded(child: button));
-      }
-    }
-    done = true;
     return PageBackground(
         topic: 'Schedule',
         child: Column(children: [
+          const SizedBox(
+            height: 25,
+          ),
           Center(
-              child: Column(
-            children: [
-              const SizedBox(height: 20),
-              Text(
-                months[now.month - 1],
-                style: GoogleFonts.karla(
-                  textStyle: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-            ],
+              child: Text(
+            "${listOfMonths[selectedDate.month - 1]} ${selectedDate.year}",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
           )),
-          Row(
-            children: mywidgets,
-          )
+          const SizedBox(height: 30),
+          SizedBox(
+              height: 65,
+              child: ListView.separated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(width: 10);
+                },
+                itemCount: 365,
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        currentDateSelectedIndex = index;
+                        selectedDate =
+                            DateTime.now().add(Duration(days: index));
+                      });
+                    },
+                    child: Container(
+                      height: 65,
+                      width: 50,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: currentDateSelectedIndex == index
+                              ? LightStandardTheme.colorSecondary
+                              : Colors.white),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            DateTime.now()
+                                .add(Duration(days: index))
+                                .day
+                                .toString(),
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w600,
+                                color: currentDateSelectedIndex == index
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                          const SizedBox(
+                            height: 1,
+                          ),
+                          Text(
+                            listOfDays[DateTime.now()
+                                        .add(Duration(days: index))
+                                        .weekday -
+                                    1]
+                                .toString(),
+                            style: TextStyle(
+                                fontSize: 12,
+                                color: currentDateSelectedIndex == index
+                                    ? Colors.white
+                                    : const Color(0xFF717171)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )),
         ]));
   }
 }
