@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "eiboard_flutter",
+            "cwd": "eiboard_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "eiboard_flutter (profile mode)",
+            "cwd": "eiboard_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "eiboard_flutter (release mode)",
+            "cwd": "eiboard_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
