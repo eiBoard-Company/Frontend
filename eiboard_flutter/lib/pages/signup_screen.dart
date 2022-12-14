@@ -19,76 +19,79 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
-        body: SafeArea(
-            child: Center(
+        body: Center(
+            child: SingleChildScrollView(
+                reverse: true,
                 child: Column(
-          children: [
-            const SizedBox(height: 40),
-            Text(
-              'SIGN UP',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700),
-              ),
-            ),
-            const SizedBox(height: 50),
-            const Image(
-              height: 250,
-              width: 250,
-              image: AssetImage('images/logoEiBoard.png'),
-            ),
-            const SizedBox(height: 30),
-            SizedBox(
-              width: 302,
-              height: 69,
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Enter E-Mail",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(),
-                  ),
-                  //fillColor: Colors.green
-                ),
-                /*validator: (val) {
+                  children: [
+                    const SizedBox(height: 40),
+                    Text(
+                      'SIGN UP',
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    const SizedBox(height: 50),
+                    const Image(
+                      height: 250,
+                      width: 250,
+                      image: AssetImage('images/logoEiBoard.png'),
+                    ),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      width: 302,
+                      height: 69,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: "Enter E-Mail",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(),
+                          ),
+                          //fillColor: Colors.green
+                        ),
+                        /*validator: (val) {
                 if (val.length == 0) {
                   return "Email cannot be empty";
                 } else {
                   return null;
                 }
               },*/
-                keyboardType: TextInputType.emailAddress,
-              ),
-            ),
-            const SizedBox(height: 15),
-            SizedBox(
-              //TODO: manage so that you can see textfield when entering input
-              width: 302,
-              height: 69,
-              child: TextFormField(
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: "Enter Password",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: const BorderSide(),
-                  ),
-                  //fillColor: Colors.green
-                ),
-                /*validator: (val) {
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      //TODO: manage so that you can see textfield when entering input
+                      width: 302,
+                      height: 69,
+                      child: TextFormField(
+                        obscureText: true,
+                        enableSuggestions: false,
+                        autocorrect: false,
+                        decoration: InputDecoration(
+                          labelText: "Enter Password",
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: const BorderSide(),
+                          ),
+                          //fillColor: Colors.green
+                        ),
+                        /*validator: (val) {
                 if (val.length == 0) {
                   return "Email cannot be empty";
                 } else {
                   return null;
                 }
               },*/
+
                 keyboardType: TextInputType.emailAddress,
               ),
             ),
@@ -144,5 +147,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ],
         ))));
+
   }
 }

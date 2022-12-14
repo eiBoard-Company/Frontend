@@ -1,41 +1,22 @@
+import 'dart:developer';
+import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/weekly_calendar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../themes/light_standard_theme.dart';
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({Key? key}) : super(key: key);
+class CalendarWeeklyScreen extends StatefulWidget {
+  const CalendarWeeklyScreen({Key? key}) : super(key: key);
 
   @override
-  State<CalendarScreen> createState() => _CalendarScreenState();
+  State<CalendarWeeklyScreen> createState() => _CalendarWeeklyScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
-  DateTime selectedDate = DateTime.now();
-  DateTime displayDate = DateTime.now().add(
-    const Duration(days: 30),
-  );
-
+class _CalendarWeeklyScreenState extends State<CalendarWeeklyScreen> {
   int currentDateSelectedIndex = 0;
   ScrollController scrollController = ScrollController();
 
-  List<String> listOfMonths = [
-    "January",
-    "Feburary",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
-  List<String> listOfDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
   DateTime now = DateTime.now();
   Text header = updateHeader(DateTime.now());
   @override
@@ -57,13 +38,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 size: 28,
               ),
               const Spacer(),
-              Text(
-                "${listOfMonths[selectedDate.month - 1]} ${selectedDate.year}",
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
+              header,
               const Spacer(),
               IconButton(
                 icon: const Icon(Icons.more_horiz,
@@ -72,149 +47,76 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const CalendarWeeklyScreen()),
+                        builder: (context) => const CalendarScreen()),
                   );
                 },
               ),
             ],
           ),
         ),
-        const SizedBox(height: 30),
-        SizedBox(
-            height: 65,
-            child: ListView.separated(
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(width: 10);
-              },
-              itemCount: 365,
-              controller: scrollController,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      currentDateSelectedIndex = index;
-                      selectedDate = DateTime.now().add(Duration(days: index));
-                    });
-                  },
-                  child: Container(
-                    height: 65,
-                    width: 50,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: currentDateSelectedIndex == index
-                            ? LightStandardTheme.colorSecondary
-                            : Colors.white),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          DateTime.now()
-                              .add(Duration(days: index))
-                              .day
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : Colors.black),
-                        ),
-                        const SizedBox(
-                          height: 1,
-                        ),
-                        Text(
-                          listOfDays[DateTime.now()
-                                      .add(Duration(days: index))
-                                      .weekday -
-                                  1]
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: currentDateSelectedIndex == index
-                                  ? Colors.white
-                                  : const Color(0xFF717171)),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            )),
         const SizedBox(
-          height: 10,
+          height: 5,
         ),
         SizedBox(
-            height: MediaQuery.of(context).size.height -
-                (2 * 65) -
-                30 -
-                25 -
-                1 -
-                50,
+            height: MediaQuery.of(context).size.height - (2 * 65) - 20 - 100,
             child: SfCalendar(
+              /*onViewChanged: (ViewChangedDetails details) { //TODO: fix error that's occuring here
+                List<DateTime> dates = details.visibleDates;
+                log(dates.elementAt(0).toString());
+                now = dates.elementAt(0);
+                setState(() {
+                  header = updateHeader(now);
+                });
+              },*/
               timeSlotViewSettings: const TimeSlotViewSettings(
                 startHour: 0,
                 endHour: 24,
               ),
-              view: CalendarView.day,
+              view: CalendarView.workWeek,
               headerHeight: 0,
-              headerStyle: const CalendarHeaderStyle(
-                textAlign: TextAlign.center,
-                textStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
               todayHighlightColor: LightStandardTheme.colorSecondary,
               dataSource: ClassDataSource(getAppointments()),
               appointmentBuilder:
                   (context, CalendarAppointmentDetails details) {
                 final Appointment meeting = details.appointments.first;
                 return Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.fromLTRB(5, 7, 5, 8),
                     height: 50,
                     alignment: Alignment.topLeft,
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(13),
+                      borderRadius: BorderRadius.circular(6),
                       color: meeting.color,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Text(meeting.notes.toString(),
-                                style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                )),
-                            const Spacer(),
-                            const Icon(Icons.location_on,
-                                color: Colors.black, size: 14),
-                            Text(" ${meeting.location}",
-                                style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                )),
-                          ],
-                        ),
-                        const Spacer(),
                         Text(meeting.subject,
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                              fontSize: 8,
                             )),
-                        const SizedBox(
-                          height: 5,
-                        ),
+                        const Spacer(),
                         Text(getTime(details),
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w500,
-                              fontSize: 12,
+                              fontSize: 6,
                             )),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(Icons.location_on,
+                                color: Colors.black, size: 8),
+                            Text(" ${meeting.location}",
+                                style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 6,
+                                )),
+                          ],
+                        ),
                       ],
                     ));
               },
@@ -311,4 +213,29 @@ class ClassDataSource extends CalendarDataSource {
   ClassDataSource(List<Appointment> source) {
     appointments = source;
   }
+}
+
+Text updateHeader(DateTime now) {
+  List<String> listOfMonths = [
+    "January",
+    "Feburary",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  return Text(
+    "${listOfMonths[now.month - 1]} ${now.year} ",
+    style: const TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w700,
+    ),
+  );
 }

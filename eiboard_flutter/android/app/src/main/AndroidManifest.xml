@@ -2,6 +2,8 @@
     package="com.example.eiboard_flutter">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+        android:enableOnBackInvokedCallback="true"
+        android:hardwareAccelerated="true"
         android:label="eiboard_flutter"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
