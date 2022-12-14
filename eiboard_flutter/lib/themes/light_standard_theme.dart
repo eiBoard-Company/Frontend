@@ -29,4 +29,5 @@ class LightStandardTheme {
   static const Color colorOverdue = Color(0xFFB90000);
   static const Color colorDueToday = Color(0xFFFF6B00);
   static const Color colorDueThisWeek = Color(0xFF023E8A);
+  static const Color colorSubjectName = Color.fromARGB(255, 63, 63, 63);
 }
