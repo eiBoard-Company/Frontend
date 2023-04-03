@@ -1,13 +1,13 @@
-import 'package:eiboard_flutter/pages/components/ListButton.dart';
 import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/components/page.dart';
 import 'package:eiboard_flutter/pages/components/todoListBox.dart';
+import 'package:eiboard_flutter/pages/createTask_screen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class newTodoListScreen extends StatelessWidget {
-  const newTodoListScreen({Key? key}) : super(key: key);
+class NewTodoListScreen extends StatelessWidget {
+  const NewTodoListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,16 @@ class newTodoListScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const newTodoListScreen();
+                            return const NewTodoListScreen();
                           },
                         ),
                       );
                     },
-                    child: const todoListBox("test1", "Rechnerarchitektur",
-                        "Oct 17", LightStandardTheme.colorClassThree))),
+                    child: const todoListBox(
+                        "Matheaufgaben erledigen",
+                        "Mathematik II",
+                        "Oct 17",
+                        LightStandardTheme.colorClassThree))),
             const SizedBox(height: 15),
             Center(
                 child: InkWell(
@@ -48,13 +51,16 @@ class newTodoListScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const newTodoListScreen();
+                            return const NewTodoListScreen();
                           },
                         ),
                       );
                     },
-                    child: const todoListBox("test1", "Rechnerarchitektur",
-                        "Oct 17", LightStandardTheme.colorClassThree))),
+                    child: const todoListBox(
+                        "Letzte Vorlesung nacharbeiten",
+                        "Rechnerarchitektur",
+                        "Oct 17",
+                        LightStandardTheme.colorClassThree))),
             const SizedBox(height: 15),
             Text(
               'Due Today',
@@ -73,7 +79,7 @@ class newTodoListScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const newTodoListScreen();
+                            return const NewTodoListScreen();
                           },
                         ),
                       );
@@ -101,7 +107,7 @@ class newTodoListScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const newTodoListScreen();
+                            return const NewTodoListScreen();
                           },
                         ),
                       );
@@ -116,7 +122,7 @@ class newTodoListScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const newTodoListScreen();
+                      return const CreateTaskScreen();
                     },
                   ),
                 );
