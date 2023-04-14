@@ -122,7 +122,7 @@ class NewTodoListScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return const CreateTaskScreen();
+                      return CreateTaskScreen();
                     },
                   ),
                 );

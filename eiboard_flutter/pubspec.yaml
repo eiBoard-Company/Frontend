@@ -32,7 +32,7 @@ dependencies:
   http: 0.13.5
   flutter:
     sdk: flutter
-    intl: ^0.17.0
+  date_field: ^3.0.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -40,6 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   syncfusion_flutter_calendar: ^20.3.59
+  datetime_picker_formfield: ^2.0.1
 
 dev_dependencies:
   flutter_test:
