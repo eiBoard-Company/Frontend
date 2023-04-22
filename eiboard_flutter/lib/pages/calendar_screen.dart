@@ -18,6 +18,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return PageBackground(
       topic: 'Schedule',
+      showPlusIcon: true,
       child: SingleChildScrollView(
           child: Column(children: [
         const SizedBox(
