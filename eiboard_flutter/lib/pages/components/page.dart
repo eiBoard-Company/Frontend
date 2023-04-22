@@ -3,9 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../themes/light_standard_theme.dart';
 
+//TODO: add option without plus
+
 class PageBackground extends StatelessWidget {
   final Widget child;
   final String topic;
+
   const PageBackground({
     Key? key,
     required this.topic,

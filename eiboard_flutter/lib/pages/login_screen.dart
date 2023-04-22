@@ -4,7 +4,7 @@ import 'package:eiboard_flutter/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-//still need to fully implement, add errors
+//TODO: still need to fully implement, add errors
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,16 +14,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextDecoration td = TextDecoration.none;
+  TextDecoration textDecoration = TextDecoration.none;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset:
-            true, //need to set to true otherwise won't be able to see all boxes
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         body: Center(
             child: SingleChildScrollView(
-                //to avoid overflow
                 reverse: true,
                 padding: const EdgeInsets.all(32),
                 child: Column(
@@ -56,15 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -85,15 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -117,17 +99,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         foregroundColor: Colors.black,
                         textStyle: TextStyle(
                           fontSize: 12,
-                          decoration: td,
+                          decoration: textDecoration,
                         ),
                       ),
                       onHover: (hasHover) {
                         if (hasHover == true) {
                           setState(() {
-                            td = TextDecoration.underline;
+                            textDecoration = TextDecoration.underline;
                           });
                         } else {
                           setState(() {
-                            td = TextDecoration.none;
+                            textDecoration = TextDecoration.none;
                           });
                         }
                       },

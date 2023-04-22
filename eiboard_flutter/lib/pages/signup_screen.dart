@@ -1,4 +1,3 @@
-import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/todoList_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextDecoration td = TextDecoration.none;
+  TextDecoration textDecoration = TextDecoration.none;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -82,71 +73,61 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
-
-                keyboardType: TextInputType.emailAddress,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Button(
-              "SIGN UP",
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const TodoListScreen();
-                    },
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 10),
-            TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.black,
-                textStyle: TextStyle(
-                  fontSize: 12,
-                  decoration: td,
-                ),
-              ),
-              onHover: (hasHover) {
-                if (hasHover == true) {
-                  setState(() {
-                    td = TextDecoration.underline;
-                  });
-                } else {
-                  setState(() {
-                    td = TextDecoration.none;
-                  });
-                }
-              },
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const LoginScreen();
-                    },
-                  ),
-                );
-              },
-              child: Text(
-                "Already have an account? Sign in.",
-                style:
-                    GoogleFonts.karla(textStyle: const TextStyle(fontSize: 14)),
-              ),
-            ),
-          ],
-        ))));
-
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Button(
+                      "SIGN UP",
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const TodoListScreen();
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.black,
+                        textStyle: TextStyle(
+                          fontSize: 12,
+                          decoration: textDecoration,
+                        ),
+                      ),
+                      onHover: (hasHover) {
+                        if (hasHover == true) {
+                          setState(() {
+                            textDecoration = TextDecoration.underline;
+                          });
+                        } else {
+                          setState(() {
+                            textDecoration = TextDecoration.none;
+                          });
+                        }
+                      },
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return const LoginScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Already have an account? Sign in.",
+                        style: GoogleFonts.karla(
+                            textStyle: const TextStyle(fontSize: 14)),
+                      ),
+                    ),
+                  ],
+                ))));
   }
 }
