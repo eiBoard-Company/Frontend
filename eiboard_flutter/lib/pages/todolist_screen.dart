@@ -12,6 +12,7 @@ class TodoListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageBackground(
         topic: 'Tasks',
+        showPlusIcon: false,
         child: Column(children: [
           Center(
               child: Column(
