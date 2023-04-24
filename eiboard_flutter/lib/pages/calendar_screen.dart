@@ -38,6 +38,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 CalendarView.week,
                 CalendarView.month
               ],
+              showDatePickerButton: true,
               headerHeight: 40,
               headerStyle: const CalendarHeaderStyle(
                 textAlign: TextAlign.center,
