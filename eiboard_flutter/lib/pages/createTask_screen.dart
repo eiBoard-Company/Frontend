@@ -1,7 +1,7 @@
 import 'dart:html';
 
 import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/components/tagButton.dart';
+import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +9,16 @@ import 'components/button.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:date_field/date_field.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:chips_choice/chips_choice.dart';
 
-class CreateTaskScreen extends StatelessWidget {
+class CreateTaskScreen extends StatefulWidget {
   CreateTaskScreen({Key? key}) : super(key: key);
+  @override
+  _CreateTaskScreenState createState() => _CreateTaskScreenState();
+}
+
+class _CreateTaskScreenState extends State<CreateTaskScreen> {
   List<String> tags = [
     'Software Engineering',
     'Formale Sprachen',
@@ -21,7 +28,9 @@ class CreateTaskScreen extends StatelessWidget {
     'Betriebssysteme',
     'Rechnerarchitektur I'
   ];
-  int tag = 1;
+  int tag1 = 0;
+  String newTag = '';
+  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +111,85 @@ class CreateTaskScreen extends StatelessWidget {
             maxLines: 4,
           ),
         ),
-        const SizedBox(width: 337, child: tagButton("test")),
+        const SizedBox(height: 15),
+        SizedBox(
+          width: 337,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('Category'),
+              const SizedBox(height: 10.0),
+              Wrap(
+                spacing: 5.0,
+                runSpacing: 7.0,
+                children: List<Widget>.generate(
+                  tags.length,
+                  (index) => ChoiceChip(
+                    label: Text(tags[index]),
+                    selected: tag1 == index,
+                    selectedColor: LightStandardTheme.colorDueToday,
+                    backgroundColor: LightStandardTheme.colorDarkFont,
+                    labelStyle: TextStyle(
+                      color: tag1 == index
+                          ? Colors.white // Farbe des ausgewählten Chips
+                          : LightStandardTheme.colorLightFont, // Standardfarbe
+                    ),
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: tag1 == index
+                              ? LightStandardTheme
+                                  .colorDueToday // Borderfarbe des ausgewählten Chips
+                              : LightStandardTheme
+                                  .tagBorder, // Standard-Borderfarbe
+                        ),
+                        borderRadius: BorderRadius.circular(15)),
+                    onSelected: (bool selected) {
+                      setState(() {
+                        tag1 = (selected ? index : null)!;
+                      });
+                    },
+                  ),
+                ).toList(),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          width: 337,
+          child: Row(children: [
+            SizedBox(
+              width: 100, // maximale Breite jedes Chips
+              child: TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                  hintText: 'Neuer Chip',
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) => setState(() => newTag = value),
+                onSubmitted: (value) {
+                  _controller.clear();
+                  setState(() {
+                    tags.add(newTag);
+                    newTag = ''; // leert das Textfeld
+                  });
+                },
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                _controller.clear();
+                setState(() {
+                  tags.add(newTag);
+                  newTag = ''; // leert das Textfeld
+                });
+              },
+            ),
+          ]),
+        ),
         const SizedBox(
-          height: 15,
+          height: 125,
         ),
         Center(
           child: Button(
