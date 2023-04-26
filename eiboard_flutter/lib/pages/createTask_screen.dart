@@ -36,6 +36,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   Widget build(BuildContext context) {
     return PageBackground(
       topic: 'Create New Task',
+      showPlusIcon: false,
       child: Column(children: [
         SizedBox(
           width: 337,

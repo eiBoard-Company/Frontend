@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../themes/light_standard_theme.dart';
 import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/weekly_calendar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';

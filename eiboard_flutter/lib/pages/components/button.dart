@@ -4,9 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../themes/light_standard_theme.dart';
 
 class Button extends StatelessWidget {
-  final String texxt;
-  final VoidCallback function;
-  const Button(this.texxt, this.function, {super.key});
+  final String textInButton;
+  final VoidCallback functionOfOnPressed;
+  const Button(this.textInButton, this.functionOfOnPressed, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
       padding: const EdgeInsets.only(top: 0),
       child: Material(
         child: ElevatedButton(
-          onPressed: function,
+          onPressed: functionOfOnPressed,
           style: ElevatedButton.styleFrom(
               minimumSize: const Size(302, 69),
               backgroundColor: LightStandardTheme.colorPrimary,
@@ -28,7 +28,7 @@ class Button extends StatelessWidget {
               textStyle:
                   const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           child: Text(
-            texxt,
+            textInButton,
             style: GoogleFonts.montserrat(
               textStyle:
                   const TextStyle(fontSize: 22, fontWeight: FontWeight.w700),

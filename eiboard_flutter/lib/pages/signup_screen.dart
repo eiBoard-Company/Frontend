@@ -1,4 +1,3 @@
-import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/new_Todo_List_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  TextDecoration td = TextDecoration.none;
+  TextDecoration textDecoration = TextDecoration.none;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,15 +53,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -82,16 +73,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             borderRadius: BorderRadius.circular(15),
                             borderSide: const BorderSide(),
                           ),
-                          //fillColor: Colors.green
                         ),
-                        /*validator: (val) {
-                if (val.length == 0) {
-                  return "Email cannot be empty";
-                } else {
-                  return null;
-                }
-              },*/
-
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -115,17 +97,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         foregroundColor: Colors.black,
                         textStyle: TextStyle(
                           fontSize: 12,
-                          decoration: td,
+                          decoration: textDecoration,
                         ),
                       ),
                       onHover: (hasHover) {
                         if (hasHover == true) {
                           setState(() {
-                            td = TextDecoration.underline;
+                            textDecoration = TextDecoration.underline;
                           });
                         } else {
                           setState(() {
-                            td = TextDecoration.none;
+                            textDecoration = TextDecoration.none;
                           });
                         }
                       },

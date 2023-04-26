@@ -6,30 +6,33 @@ import '../../themes/light_standard_theme.dart';
 class PageBackground extends StatelessWidget {
   final Widget child;
   final String topic;
+  final bool showPlusIcon;
+
   const PageBackground({
     Key? key,
     required this.topic,
+    required this.showPlusIcon,
     required this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        backgroundColor: LightStandardTheme.colorMain,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80),
-          child: SafeArea(
-            child: AppBar(
-              automaticallyImplyLeading: false,
-              toolbarHeight: 80,
-              elevation: 0,
-              leading: IconButton(
-                icon:
-                    const Icon(Icons.arrow_back, color: Colors.black, size: 30),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-              actions: [
+      extendBodyBehindAppBar: true,
+      backgroundColor: LightStandardTheme.colorMain,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: SafeArea(
+          child: AppBar(
+            automaticallyImplyLeading: false,
+            toolbarHeight: 80,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            actions: [
+              if (showPlusIcon)
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(
@@ -37,37 +40,42 @@ class PageBackground extends StatelessWidget {
                     color: Colors.black,
                     size: 30,
                   ),
-                  //TODO: add onPressed
                 ),
-              ],
-              centerTitle: true,
-              title: Text(
-                topic,
-                style: GoogleFonts.montserrat(
-                  textStyle: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600),
+            ],
+            centerTitle: true,
+            title: Text(
+              topic,
+              style: GoogleFonts.montserrat(
+                textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              backgroundColor: LightStandardTheme.colorMain,
             ),
+            backgroundColor: LightStandardTheme.colorMain,
           ),
         ),
-        body: SafeArea(
-            child: Center(
-                child: Column(
-          children: [
-            const SizedBox(height: 0),
-            Expanded(
+      ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 0),
+              Expanded(
                 child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-                color: Colors.white,
+                  decoration: const BoxDecoration(
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40)),
+                    color: Colors.white,
+                  ),
+                  child: child,
+                ),
               ),
-              child: child,
-            ))
-          ],
-        ))));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
