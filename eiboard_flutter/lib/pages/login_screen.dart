@@ -1,4 +1,3 @@
-import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/main_screen.dart';
 import 'package:eiboard_flutter/pages/signup_screen.dart';
