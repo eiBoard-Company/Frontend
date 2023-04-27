@@ -30,4 +30,7 @@ class LightStandardTheme {
   static const Color colorDueToday = Color(0xFFFF6B00);
   static const Color colorDueThisWeek = Color(0xFF023E8A);
   static const Color colorSubjectName = Color.fromARGB(255, 63, 63, 63);
+
+  //Color for TagButtonBorder
+  static const Color tagBorder = Color.fromARGB(255, 128, 128, 128);
 }
