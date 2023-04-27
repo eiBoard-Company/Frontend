@@ -1,21 +1,15 @@
-import 'dart:html';
-
 import 'package:eiboard_flutter/pages/components/page.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'components/button.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:intl/intl.dart';
 import 'package:date_field/date_field.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
-import 'package:chips_choice/chips_choice.dart';
 
 class CreateTaskScreen extends StatefulWidget {
-  CreateTaskScreen({Key? key}) : super(key: key);
+  const CreateTaskScreen({Key? key}) : super(key: key);
+
   @override
-  _CreateTaskScreenState createState() => _CreateTaskScreenState();
+  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
 }
 
 class _CreateTaskScreenState extends State<CreateTaskScreen> {
@@ -58,9 +52,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               autovalidateMode: AutovalidateMode.always,
               validator: (e) =>
                   (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-              onDateSelected: (DateTime value) {
-                print(value);
-              },
+              onDateSelected: (DateTime value) {},
             )),
         SizedBox(
             width: 337,
@@ -78,9 +70,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     autovalidateMode: AutovalidateMode.always,
                     validator: (e) =>
                         (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {
-                      print(value);
-                    },
+                    onDateSelected: (DateTime value) {},
                   ),
                 ),
                 Padding(
@@ -95,9 +85,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     autovalidateMode: AutovalidateMode.always,
                     validator: (e) =>
                         (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {
-                      print(value);
-                    },
+                    onDateSelected: (DateTime value) {},
                   ),
                 )
               ],
@@ -178,7 +166,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add),
+              icon: const Icon(Icons.add),
               onPressed: () {
                 _controller.clear();
                 setState(() {
@@ -200,7 +188,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return CreateTaskScreen();
+                    return const CreateTaskScreen();
                   },
                 ),
               );

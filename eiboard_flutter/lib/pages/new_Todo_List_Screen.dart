@@ -1,7 +1,7 @@
 import 'package:eiboard_flutter/pages/components/button.dart';
 import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/components/todoListBox.dart';
-import 'package:eiboard_flutter/pages/createTask_screen.dart';
+import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
+import 'package:eiboard_flutter/pages/create_task_screen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +39,7 @@ class NewTodoListScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const todoListBox(
+                    child: const TodoListBox(
                         "Matheaufgaben erledigen",
                         "Mathematik II",
                         "Oct 17",
@@ -57,7 +57,7 @@ class NewTodoListScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const todoListBox(
+                    child: const TodoListBox(
                         "Letzte Vorlesung nacharbeiten",
                         "Rechnerarchitektur",
                         "Oct 17",
@@ -85,7 +85,7 @@ class NewTodoListScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const todoListBox(
+                    child: const TodoListBox(
                         "Typ3-grammatik lernen",
                         "Formale Sprachen",
                         "Nov 21",
@@ -113,7 +113,7 @@ class NewTodoListScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const todoListBox("Project", "Software Enineering",
+                    child: const TodoListBox("Project", "Software Enineering",
                         "Nov 25", LightStandardTheme.colorClassOne))),
             const SizedBox(height: 150),
             Button(
@@ -123,7 +123,7 @@ class NewTodoListScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return CreateTaskScreen();
+                      return const CreateTaskScreen();
                     },
                   ),
                 );

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../themes/light_standard_theme.dart';
-import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class todoListBox extends StatelessWidget {
+class TodoListBox extends StatelessWidget {
   final String taskname;
   final String classname;
   final String date;
   final Color color;
-  const todoListBox(this.taskname, this.classname, this.date, this.color,
+  const TodoListBox(this.taskname, this.classname, this.date, this.color,
       {super.key});
 
   @override
