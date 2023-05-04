@@ -1,70 +1,51 @@
+import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
+import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TodoBoxMainScreen extends StatelessWidget {
   final String textInCardTop;
-  final String textInCardMiddle;
-  final String textInCardBottom;
-  final Color colorOfCard;
-  final double widthOfCard;
-  final double heightOfCard;
-  final Color colorOfText;
-  final VoidCallback? onTap;
+  final TodoListBox todo;
 
   const TodoBoxMainScreen({
     Key? key,
     required this.textInCardTop,
-    required this.textInCardMiddle,
-    required this.textInCardBottom,
-    required this.colorOfCard,
-    required this.widthOfCard,
-    required this.heightOfCard,
-    required this.colorOfText,
-    required this.onTap,
+    required this.todo,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: widthOfCard,
-        height: heightOfCard,
-        child: InkWell(
-          onTap: onTap,
-          child: Card(
-            color: colorOfCard,
-            elevation: 2.0,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0)),
-            child: Center(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    textInCardTop,
-                    style: TextStyle(color: colorOfText),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    textInCardMiddle,
-                    style: TextStyle(
-                        color: colorOfText,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 45.0),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  Text(
-                    textInCardBottom,
-                    style: TextStyle(
-                        color: colorOfText, fontWeight: FontWeight.w100),
-                  )
-                ],
+      width: 208,
+      height: 259,
+      child: Card(
+        color: Colors.white,
+        elevation: 2.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        child: Center(
+            child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              const SizedBox(height: 5.0),
+              Text(
+                textInCardTop,
+                style: GoogleFonts.karla(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: LightStandardTheme.colorSecondary),
               ),
-            )),
+              const Divider(
+                color: LightStandardTheme.colorLines,
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              todo,
+            ],
           ),
-        ));
+        )),
+      ),
+    );
   }
 }
