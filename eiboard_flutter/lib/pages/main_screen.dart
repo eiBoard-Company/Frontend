@@ -8,13 +8,20 @@ import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+//TODO: add on taps to each widget
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(context: context),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +29,7 @@ class MainScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(18.0),
               child: Text(
-                "Hello eiCompany!",
+                "Hello Matteo!",
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

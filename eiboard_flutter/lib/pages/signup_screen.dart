@@ -1,4 +1,5 @@
 import 'package:eiboard_flutter/pages/components/button.dart';
+import 'package:eiboard_flutter/pages/components/custom_drawer.dart';
 import 'package:eiboard_flutter/pages/new_Todo_List_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -85,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return const NewTodoListScreen();
+                              return const CustomDrawer();
                             },
                           ),
                         );
