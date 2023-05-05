@@ -4,6 +4,7 @@ import 'package:eiboard_flutter/pages/components/cards_main_screen.dart';
 import 'package:eiboard_flutter/pages/components/custom_app_bar.dart';
 import 'package:eiboard_flutter/pages/components/todo_box_main.dart';
 import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
+import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -51,11 +52,11 @@ class _MainScreenState extends State<MainScreen> {
                           heightOfCard: 121,
                           colorOfText: Colors.white,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
+                            /*Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return const CalendarScreen();
                               },
-                            ));
+                            ));*/
                           },
                         ),
                         const SizedBox(height: 17),
@@ -70,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return const CalendarScreen();
+                                return const NewTodoListScreen();
                               },
                             ));
                           },
@@ -78,13 +79,14 @@ class _MainScreenState extends State<MainScreen> {
                       ],
                     ),
                     const SizedBox(width: 20),
-                    const TodoBoxMainScreen(
+                    TodoBoxMainScreen(
                       textInCardTop: 'Todos',
                       todo: TodoListBox.withSize(
                         "Matheaufgaben erledigen",
                         "Mathematik II",
                         "Oct 17",
                         LightStandardTheme.colorClassThree,
+                        () {},
                         186,
                         58,
                         10,

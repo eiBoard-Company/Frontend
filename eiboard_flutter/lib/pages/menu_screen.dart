@@ -83,6 +83,8 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
+  //TODO: when email or name too long it overflows, so add a max for signs
+
   buildHeader(
       {required String profileImage,
       required String name,
