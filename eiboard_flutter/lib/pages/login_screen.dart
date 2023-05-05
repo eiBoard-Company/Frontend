@@ -1,4 +1,5 @@
 import 'package:eiboard_flutter/pages/components/button.dart';
+import 'package:eiboard_flutter/pages/components/custom_drawer.dart';
 import 'package:eiboard_flutter/pages/main_screen.dart';
 import 'package:eiboard_flutter/pages/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return const MainScreen();
+                              return const CustomDrawer();
                             },
                           ),
                         );

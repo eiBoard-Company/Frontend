@@ -4,17 +4,25 @@ import 'package:eiboard_flutter/pages/components/cards_main_screen.dart';
 import 'package:eiboard_flutter/pages/components/custom_app_bar.dart';
 import 'package:eiboard_flutter/pages/components/todo_box_main.dart';
 import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
+import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+//TODO: add on taps to each widget
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(context: context),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,7 +30,7 @@ class MainScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.all(18.0),
               child: Text(
-                "Hello eiCompany!",
+                "Hello Matteo!",
                 style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
@@ -44,11 +52,11 @@ class MainScreen extends StatelessWidget {
                           heightOfCard: 121,
                           colorOfText: Colors.white,
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
+                            /*Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
                                 return const CalendarScreen();
                               },
-                            ));
+                            ));*/
                           },
                         ),
                         const SizedBox(height: 17),
@@ -63,7 +71,7 @@ class MainScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return const CalendarScreen();
+                                return const NewTodoListScreen();
                               },
                             ));
                           },
@@ -71,13 +79,14 @@ class MainScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(width: 20),
-                    const TodoBoxMainScreen(
+                    TodoBoxMainScreen(
                       textInCardTop: 'Todos',
                       todo: TodoListBox.withSize(
                         "Matheaufgaben erledigen",
                         "Mathematik II",
                         "Oct 17",
                         LightStandardTheme.colorClassThree,
+                        () {},
                         186,
                         58,
                         10,
