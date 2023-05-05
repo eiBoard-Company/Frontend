@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_zoom_drawer: ^3.0.3
+  url_launcher: ^6.1.8
   http: 0.13.5
   flutter:
     sdk: flutter
