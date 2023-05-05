@@ -1,5 +1,8 @@
+import 'package:eiboard_flutter/pages/settings_pages/account_screen.dart';
 import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
+import 'package:eiboard_flutter/pages/open_screen.dart';
+import 'package:eiboard_flutter/pages/settings_pages/settings_screen.dart';
 import 'package:eiboard_flutter/pages/useful_links_sreen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -27,50 +30,19 @@ class _MenuScreenState extends State<MenuScreen> {
           profileImage: profileImage,
           name: name,
           email: email,
-          onPressed: () {},
+          page: const AccountScreen(),
         ),
         buildMenuItem(
           text: 'Tasks',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const NewTodoListScreen();
-                },
-              ),
-            );
-          },
-        ),
-        buildMenuItem(
-          text: 'Classes',
-          onPressed: () {},
+          page: const NewTodoListScreen(),
         ),
         buildMenuItem(
           text: 'Schedule',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const CalendarScreen();
-                },
-              ),
-            );
-          },
+          page: const CalendarScreen(),
         ),
         buildMenuItem(
           text: 'Useful Links',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return const UsefulLinksScreen();
-                },
-              ),
-            );
-          },
+          page: const UsefulLinksScreen(),
         ),
         const SizedBox(
           height: 12,
@@ -83,11 +55,11 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
         buildMenuItem(
           text: 'Settings',
-          onPressed: () {},
+          page: const SettingsScreen(),
         ),
         buildMenuItem(
           text: 'Logout',
-          onPressed: () {},
+          page: const OpenScreen(),
         ),
       ]),
     );
@@ -99,10 +71,17 @@ class _MenuScreenState extends State<MenuScreen> {
       {required String profileImage,
       required String name,
       required String email,
-      required void Function() onPressed}) {
+      required Widget page}) {
     return InkWell(
       onTap: () {
-        onPressed();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return page;
+            },
+          ),
+        );
       },
       child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10),
@@ -142,7 +121,7 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  buildMenuItem({required String text, required void Function() onPressed}) {
+  buildMenuItem({required String text, required Widget page}) {
     return ListTile(
       leading: Text(
         text,
@@ -153,7 +132,14 @@ class _MenuScreenState extends State<MenuScreen> {
       ),
       hoverColor: Colors.white,
       onTap: () {
-        onPressed();
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return page;
+            },
+          ),
+        );
       },
     );
   }
