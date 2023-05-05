@@ -1,5 +1,6 @@
 import 'package:eiboard_flutter/pages/calendar_screen.dart';
 import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
+import 'package:eiboard_flutter/pages/useful_links_sreen.dart';
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,7 +53,7 @@ class _MenuScreenState extends State<MenuScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return CalendarScreen();
+                  return const CalendarScreen();
                 },
               ),
             );
@@ -60,7 +61,16 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
         buildMenuItem(
           text: 'Useful Links',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const UsefulLinksScreen();
+                },
+              ),
+            );
+          },
         ),
         const SizedBox(
           height: 12,
