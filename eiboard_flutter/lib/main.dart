@@ -1,4 +1,5 @@
 import 'package:eiboard_flutter/pages/open_screen.dart';
+import 'package:eiboard_flutter/pages/settings_pages/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
