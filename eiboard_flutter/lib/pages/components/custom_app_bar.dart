@@ -1,8 +1,11 @@
 import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({Key? key, required this.context}) : super(key: key);
+
+  final BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
         icon: const Icon(Icons.menu),
         color: Colors.black,
         iconSize: 28.0,
-        onPressed: () {},
+        onPressed: () {
+          ZoomDrawer.of(context)!.toggle();
+        },
       ),
       actions: <Widget>[
         IconButton(

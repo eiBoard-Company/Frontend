@@ -32,6 +32,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       topic: 'Create New Task',
       showPlusIcon: false,
       child: Column(children: [
+        const SizedBox(
+          height: 30,
+        ),
         SizedBox(
           width: 337,
           child: TextFormField(
@@ -162,22 +165,25 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             ),
           ]),
         ),
-        const SizedBox(
-          height: 125,
-        ),
-        Center(
-          child: Button(
-            'Create Tasks',
-            () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const CreateTaskScreen();
-                  },
-                ),
-              );
-            },
+        Expanded(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Button(
+                'Create Task',
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const CreateTaskScreen();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         ),
       ]),

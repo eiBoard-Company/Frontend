@@ -16,8 +16,10 @@ class NewTodoListScreen extends StatelessWidget {
         showPlusIcon: false,
         child: Column(
           children: [
-            Center(
-                child: Text(
+            const SizedBox(
+              height: 40,
+            ),
+            Text(
               'Overdue',
               style: GoogleFonts.montserrat(
                 textStyle: const TextStyle(
@@ -25,43 +27,36 @@ class NewTodoListScreen extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-            )),
+            ),
             const SizedBox(height: 15),
             Center(
-                child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const NewTodoListScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const TodoListBox(
-                        "Matheaufgaben erledigen",
-                        "Mathematik II",
-                        "Oct 17",
-                        LightStandardTheme.colorClassThree))),
+                child: TodoListBox("Matheaufgaben erledigen", "Mathematik II",
+                    "Oct 17", LightStandardTheme.colorClassThree, () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const NewTodoListScreen();
+                  },
+                ),
+              );
+            })),
             const SizedBox(height: 15),
             Center(
-                child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const NewTodoListScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const TodoListBox(
-                        "Letzte Vorlesung nacharbeiten",
-                        "Rechnerarchitektur",
-                        "Oct 17",
-                        LightStandardTheme.colorClassThree))),
+                child: TodoListBox(
+                    "Letzte Vorlesung nacharbeiten",
+                    "Rechnerarchitektur",
+                    "Oct 17",
+                    LightStandardTheme.colorClassThree, () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const NewTodoListScreen();
+                  },
+                ),
+              );
+            })),
             const SizedBox(height: 15),
             Text(
               'Due Today',
@@ -74,22 +69,17 @@ class NewTodoListScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             Center(
-                child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const NewTodoListScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const TodoListBox(
-                        "Typ3-grammatik lernen",
-                        "Formale Sprachen",
-                        "Nov 21",
-                        LightStandardTheme.colorClassTwo))),
+                child: TodoListBox("Typ3-grammatik lernen", "Formale Sprachen",
+                    "Nov 21", LightStandardTheme.colorClassTwo, () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const NewTodoListScreen();
+                  },
+                ),
+              );
+            })),
             const SizedBox(height: 15),
             Text(
               'Due This Week',
@@ -102,32 +92,37 @@ class NewTodoListScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             Center(
-                child: InkWell(
-                    onTap: () {
+                child: TodoListBox("Project", "Software Enineering", "Nov 25",
+                    LightStandardTheme.colorClassOne, () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const NewTodoListScreen();
+                  },
+                ),
+              );
+            })),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Button(
+                    'Create Task',
+                    () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const NewTodoListScreen();
+                            return const CreateTaskScreen();
                           },
                         ),
                       );
                     },
-                    child: const TodoListBox("Project", "Software Enineering",
-                        "Nov 25", LightStandardTheme.colorClassOne))),
-            const SizedBox(height: 150),
-            Button(
-              'Create Tasks',
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const CreateTaskScreen();
-                    },
                   ),
-                );
-              },
+                ),
+              ),
             ),
           ],
         ));
