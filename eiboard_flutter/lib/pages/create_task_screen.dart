@@ -64,21 +64,6 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     decoration: const InputDecoration(
                       hintStyle: TextStyle(color: Colors.black45),
                       errorStyle: TextStyle(color: Colors.redAccent),
-                      labelText: 'Start Time',
-                    ),
-                    mode: DateTimeFieldPickerMode.time,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (e) =>
-                        (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {},
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(202, 0, 0, 0),
-                  child: DateTimeFormField(
-                    decoration: const InputDecoration(
-                      hintStyle: TextStyle(color: Colors.black45),
-                      errorStyle: TextStyle(color: Colors.redAccent),
                       labelText: 'End Time',
                     ),
                     mode: DateTimeFieldPickerMode.time,
