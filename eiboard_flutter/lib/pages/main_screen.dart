@@ -1,11 +1,10 @@
-import 'package:eiboard_flutter/pages/calendar_screen.dart';
-import 'package:eiboard_flutter/pages/components/calendar.dart';
-import 'package:eiboard_flutter/pages/components/cards_main_screen.dart';
-import 'package:eiboard_flutter/pages/components/custom_app_bar.dart';
-import 'package:eiboard_flutter/pages/components/todo_box_main.dart';
-import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
-import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/components/calendar.dart';
+import '/../pages/components/cards_main_screen.dart';
+import '/../pages/components/custom_app_bar.dart';
+import '/../pages/components/todo_box_main.dart';
+import '/../pages/components/todo_list_box.dart';
+import '/../pages/new_Todo_List_Screen.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 

@@ -1,5 +1,5 @@
-import 'package:eiboard_flutter/pages/components/calendar.dart';
-import 'package:eiboard_flutter/pages/components/page.dart';
+import '/../pages/components/calendar.dart';
+import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 

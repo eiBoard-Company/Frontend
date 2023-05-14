@@ -1,7 +1,6 @@
-import 'package:eiboard_flutter/pages/components/button.dart';
-import 'package:eiboard_flutter/pages/components/custom_drawer.dart';
-import 'package:eiboard_flutter/pages/main_screen.dart';
-import 'package:eiboard_flutter/pages/signup_screen.dart';
+import '/../pages/components/button.dart';
+import '/../pages/components/custom_drawer.dart';
+import '/../pages/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

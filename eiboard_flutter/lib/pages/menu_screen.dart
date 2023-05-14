@@ -1,10 +1,10 @@
-import 'package:eiboard_flutter/pages/settings_pages/account_screen.dart';
-import 'package:eiboard_flutter/pages/calendar_screen.dart';
-import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
-import 'package:eiboard_flutter/pages/open_screen.dart';
-import 'package:eiboard_flutter/pages/settings_pages/settings_screen.dart';
-import 'package:eiboard_flutter/pages/useful_links_sreen.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/settings_pages/account_screen.dart';
+import '/../pages/calendar_screen.dart';
+import '/../pages/new_Todo_List_Screen.dart';
+import '/../pages/open_screen.dart';
+import '/../pages/settings_pages/settings_screen.dart';
+import '/../pages/useful_links_sreen.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

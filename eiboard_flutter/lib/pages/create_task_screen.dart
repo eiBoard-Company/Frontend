@@ -1,5 +1,5 @@
-import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/components/page.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'components/button.dart';
