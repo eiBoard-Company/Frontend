@@ -6,16 +6,16 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageBackground(
+    return PageBackground(
         topic: 'About us',
         showPlusIcon: false,
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: const [
                     SizedBox(
                       height: 30,
                     ),

@@ -68,9 +68,9 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   Text(
                     'App Version',
                     style: TextStyle(fontSize: 12, color: Colors.black),
