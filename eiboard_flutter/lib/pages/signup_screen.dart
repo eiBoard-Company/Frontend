@@ -1,6 +1,5 @@
-import 'package:eiboard_flutter/pages/components/button.dart';
-import 'package:eiboard_flutter/pages/components/custom_drawer.dart';
-import 'package:eiboard_flutter/pages/new_Todo_List_screen.dart';
+import '/../pages/components/button.dart';
+import '/../pages/components/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'login_screen.dart';

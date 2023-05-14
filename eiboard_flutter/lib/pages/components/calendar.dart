@@ -1,4 +1,4 @@
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';

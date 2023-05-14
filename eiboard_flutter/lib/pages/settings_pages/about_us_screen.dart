@@ -1,4 +1,4 @@
-import 'package:eiboard_flutter/pages/components/page.dart';
+import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatelessWidget {
@@ -6,16 +6,16 @@ class AboutUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageBackground(
+    return const PageBackground(
         topic: 'About us',
         showPlusIcon: false,
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     SizedBox(
                       height: 30,
                     ),

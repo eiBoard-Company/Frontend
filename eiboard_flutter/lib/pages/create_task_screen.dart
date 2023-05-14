@@ -1,5 +1,5 @@
-import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/components/page.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'components/button.dart';
@@ -63,21 +63,6 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 202, 0),
-                  child: DateTimeFormField(
-                    decoration: const InputDecoration(
-                      hintStyle: TextStyle(color: Colors.black45),
-                      errorStyle: TextStyle(color: Colors.redAccent),
-                      labelText: 'Start Time',
-                    ),
-                    mode: DateTimeFieldPickerMode.time,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (e) =>
-                        (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {},
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(202, 0, 0, 0),
                   child: DateTimeFormField(
                     decoration: const InputDecoration(
                       hintStyle: TextStyle(color: Colors.black45),

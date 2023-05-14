@@ -1,5 +1,5 @@
-import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/components/todo_list_box.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

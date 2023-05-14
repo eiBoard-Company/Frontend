@@ -1,8 +1,4 @@
-import 'package:eiboard_flutter/pages/components/button.dart';
-import 'package:eiboard_flutter/pages/components/page.dart';
-import 'package:eiboard_flutter/pages/components/profile_widget.dart';
-import 'package:eiboard_flutter/pages/main_screen.dart';
-import 'package:eiboard_flutter/utils/user_preferences.dart';
+import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 
 class AccountScreen extends StatelessWidget {
