@@ -6,20 +6,39 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PageBackground(
-        topic: 'My Account',
-        showPlusIcon: false,
-        child: Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                  ]),
-            )));
+    final user = UserPreferences.user;
+    return PageBackground(
+      topic: 'My Account',
+      showPlusIcon: false,
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 30,
+          ),
+          ProfileWidget(imagePath: user.imagePath, onClicked: () async {}),
+          Expanded(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Button(
+                  'Save',
+                  () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const MainScreen();
+                        },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

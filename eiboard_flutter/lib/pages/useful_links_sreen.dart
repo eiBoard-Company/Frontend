@@ -2,6 +2,8 @@ import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+//TODO: fix links for mobile usage
+
 class UsefulLinksScreen extends StatelessWidget {
   const UsefulLinksScreen({Key? key}) : super(key: key);
 
