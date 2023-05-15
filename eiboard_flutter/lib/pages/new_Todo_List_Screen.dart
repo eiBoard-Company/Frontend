@@ -13,7 +13,6 @@ class NewTodoListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageBackground(
         topic: 'Tasks',
-        showPlusIcon: false,
         child: Column(
           children: [
             const SizedBox(

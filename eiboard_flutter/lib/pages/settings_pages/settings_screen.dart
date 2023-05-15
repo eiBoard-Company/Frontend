@@ -15,7 +15,6 @@ class SettingsScreen extends StatelessWidget {
       children: [
         PageBackground(
           topic: 'Settings',
-          showPlusIcon: false,
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(

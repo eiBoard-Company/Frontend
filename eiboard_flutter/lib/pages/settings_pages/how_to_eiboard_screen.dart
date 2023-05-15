@@ -8,7 +8,6 @@ class HowToEiBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const PageBackground(
         topic: 'How to eiBoard',
-        showPlusIcon: false,
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(

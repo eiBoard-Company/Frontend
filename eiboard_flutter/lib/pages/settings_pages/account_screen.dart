@@ -13,7 +13,6 @@ class AccountScreen extends StatelessWidget {
     final user = UserPreferences.user;
     return PageBackground(
       topic: 'My Account',
-      showPlusIcon: false,
       child: Column(
         children: [
           const SizedBox(

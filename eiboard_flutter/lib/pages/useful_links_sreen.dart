@@ -17,7 +17,6 @@ class UsefulLinksScreen extends StatelessWidget {
 
     return PageBackground(
         topic: 'Useful Links',
-        showPlusIcon: false,
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(

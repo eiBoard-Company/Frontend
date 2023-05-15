@@ -7,14 +7,14 @@ import 'package:date_field/date_field.dart';
 
 import 'new_Todo_List_Screen.dart';
 
-class CreateTaskScreen extends StatefulWidget {
-  const CreateTaskScreen({Key? key}) : super(key: key);
+class CreateEventScreen extends StatefulWidget {
+  const CreateEventScreen({Key? key}) : super(key: key);
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<CreateEventScreen> createState() => _CreateEventScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _CreateEventScreenState extends State<CreateEventScreen> {
   List<String> tags = [
     'Software Engineering',
     'Formale Sprachen',

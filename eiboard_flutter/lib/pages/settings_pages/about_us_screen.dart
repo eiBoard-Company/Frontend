@@ -8,7 +8,6 @@ class AboutUsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const PageBackground(
         topic: 'About us',
-        showPlusIcon: false,
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(

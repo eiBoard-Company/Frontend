@@ -1,3 +1,4 @@
+import 'package:eiboard_flutter/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,12 +8,22 @@ class PageBackground extends StatelessWidget {
   final Widget child;
   final String topic;
   final bool showPlusIcon;
+  final Widget pageForPlus;
 
-  const PageBackground({
+  const PageBackground(
+      {required this.topic,
+      required this.child,
+      this.showPlusIcon = false,
+      this.pageForPlus = const MainScreen(),
+      Key? key})
+      : super(key: key);
+
+  const PageBackground.withPlusIcon({
     Key? key,
     required this.topic,
     required this.showPlusIcon,
     required this.child,
+    required this.pageForPlus,
   }) : super(key: key);
 
   @override
@@ -28,13 +39,20 @@ class PageBackground extends StatelessWidget {
             toolbarHeight: 80,
             elevation: 0,
             leading: IconButton(
+              //TODO: fix
               icon: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
               onPressed: () => Navigator.of(context).pop(),
             ),
             actions: [
               if (showPlusIcon)
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return pageForPlus;
+                      },
+                    ));
+                  },
                   icon: const Icon(
                     Icons.add,
                     color: Colors.black,
