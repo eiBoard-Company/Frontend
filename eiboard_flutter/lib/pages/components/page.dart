@@ -1,8 +1,8 @@
-import 'package:eiboard_flutter/pages/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../themes/light_standard_theme.dart';
+import '../main_screen.dart';
 
 class PageBackground extends StatelessWidget {
   final Widget child;
