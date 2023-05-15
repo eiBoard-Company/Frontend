@@ -1,3 +1,7 @@
+import 'package:eiboard_flutter/pages/settings_pages/about_us_screen.dart';
+import 'package:eiboard_flutter/pages/settings_pages/account_screen.dart';
+import 'package:eiboard_flutter/pages/settings_pages/how_to_eiboard_screen.dart';
+
 import '/../pages/components/page.dart';
 import '/../pages/main_screen.dart';
 import '/../themes/light_standard_theme.dart';
@@ -25,21 +29,21 @@ class SettingsScreen extends StatelessWidget {
                     context: context,
                     text: 'My Account',
                     description: 'Manage your Account',
-                    page: const MainScreen(),
+                    page: const AccountScreen(),
                   ),
                   const SizedBox(height: 25),
                   buildText(
                     context: context,
                     text: 'How to eiBoard',
                     description: 'Have a look at the FAQs',
-                    page: const MainScreen(),
+                    page: const HowToEiBoardScreen(),
                   ),
                   const SizedBox(height: 25),
                   buildText(
                     context: context,
                     text: 'About us',
                     description: 'Our mission and contact',
-                    page: const MainScreen(),
+                    page: const AboutUsScreen(),
                   ),
                 ],
               ),

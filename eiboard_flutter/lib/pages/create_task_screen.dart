@@ -1,3 +1,5 @@
+import 'package:eiboard_flutter/pages/new_Todo_List_Screen.dart';
+
 import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -177,7 +179,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const CreateTaskScreen();
+                        return const NewTodoListScreen();
                       },
                     ),
                   );
