@@ -1,11 +1,10 @@
-import 'package:eiboard_flutter/pages/settings_pages/about_us_screen.dart';
-import 'package:eiboard_flutter/pages/settings_pages/account_screen.dart';
-import 'package:eiboard_flutter/pages/settings_pages/how_to_eiboard_screen.dart';
-
 import '/../pages/components/page.dart';
-import '/../pages/main_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'about_us_screen.dart';
+import 'account_screen.dart';
+import 'how_to_eiboard_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -72,9 +71,9 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'App Version',
                     style: TextStyle(fontSize: 12, color: Colors.black),
