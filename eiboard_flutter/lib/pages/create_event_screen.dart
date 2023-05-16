@@ -2,10 +2,11 @@ import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'calendar_screen.dart';
 import 'components/button.dart';
-import 'package:date_field/date_field.dart';
 
-import 'new_Todo_List_Screen.dart';
+import 'components/custom_date_picker.dart';
+import 'components/custom_time_picker.dart';
 
 class CreateEventScreen extends StatefulWidget {
   const CreateEventScreen({Key? key}) : super(key: key);
@@ -16,22 +17,22 @@ class CreateEventScreen extends StatefulWidget {
 
 class _CreateEventScreenState extends State<CreateEventScreen> {
   List<String> tags = [
-    'Software Engineering',
-    'Formale Sprachen',
-    'Mathematik II',
-    'Datenbanken I',
-    'Webengineering II',
-    'Betriebssysteme',
-    'Rechnerarchitektur I'
+    'Private',
+    'Lecture',
+    'Doctor',
+    'Studying',
   ];
   int tag1 = 0;
   String newTag = '';
-  final _controller = TextEditingController();
+  final _dateController = TextEditingController();
+  final _startTimeController = TextEditingController();
+  final _endTimeController = TextEditingController();
+  final _chipController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return PageBackground(
-      topic: 'Create New Task',
+      topic: 'Create New Event',
       child: Column(children: [
         const SizedBox(
           height: 30,
@@ -43,42 +44,31 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 border: UnderlineInputBorder(), labelText: 'Title'),
           ),
         ),
+        CustomDatePicker(controller: _dateController, labelText: 'Date'),
         SizedBox(
             width: 337,
-            child: DateTimeFormField(
-              decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Colors.black45),
-                errorStyle: TextStyle(color: Colors.redAccent),
-                suffixIcon: Icon(Icons.date_range),
-                labelText: 'Date',
+            child: Row(children: [
+              CustomTimePicker(
+                controller: _startTimeController,
+                labelText: 'Start Time',
+                width: 155,
               ),
-              mode: DateTimeFieldPickerMode.date,
-              autovalidateMode: AutovalidateMode.always,
-              validator: (e) =>
-                  (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-              onDateSelected: (DateTime value) {},
-            )),
+              const SizedBox(
+                width: 27,
+              ),
+              CustomTimePicker(
+                controller: _endTimeController,
+                labelText: 'End Time',
+                width: 155,
+              ),
+            ])),
         SizedBox(
-            width: 337,
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 202, 0),
-                  child: DateTimeFormField(
-                    decoration: const InputDecoration(
-                      hintStyle: TextStyle(color: Colors.black45),
-                      errorStyle: TextStyle(color: Colors.redAccent),
-                      labelText: 'End Time',
-                    ),
-                    mode: DateTimeFieldPickerMode.time,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (e) =>
-                        (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {},
-                  ),
-                )
-              ],
-            )),
+          width: 337,
+          child: TextFormField(
+            decoration: const InputDecoration(
+                border: UnderlineInputBorder(), labelText: 'Location'),
+          ),
+        ),
         SizedBox(
           width: 337,
           child: TextFormField(
@@ -139,14 +129,14 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             SizedBox(
               width: 100, // maximale Breite jedes Chips
               child: TextField(
-                controller: _controller,
+                controller: _chipController,
                 decoration: const InputDecoration(
-                  hintText: 'Neuer Chip',
+                  hintText: 'New Category',
                   border: InputBorder.none,
                 ),
                 onChanged: (value) => setState(() => newTag = value),
                 onSubmitted: (value) {
-                  _controller.clear();
+                  _chipController.clear();
                   setState(() {
                     tags.add(newTag);
                     newTag = ''; // leert das Textfeld
@@ -157,7 +147,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                _controller.clear();
+                _chipController.clear();
                 setState(() {
                   tags.add(newTag);
                   newTag = ''; // leert das Textfeld
@@ -172,13 +162,13 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Button(
-                'Create Task',
+                'Create Event',
                 () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const NewTodoListScreen();
+                        return const CalendarScreen();
                       },
                     ),
                   );

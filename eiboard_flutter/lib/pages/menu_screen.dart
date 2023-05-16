@@ -1,6 +1,6 @@
 import '/../pages/settings_pages/account_screen.dart';
 import '/../pages/calendar_screen.dart';
-import '/../pages/new_Todo_List_Screen.dart';
+import 'todo_list_screen.dart';
 import '/../pages/open_screen.dart';
 import '/../pages/settings_pages/settings_screen.dart';
 import '/../pages/useful_links_sreen.dart';
@@ -34,7 +34,7 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
         buildMenuItem(
           text: 'Tasks',
-          page: const NewTodoListScreen(),
+          page: const TodoListScreen(),
         ),
         buildMenuItem(
           text: 'Schedule',

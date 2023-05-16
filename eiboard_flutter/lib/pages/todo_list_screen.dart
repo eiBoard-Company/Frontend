@@ -6,8 +6,8 @@ import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class NewTodoListScreen extends StatelessWidget {
-  const NewTodoListScreen({Key? key}) : super(key: key);
+class TodoListScreen extends StatelessWidget {
+  const TodoListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const TodoListScreen();
                   },
                 ),
               );
@@ -51,7 +51,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const TodoListScreen();
                   },
                 ),
               );
@@ -74,7 +74,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const TodoListScreen();
                   },
                 ),
               );
@@ -97,7 +97,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const TodoListScreen();
                   },
                 ),
               );

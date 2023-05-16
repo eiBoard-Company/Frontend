@@ -3,9 +3,10 @@ import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'components/button.dart';
-import 'package:date_field/date_field.dart';
 
-import 'new_Todo_List_Screen.dart';
+import 'components/custom_date_picker.dart';
+import 'components/custom_time_picker.dart';
+import 'todo_list_screen.dart';
 
 class CreateTaskScreen extends StatefulWidget {
   const CreateTaskScreen({Key? key}) : super(key: key);
@@ -26,7 +27,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   ];
   int tag1 = 0;
   String newTag = '';
-  final _controller = TextEditingController();
+  final _chipController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _endTimeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,42 +46,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 border: UnderlineInputBorder(), labelText: 'Title'),
           ),
         ),
-        SizedBox(
-            width: 337,
-            child: DateTimeFormField(
-              decoration: const InputDecoration(
-                hintStyle: TextStyle(color: Colors.black45),
-                errorStyle: TextStyle(color: Colors.redAccent),
-                suffixIcon: Icon(Icons.date_range),
-                labelText: 'Date',
-              ),
-              mode: DateTimeFieldPickerMode.date,
-              autovalidateMode: AutovalidateMode.always,
-              validator: (e) =>
-                  (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-              onDateSelected: (DateTime value) {},
-            )),
-        SizedBox(
-            width: 337,
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 202, 0),
-                  child: DateTimeFormField(
-                    decoration: const InputDecoration(
-                      hintStyle: TextStyle(color: Colors.black45),
-                      errorStyle: TextStyle(color: Colors.redAccent),
-                      labelText: 'End Time',
-                    ),
-                    mode: DateTimeFieldPickerMode.time,
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (e) =>
-                        (e?.day ?? 0) == 1 ? 'Please not the first day' : null,
-                    onDateSelected: (DateTime value) {},
-                  ),
-                )
-              ],
-            )),
+        CustomDatePicker(controller: _dateController, labelText: 'Date'),
+        CustomTimePicker(
+            controller: _endTimeController, labelText: 'End Time', width: 337),
         SizedBox(
           width: 337,
           child: TextFormField(
@@ -139,14 +109,14 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             SizedBox(
               width: 100, // maximale Breite jedes Chips
               child: TextField(
-                controller: _controller,
+                controller: _chipController,
                 decoration: const InputDecoration(
-                  hintText: 'Neuer Chip',
+                  hintText: 'New Category',
                   border: InputBorder.none,
                 ),
                 onChanged: (value) => setState(() => newTag = value),
                 onSubmitted: (value) {
-                  _controller.clear();
+                  _chipController.clear();
                   setState(() {
                     tags.add(newTag);
                     newTag = ''; // leert das Textfeld
@@ -157,7 +127,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                _controller.clear();
+                _chipController.clear();
                 setState(() {
                   tags.add(newTag);
                   newTag = ''; // leert das Textfeld
@@ -178,7 +148,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const NewTodoListScreen();
+                        return const TodoListScreen();
                       },
                     ),
                   );

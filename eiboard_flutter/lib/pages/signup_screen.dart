@@ -59,7 +59,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 15),
                     SizedBox(
-                      //TODO: manage so that you can see textfield when entering input
                       width: 302,
                       height: 69,
                       child: TextFormField(
