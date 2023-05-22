@@ -1,8 +1,8 @@
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({Key? key, required this.context}) : super(key: key);
 
   final BuildContext context;

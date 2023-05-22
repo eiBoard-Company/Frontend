@@ -1,4 +1,4 @@
-import 'package:eiboard_flutter/pages/components/page.dart';
+import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsScreen extends StatelessWidget {

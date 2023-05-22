@@ -1,6 +1,6 @@
-import 'package:eiboard_flutter/pages/main_screen.dart';
-import 'package:eiboard_flutter/pages/menu_screen.dart';
-import 'package:eiboard_flutter/themes/light_standard_theme.dart';
+import '/../pages/main_screen.dart';
+import '/../pages/menu_screen.dart';
+import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
