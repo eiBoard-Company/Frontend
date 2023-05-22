@@ -1,3 +1,4 @@
+import '../settings_pages/account_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -25,7 +26,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.person_rounded),
           color: Colors.black,
           iconSize: 28.0,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const AccountScreen();
+                },
+              ),
+            );
+          },
         ),
       ],
     );

@@ -2,39 +2,37 @@ import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'calendar_screen.dart';
 import 'components/button.dart';
 
 import 'components/custom_date_picker.dart';
 import 'components/custom_time_picker.dart';
-import 'todo_list_screen.dart';
 
-class CreateTaskScreen extends StatefulWidget {
-  const CreateTaskScreen({Key? key}) : super(key: key);
+class CreateEventScreen extends StatefulWidget {
+  const CreateEventScreen({Key? key}) : super(key: key);
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<CreateEventScreen> createState() => _CreateEventScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _CreateEventScreenState extends State<CreateEventScreen> {
   List<String> tags = [
-    'Software Engineering',
-    'Formale Sprachen',
-    'Mathematik II',
-    'Datenbanken I',
-    'Webengineering II',
-    'Betriebssysteme',
-    'Rechnerarchitektur I'
+    'Private',
+    'Lecture',
+    'Doctor',
+    'Studying',
   ];
   int tag1 = 0;
   String newTag = '';
-  final _chipController = TextEditingController();
   final _dateController = TextEditingController();
+  final _startTimeController = TextEditingController();
   final _endTimeController = TextEditingController();
+  final _chipController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return PageBackground(
-      topic: 'Create New Task',
+      topic: 'Create New Event',
       child: Column(children: [
         const SizedBox(
           height: 30,
@@ -47,8 +45,30 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           ),
         ),
         CustomDatePicker(controller: _dateController, labelText: 'Date'),
-        CustomTimePicker(
-            controller: _endTimeController, labelText: 'End Time', width: 337),
+        SizedBox(
+            width: 337,
+            child: Row(children: [
+              CustomTimePicker(
+                controller: _startTimeController,
+                labelText: 'Start Time',
+                width: 155,
+              ),
+              const SizedBox(
+                width: 27,
+              ),
+              CustomTimePicker(
+                controller: _endTimeController,
+                labelText: 'End Time',
+                width: 155,
+              ),
+            ])),
+        SizedBox(
+          width: 337,
+          child: TextFormField(
+            decoration: const InputDecoration(
+                border: UnderlineInputBorder(), labelText: 'Location'),
+          ),
+        ),
         SizedBox(
           width: 337,
           child: TextFormField(
@@ -142,13 +162,13 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 20),
               child: Button(
-                'Create Task',
+                'Create Event',
                 () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const TodoListScreen();
+                        return const CalendarScreen();
                       },
                     ),
                   );

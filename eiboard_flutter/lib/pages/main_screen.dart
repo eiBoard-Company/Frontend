@@ -3,7 +3,7 @@ import '/../pages/components/cards_main_screen.dart';
 import '/../pages/components/custom_app_bar.dart';
 import '/../pages/components/todo_box_main.dart';
 import '/../pages/components/todo_list_box.dart';
-import '/../pages/new_Todo_List_Screen.dart';
+import 'todo_list_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return const NewTodoListScreen();
+                                return const TodoListScreen();
                               },
                             ));
                           },

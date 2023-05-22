@@ -1,7 +1,10 @@
 import '/../pages/components/page.dart';
-import '/../pages/main_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'about_us_screen.dart';
+import 'account_screen.dart';
+import 'how_to_eiboard_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -12,7 +15,6 @@ class SettingsScreen extends StatelessWidget {
       children: [
         PageBackground(
           topic: 'Settings',
-          showPlusIcon: false,
           child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
@@ -25,21 +27,21 @@ class SettingsScreen extends StatelessWidget {
                     context: context,
                     text: 'My Account',
                     description: 'Manage your Account',
-                    page: const MainScreen(),
+                    page: const AccountScreen(),
                   ),
                   const SizedBox(height: 25),
                   buildText(
                     context: context,
                     text: 'How to eiBoard',
                     description: 'Have a look at the FAQs',
-                    page: const MainScreen(),
+                    page: const HowToEiBoardScreen(),
                   ),
                   const SizedBox(height: 25),
                   buildText(
                     context: context,
                     text: 'About us',
                     description: 'Our mission and contact',
-                    page: const MainScreen(),
+                    page: const AboutUsScreen(),
                   ),
                 ],
               ),
@@ -68,9 +70,9 @@ class SettingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'App Version',
                     style: TextStyle(fontSize: 12, color: Colors.black),
