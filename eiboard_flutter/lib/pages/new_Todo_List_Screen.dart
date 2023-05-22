@@ -1,8 +1,9 @@
-import '/../pages/components/button.dart';
-import '/../pages/components/page.dart';
-import '/../pages/components/todo_list_box.dart';
-import '/../pages/create_task_screen.dart';
-import '/../themes/light_standard_theme.dart';
+import 'package:eiboard_flutter/pages/components/button.dart';
+import 'package:eiboard_flutter/pages/components/page.dart';
+import 'package:eiboard_flutter/pages/components/todo_list_box.dart';
+import 'package:eiboard_flutter/pages/create_task_screen.dart';
+import 'package:eiboard_flutter/pages/singletask_screen.dart';
+import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,7 +37,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return SingleTaskScreen();
                   },
                 ),
               );
@@ -52,7 +53,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -75,7 +76,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -98,7 +99,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
