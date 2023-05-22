@@ -19,7 +19,7 @@ class EiBoard extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const NewTodoListScreen(),
+      home: const OpenScreen(),
     );
   }
 }
