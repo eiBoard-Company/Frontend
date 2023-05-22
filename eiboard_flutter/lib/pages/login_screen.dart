@@ -1,3 +1,6 @@
+import 'package:eiboard_flutter/pages/components/backend_rapla.dart';
+import 'package:http/http.dart';
+
 import '/../pages/components/button.dart';
 import '/../pages/components/custom_drawer.dart';
 import '/../pages/signup_screen.dart';
@@ -87,6 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
+                              print('Hallo Matteo');
+                              Future<Response> fs = HttpRequest.fetchData(
+                                  HttpRequest.url + HttpRequest.user);
+                              fs.then((value) => print(value.body));
                               return const CustomDrawer();
                             },
                           ),
