@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../themes/light_standard_theme.dart';
 
-class SliderExample extends StatefulWidget {
-  const SliderExample({super.key});
+class SingleTaskScreen extends StatefulWidget {
+  const SingleTaskScreen({super.key});
 
   @override
-  State<SliderExample> createState() => _SingleTaskScreen();
+  State<SingleTaskScreen> createState() => _SingleTaskScreen();
 }
 
-class _SingleTaskScreen extends State<SliderExample> {
+class _SingleTaskScreen extends State<SingleTaskScreen> {
   bool bearbeitet = false;
   double sliderValue = 0.0;
 

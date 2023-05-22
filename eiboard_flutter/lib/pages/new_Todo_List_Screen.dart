@@ -37,7 +37,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SliderExample();
+                    return SingleTaskScreen();
                   },
                 ),
               );
@@ -53,7 +53,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -76,7 +76,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -99,7 +99,7 @@ class NewTodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const NewTodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
