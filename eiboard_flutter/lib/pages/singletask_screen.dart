@@ -86,12 +86,13 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
                 ),
                 const SizedBox(height: 20),
                 TextField(
-                    controller: TextEditingController()
-                      ..text = 'Your initial value',
-                    onChanged: (text) => {},
-                    decoration: InputDecoration(
-                      enabled: bearbeitet,
-                    )),
+                  controller: TextEditingController()
+                    ..text = 'Your initial value',
+                  onChanged: (text) => {},
+                  decoration: InputDecoration(
+                    enabled: bearbeitet,
+                  ),
+                ),
                 const SizedBox(height: 20),
                 Text('${sliderValue.toStringAsFixed(0)}% completet'),
                 Slider(

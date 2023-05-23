@@ -1,3 +1,5 @@
+import 'package:eiboard_flutter/pages/singletask_screen.dart';
+
 import '/../pages/components/button.dart';
 import '/../pages/components/page.dart';
 import '/../pages/components/todo_list_box.dart';
@@ -54,7 +56,7 @@ class TodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const TodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -77,7 +79,7 @@ class TodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const TodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -100,7 +102,7 @@ class TodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const TodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
