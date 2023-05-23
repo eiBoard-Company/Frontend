@@ -22,7 +22,7 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
         topic: 'Task',
         showPlusIcon: false,
         child: Center(
-            child: Container(
+            child: SizedBox(
           width: 337,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start, // hier hinzugefügt

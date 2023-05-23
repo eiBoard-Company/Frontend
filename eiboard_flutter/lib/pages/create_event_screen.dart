@@ -160,7 +160,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 20, top: 20),
               child: Button(
                 'Create Event',
                 () {

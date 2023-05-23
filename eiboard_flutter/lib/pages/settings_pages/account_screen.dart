@@ -22,7 +22,7 @@ class AccountScreen extends StatelessWidget {
           ),
           ProfileWidget(imagePath: user.imagePath, onClicked: () async {}),
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
           SizedBox(
             width: 337,
@@ -53,7 +53,7 @@ class AccountScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 40,
+            height: 30,
           ),
           Text('Create New Password',
               style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
@@ -71,11 +71,18 @@ class AccountScreen extends StatelessWidget {
                   border: UnderlineInputBorder(), labelText: 'New Password'),
             ),
           ),
+          SizedBox(
+            width: 337,
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  border: UnderlineInputBorder(), labelText: 'New Password'),
+            ),
+          ),
           Expanded(
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.only(bottom: 20, top: 20),
                 child: Button(
                   'Save',
                   () {
