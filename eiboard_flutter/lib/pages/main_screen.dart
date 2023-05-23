@@ -1,3 +1,4 @@
+import '../utils/user_preferences.dart';
 import '/../pages/components/calendar.dart';
 import '/../pages/components/cards_main_screen.dart';
 import '/../pages/components/custom_app_bar.dart';
@@ -18,6 +19,7 @@ class MainScreen extends StatefulWidget {
 //TODO: add on taps to each widget
 
 class _MainScreenState extends State<MainScreen> {
+  final user = UserPreferences.user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,11 +28,12 @@ class _MainScreenState extends State<MainScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(18.0),
+            Padding(
+              padding: const EdgeInsets.all(18.0),
               child: Text(
-                "Hello Matteo!",
-                style: TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
+                "Hello ${user.firstName.isNotEmpty ? user.firstName : 'You'}!",
+                style: const TextStyle(
+                    fontSize: 28.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),

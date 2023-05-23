@@ -27,6 +27,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             width: 337,
             child: TextFormField(
+              initialValue: user.firstName,
               decoration: const InputDecoration(
                   border: UnderlineInputBorder(), labelText: 'First Name'),
             ),
@@ -34,6 +35,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             width: 337,
             child: TextFormField(
+              initialValue: user.lastName,
               decoration: const InputDecoration(
                   border: UnderlineInputBorder(), labelText: 'Last Name'),
             ),
@@ -41,6 +43,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             width: 337,
             child: TextFormField(
+              initialValue: user.email,
               decoration: const InputDecoration(
                   border: UnderlineInputBorder(), labelText: 'E-Mail'),
             ),
@@ -48,6 +51,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(
             width: 337,
             child: TextFormField(
+              initialValue: user.raplaURL,
               decoration: const InputDecoration(
                   border: UnderlineInputBorder(), labelText: 'Rapla URL'),
             ),
