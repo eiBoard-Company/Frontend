@@ -164,7 +164,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               child: Button(
                 'Create Event',
                 () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {

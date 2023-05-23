@@ -47,7 +47,7 @@ class PageBackground extends StatelessWidget {
               if (showPlusIcon)
                 IconButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (context) {
                         return pageForPlus;
                       },

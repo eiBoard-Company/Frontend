@@ -144,7 +144,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               child: Button(
                 'Create Task',
                 () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {

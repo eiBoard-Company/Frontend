@@ -6,6 +6,8 @@ import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'singletask_screen.dart';
+
 class TodoListScreen extends StatelessWidget {
   const TodoListScreen({Key? key}) : super(key: key);
 
@@ -36,7 +38,7 @@ class TodoListScreen extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return const TodoListScreen();
+                    return const SingleTaskScreen();
                   },
                 ),
               );
@@ -111,7 +113,7 @@ class TodoListScreen extends StatelessWidget {
                   child: Button(
                     'Create Task',
                     () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
