@@ -2,8 +2,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/user_preferences.dart';
 import '../components/button.dart';
+import '../components/custom_drawer.dart';
 import '../components/profile_widget.dart';
-import '../main_screen.dart';
 import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 
@@ -83,7 +83,7 @@ class AccountScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const MainScreen();
+                          return const CustomDrawer();
                         },
                       ),
                     );
