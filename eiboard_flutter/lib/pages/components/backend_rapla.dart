@@ -10,6 +10,7 @@ class HttpRequest {
   static Future<http.Response> fetchData(String buildUrl) async {
     final response = await http.get(Uri.parse(buildUrl));
     var encoded = utf8.encode(response.body);
+    // ignore: unused_local_variable
     var decoded = utf8.decode(encoded);
     return response;
   }

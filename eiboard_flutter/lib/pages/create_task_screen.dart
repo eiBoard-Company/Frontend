@@ -148,7 +148,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const TodoListScreen();
+                        return TodoListScreen();
                       },
                     ),
                   );
