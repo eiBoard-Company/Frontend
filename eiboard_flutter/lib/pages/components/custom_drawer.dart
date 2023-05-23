@@ -26,7 +26,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
       showShadow: true,
       style: DrawerStyle.defaultStyle,
       openCurve: Curves.fastOutSlowIn,
-      closeCurve: Curves.bounceIn,
+      closeCurve: Curves.fastOutSlowIn,
       menuBackgroundColor: LightStandardTheme.colorMain,
     );
   }
