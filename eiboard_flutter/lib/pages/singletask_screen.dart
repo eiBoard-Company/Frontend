@@ -99,6 +99,7 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
                   value: sliderValue,
                   min: 0.0,
                   max: 100.0,
+                  divisions: 5,
                   label: sliderValue.round().toString(),
                   onChanged: (double value) {
                     setState(() {
