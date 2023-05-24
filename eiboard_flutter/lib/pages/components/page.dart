@@ -39,7 +39,6 @@ class PageBackground extends StatelessWidget {
             toolbarHeight: 80,
             elevation: 0,
             leading: IconButton(
-              //TODO: fix
               icon: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
               onPressed: () => Navigator.of(context).pop(),
             ),
@@ -47,7 +46,7 @@ class PageBackground extends StatelessWidget {
               if (showPlusIcon)
                 IconButton(
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (context) {
                         return pageForPlus;
                       },
@@ -76,21 +75,29 @@ class PageBackground extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(height: 0),
-              Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(40)),
-                    color: Colors.white,
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+            color: Colors.white,
+          ),
+          child: LayoutBuilder(
+            builder:
+                (BuildContext context, BoxConstraints viewportConstraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: viewportConstraints.maxHeight,
                   ),
-                  child: child,
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(child: child),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),

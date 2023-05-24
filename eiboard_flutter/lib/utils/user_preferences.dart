@@ -6,6 +6,5 @@ class UserPreferences {
       'Chicken',
       'Ei',
       'chicken.ei@ei.com',
-      'https://rapla.dhbw-karlsruhe.de/rapla?page=calendar&user=eisenbiegler&file=TINF21B4',
-      true);
+      'https://rapla.dhbw-karlsruhe.de/rapla?page=calendar&user=eisenbiegler&file=TINF21B4');
 }

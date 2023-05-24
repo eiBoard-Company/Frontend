@@ -63,7 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 15),
                     SizedBox(
-                      //TODO: manage so that you can see textfield when entering input
                       width: 302,
                       height: 69,
                       child: TextFormField(
@@ -90,7 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              print('Hallo Matteo');
                               Future<Response> fs = HttpRequest.fetchData(
                                   HttpRequest.url + HttpRequest.user);
                               fs.then((value) => print(value.body));

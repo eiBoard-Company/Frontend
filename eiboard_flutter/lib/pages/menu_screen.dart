@@ -1,3 +1,4 @@
+import '../utils/user_preferences.dart';
 import '/../pages/settings_pages/account_screen.dart';
 import '/../pages/calendar_screen.dart';
 import 'todo_list_screen.dart';
@@ -16,20 +17,17 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
+  final user = UserPreferences.user;
   @override
   Widget build(BuildContext context) {
-    const name = 'Matteo Staar';
-    const email = 'matteo.staar@ei.com';
-    const profileImage = 'images/logoEiBoard.png';
-
     return Scaffold(
       backgroundColor: LightStandardTheme.colorMain,
       body: ListView(padding: const EdgeInsets.only(left: 15), children: [
         const SizedBox(height: 50),
         buildHeader(
-          profileImage: profileImage,
-          name: name,
-          email: email,
+          profileImage: user.imagePath,
+          name: "${user.firstName} ${user.lastName}",
+          email: user.email,
           page: const AccountScreen(),
         ),
         buildMenuItem(
@@ -65,8 +63,6 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  //TODO: when email or name too long it overflows, so add a max for signs
-
   buildHeader(
       {required String profileImage,
       required String name,
@@ -92,11 +88,14 @@ class _MenuScreenState extends State<MenuScreen> {
                 backgroundImage: AssetImage(profileImage),
               ),
               const SizedBox(width: 10),
-              Column(
+              Expanded(
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     name,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                           color: Colors.black,
@@ -107,6 +106,8 @@ class _MenuScreenState extends State<MenuScreen> {
                   const SizedBox(width: 4),
                   Text(
                     email,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: GoogleFonts.montserrat(
                       textStyle: const TextStyle(
                           color: Colors.black,
@@ -115,7 +116,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     ),
                   )
                 ],
-              )
+              ))
             ],
           )),
     );

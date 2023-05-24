@@ -138,11 +138,11 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 20, top: 20),
               child: Button(
                 'Create Task',
                 () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) {

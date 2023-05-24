@@ -1,6 +1,5 @@
 import 'package:eiboard_flutter/pages/singletask_screen.dart';
 import 'package:intl/intl.dart';
-
 import '/../pages/components/button.dart';
 import '/../pages/components/page.dart';
 import '/../pages/components/todo_list_box.dart';
@@ -195,11 +194,11 @@ class TodoListScreen extends StatelessWidget {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20, top: 20),
                   child: Button(
                     'Create Task',
                     () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
