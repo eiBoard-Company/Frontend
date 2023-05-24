@@ -80,16 +80,14 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     backgroundColor: LightStandardTheme.colorDarkFont,
                     labelStyle: TextStyle(
                       color: tag1 == index
-                          ? Colors.white // Farbe des ausgewählten Chips
-                          : LightStandardTheme.colorLightFont, // Standardfarbe
+                          ? Colors.white
+                          : LightStandardTheme.colorLightFont,
                     ),
                     shape: RoundedRectangleBorder(
                         side: BorderSide(
                           color: tag1 == index
-                              ? LightStandardTheme
-                                  .colorDueToday // Borderfarbe des ausgewählten Chips
-                              : LightStandardTheme
-                                  .tagBorder, // Standard-Borderfarbe
+                              ? LightStandardTheme.colorDueToday
+                              : LightStandardTheme.tagBorder,
                         ),
                         borderRadius: BorderRadius.circular(15)),
                     onSelected: (bool selected) {
@@ -107,7 +105,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
           width: 337,
           child: Row(children: [
             SizedBox(
-              width: 100, // maximale Breite jedes Chips
+              width: 100,
               child: TextField(
                 controller: _chipController,
                 decoration: const InputDecoration(
@@ -119,7 +117,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                   _chipController.clear();
                   setState(() {
                     tags.add(newTag);
-                    newTag = ''; // leert das Textfeld
+                    newTag = '';
                   });
                 },
               ),
@@ -130,7 +128,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 _chipController.clear();
                 setState(() {
                   tags.add(newTag);
-                  newTag = ''; // leert das Textfeld
+                  newTag = '';
                 });
               },
             ),
@@ -148,7 +146,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return const TodoListScreen();
+                        return TodoListScreen();
                       },
                     ),
                   );

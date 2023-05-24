@@ -32,7 +32,7 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
         buildMenuItem(
           text: 'Tasks',
-          page: const TodoListScreen(),
+          page: TodoListScreen(),
         ),
         buildMenuItem(
           text: 'Schedule',
