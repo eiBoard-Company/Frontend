@@ -5,12 +5,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 class TodoBoxMainScreen extends StatelessWidget {
   final String textInCardTop;
-  final TodoListBox todo;
+  final List<TodoListBox> todos;
 
   const TodoBoxMainScreen({
     Key? key,
     required this.textInCardTop,
-    required this.todo,
+    required this.todos,
   }) : super(key: key);
 
   @override
@@ -23,28 +23,36 @@ class TodoBoxMainScreen extends StatelessWidget {
         elevation: 2.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
         child: Center(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              const SizedBox(height: 5.0),
-              Text(
-                textInCardTop,
-                style: GoogleFonts.karla(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 5.0),
+                Text(
+                  textInCardTop,
+                  style: GoogleFonts.karla(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: LightStandardTheme.colorSecondary),
-              ),
-              const Divider(
-                color: LightStandardTheme.colorLines,
-              ),
-              const SizedBox(
-                height: 5.0,
-              ),
-              todo,
-            ],
+                    color: LightStandardTheme.colorSecondary,
+                  ),
+                ),
+                const Divider(
+                  color: LightStandardTheme.colorLines,
+                ),
+                const SizedBox(height: 5.0),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: todos.length,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const SizedBox(height: 5.0),
+                  itemBuilder: (BuildContext context, int index) =>
+                      todos[index],
+                ),
+              ],
+            ),
           ),
-        )),
+        ),
       ),
     );
   }
