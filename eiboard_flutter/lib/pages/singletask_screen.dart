@@ -57,10 +57,8 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
   Widget build(BuildContext context) {
     String typeId = widget.typeId;
 
-    // Find the task object with matching typeId
     TaskListObject task = tasks.firstWhere((task) => task.typId == typeId);
     double sliderValue = task.completeValue ?? 0.0;
-    // Helper method to determine color based on dueValue
     Color _getColorForDueValue(String? dueValue) {
       switch (dueValue) {
         case 'Due Today':
@@ -70,7 +68,7 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
         case 'Overdue':
           return LightStandardTheme.colorOverdue;
         default:
-          return Colors.black; // Default color
+          return Colors.black;
       }
     }
 
@@ -81,8 +79,8 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
             child: Container(
           width: 337,
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.start, // hier hinzugefügt
-              crossAxisAlignment: CrossAxisAlignment.start, // hier hinzugefügt
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
                   height: 40,

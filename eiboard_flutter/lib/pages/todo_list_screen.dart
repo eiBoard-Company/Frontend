@@ -54,7 +54,6 @@ class TodoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     formatter = DateFormat('MMMMd').format(today);
-    // Filter tasks based on dueValue
     List<TaskListObject> overdueTasks =
         tasks.where((task) => task.dueValue == 'Overdue').toList();
     List<TaskListObject> dueTodayTasks =
@@ -173,7 +172,6 @@ class TodoListScreen extends StatelessWidget {
                             ? DateFormat('MMMMd').format(task.time!)
                             : '-',
                         LightStandardTheme.colorClassOne,
-                        // Handle nullable dueValue
                         () {
                           if (task.dueValue != null) {
                             Navigator.push(
