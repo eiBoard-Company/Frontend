@@ -228,7 +228,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     const SizedBox(width: 20),
                     TodoBoxMainScreen(
-                      textInCardTop: 'Todos',
+                      textInCardTop: 'Tasks',
                       todos: todoBoxes,
                       page: TodoListScreen(),
                     )
