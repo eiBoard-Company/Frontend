@@ -62,39 +62,97 @@ class _CustomCalendarState extends State<CustomCalendar> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //TODO: adjust font sizes to screen size
                   children: [
-                    Row(
-                      children: [
-                        Text(meeting.notes.toString(),
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                            )),
-                        const Spacer(),
-                        const Icon(Icons.location_on,
-                            color: Colors.black, size: 14),
-                        Text(" ${meeting.location}",
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 12,
-                            )),
-                      ],
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        double screenWidth = constraints.maxWidth;
+                        double fontSizeRow = 12.0; // Default font size
+                        double iconSize = 14.0;
+
+                        if (screenWidth < 100 &&
+                            _calendarController.view == CalendarView.day) {
+                          fontSizeRow = 8.0;
+                          iconSize = 10.0;
+                          //add 2 stages for week view
+                        } else if (screenWidth < 120 &&
+                            _calendarController.view == CalendarView.week) {
+                          fontSizeRow = 5.0;
+                          iconSize = 5.0;
+                        }
+
+                        return Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    meeting.notes.toString(),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: fontSizeRow,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: RichText(
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    text: TextSpan(
+                                      children: [
+                                        WidgetSpan(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 4.0),
+                                            child: Icon(
+                                              Icons.location_on,
+                                              color: Colors.black,
+                                              size: iconSize,
+                                            ),
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: "${meeting.location}",
+                                          style: GoogleFonts.montserrat(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: fontSizeRow,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                     const Spacer(),
-                    Text(meeting.subject,
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15,
-                        )),
-                    const SizedBox(
-                      height: 5,
+                    Text(
+                      meeting.subject,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15.0,
+                      ),
                     ),
-                    Text(getTime(details),
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        )),
+                    const SizedBox(height: 5),
+                    Text(
+                      getTime(details),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.0,
+                      ),
+                    ),
                   ],
                 ));
           },
@@ -105,8 +163,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
     if (_calendarController.view == CalendarView.month &&
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _calendarController.view = CalendarView.day;
-    } else if ((_calendarController.view == CalendarView.week ||
-            _calendarController.view == CalendarView.workWeek) &&
+    } else if (_calendarController.view == CalendarView.week &&
         calendarTapDetails.targetElement == CalendarElement.viewHeader) {
       _calendarController.view = CalendarView.day;
     }
