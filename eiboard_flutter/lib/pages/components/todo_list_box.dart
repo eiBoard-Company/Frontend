@@ -29,12 +29,12 @@ class TodoListBox extends StatelessWidget {
       this.classname,
       this.date,
       this.color,
-      this.onPressed,
       this.width,
       this.height,
       this.fontSizeTitleOfTodo,
       this.fontSizeCategoryOfTodo,
       this.showDueDateOfTodo,
+      this.onPressed,
       {Key? key})
       : super(key: key);
 

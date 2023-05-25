@@ -1,9 +1,13 @@
+import 'package:eiboard_flutter/pages/singletask_screen.dart';
+import 'package:intl/intl.dart';
+
 import '../utils/user_preferences.dart';
 import '/../pages/components/calendar.dart';
 import '/../pages/components/cards_main_screen.dart';
 import '/../pages/components/custom_app_bar.dart';
 import '/../pages/components/todo_box_main.dart';
 import '/../pages/components/todo_list_box.dart';
+import 'components/task_List_Object.dart';
 import 'todo_list_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +24,150 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final user = UserPreferences.user;
+  List<TaskListObject> tasks = [
+    TaskListObject(
+        taskname: "Matheaufgaben erledigen",
+        subject: "Mathematik II",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test",
+        dueValue: "Overdue",
+        typId: "1"),
+    TaskListObject(
+        taskname: "Project",
+        subject: "Software Engineering",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test2",
+        dueValue: "Due This Week",
+        typId: "2"),
+    TaskListObject(
+        taskname: "Type3-Grammatik lernen",
+        subject: "Formale Sprachen",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test3",
+        dueValue: "Due Today",
+        typId: "3"),
+    TaskListObject(
+        taskname: "Datenbanken lernen",
+        subject: "Datenbanken",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test4",
+        dueValue: "Overdue",
+        typId: "4"),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    List<TaskListObject> overdueTasks =
+        tasks.where((task) => task.dueValue == 'Overdue').toList();
+    List<TaskListObject> dueTodayTasks =
+        tasks.where((task) => task.dueValue == 'Due Today').toList();
+    List<TaskListObject> dueThisWeekTasks =
+        tasks.where((task) => task.dueValue == 'Due This Week').toList();
+
+    List<TodoListBox> todoBoxes = [];
+    int maxTodoBoxes = 3;
+    int todoCount = 0;
+
+    for (TaskListObject task in overdueTasks) {
+      if (todoCount >= maxTodoBoxes) break;
+
+      todoBoxes.add(
+        TodoListBox.withSize(
+          task.subject ?? '-',
+          DateFormat('MMM d').format(task.time ?? DateTime.now()),
+          task.dueValue ?? '-',
+          LightStandardTheme.colorClassThree,
+          186,
+          58,
+          10,
+          8,
+          false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
+        ),
+      );
+
+      todoCount++;
+    }
+
+    for (TaskListObject task in dueTodayTasks) {
+      if (todoCount >= maxTodoBoxes) break;
+
+      todoBoxes.add(
+        TodoListBox.withSize(
+          task.subject ?? '-',
+          DateFormat('MMM d').format(task.time ?? DateTime.now()),
+          task.dueValue ?? '-',
+          LightStandardTheme.colorClassTwo,
+          186,
+          58,
+          10,
+          8,
+          false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
+        ),
+      );
+
+      todoCount++;
+    }
+
+    for (TaskListObject task in dueThisWeekTasks) {
+      if (todoCount >= maxTodoBoxes) break;
+
+      todoBoxes.add(
+        TodoListBox.withSize(
+          task.subject ?? '-',
+          DateFormat('MMM d').format(task.time ?? DateTime.now()),
+          task.dueValue ?? '-',
+          LightStandardTheme.colorClassOne,
+          186,
+          58,
+          10,
+          8,
+          false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
+        ),
+      );
+
+      todoCount++;
+    }
+
     return Scaffold(
       appBar: CustomAppBar(context: context),
       body: SafeArea(
@@ -82,20 +228,10 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     const SizedBox(width: 20),
                     TodoBoxMainScreen(
-                      textInCardTop: 'Todos',
-                      todo: TodoListBox.withSize(
-                        "Matheaufgaben erledigen",
-                        "Mathematik II",
-                        "Oct 17",
-                        LightStandardTheme.colorClassThree,
-                        () {},
-                        186,
-                        58,
-                        10,
-                        8,
-                        false,
-                      ),
-                    ),
+                      textInCardTop: 'Tasks',
+                      todos: todoBoxes,
+                      page: TodoListScreen(),
+                    )
                   ],
                 ),
               ),
