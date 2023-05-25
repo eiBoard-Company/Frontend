@@ -1,3 +1,4 @@
+import 'package:eiboard_flutter/pages/singletask_screen.dart';
 import 'package:intl/intl.dart';
 
 import '../utils/user_preferences.dart';
@@ -76,16 +77,28 @@ class _MainScreenState extends State<MainScreen> {
 
       todoBoxes.add(
         TodoListBox.withSize(
-            task.subject ?? '-',
-            DateFormat('MMM d').format(task.time ?? DateTime.now()),
-            task.dueValue ?? '-',
-            Colors.blue,
-            () {},
-            186,
-            58,
-            10,
-            8,
-            false),
+          task.subject ?? '-',
+          DateFormat('MMM d').format(task.time ?? DateTime.now()),
+          task.dueValue ?? '-',
+          LightStandardTheme.colorClassThree,
+          186,
+          58,
+          10,
+          8,
+          false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
+        ),
       );
 
       todoCount++;
@@ -96,36 +109,28 @@ class _MainScreenState extends State<MainScreen> {
 
       todoBoxes.add(
         TodoListBox.withSize(
-            task.subject ?? '-',
-            DateFormat('MMM d').format(task.time ?? DateTime.now()),
-            task.dueValue ?? '-',
-            Colors.blue,
-            () {},
-            186,
-            58,
-            10,
-            8,
-            false),
-      );
-
-      todoCount++;
-    }
-
-    for (TaskListObject task in dueThisWeekTasks) {
-      if (todoCount >= maxTodoBoxes) break;
-
-      todoBoxes.add(
-        TodoListBox.withSize(
-            task.subject ?? '-',
-            DateFormat('MMM d').format(task.time ?? DateTime.now()),
-            task.dueValue ?? '-',
-            Colors.blue,
-            () {},
-            186,
-            58,
-            10,
-            8,
-            false),
+          task.subject ?? '-',
+          DateFormat('MMM d').format(task.time ?? DateTime.now()),
+          task.dueValue ?? '-',
+          LightStandardTheme.colorClassTwo,
+          186,
+          58,
+          10,
+          8,
+          false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
+        ),
       );
 
       todoCount++;
@@ -140,12 +145,23 @@ class _MainScreenState extends State<MainScreen> {
           DateFormat('MMM d').format(task.time ?? DateTime.now()),
           task.dueValue ?? '-',
           LightStandardTheme.colorClassOne,
-          () {},
           186,
           58,
           10,
           8,
           false,
+          () {
+            if (task.dueValue != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SingleTaskScreen(typeId: task.typId ?? '-');
+                  },
+                ),
+              );
+            }
+          },
         ),
       );
 
@@ -211,7 +227,11 @@ class _MainScreenState extends State<MainScreen> {
                       ],
                     ),
                     const SizedBox(width: 20),
-                    TodoBoxMainScreen(textInCardTop: 'Todos', todos: todoBoxes)
+                    TodoBoxMainScreen(
+                      textInCardTop: 'Todos',
+                      todos: todoBoxes,
+                      page: TodoListScreen(),
+                    )
                   ],
                 ),
               ),
