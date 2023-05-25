@@ -6,6 +6,7 @@ import '../../themes/light_standard_theme.dart';
 class Button extends StatelessWidget {
   final String textInButton;
   final VoidCallback functionOfOnPressed;
+
   const Button(this.textInButton, this.functionOfOnPressed, {super.key});
 
   @override

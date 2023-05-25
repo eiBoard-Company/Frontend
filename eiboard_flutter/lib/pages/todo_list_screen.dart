@@ -1,3 +1,5 @@
+import 'package:eiboard_flutter/pages/singletask_screen.dart';
+import 'package:intl/intl.dart';
 import '/../pages/components/button.dart';
 import '/../pages/components/page.dart';
 import '/../pages/components/todo_list_box.dart';
@@ -6,13 +8,58 @@ import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'singletask_screen.dart';
+import 'components/task_List_Object.dart';
 
+// ignore: must_be_immutable
 class TodoListScreen extends StatelessWidget {
-  const TodoListScreen({Key? key}) : super(key: key);
+  TodoListScreen({Key? key}) : super(key: key);
+  var today = DateTime.now();
+  String formatter = '';
+  List<TaskListObject> tasks = [
+    TaskListObject(
+        taskname: "Matheaufgaben erledigen",
+        subject: "Mathematik II",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test",
+        dueValue: "Overdue",
+        typId: "1"),
+    TaskListObject(
+        taskname: "Project",
+        subject: "Software Engineering",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test2",
+        dueValue: "Due This Week",
+        typId: "2"),
+    TaskListObject(
+        taskname: "Type3-Grammatik lernen",
+        subject: "Formale Sprachen",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test3",
+        dueValue: "Due Today",
+        typId: "3"),
+    TaskListObject(
+        taskname: "Datenbanken lernen",
+        subject: "Datenbanken",
+        time: DateTime.now(),
+        completeValue: 0.0,
+        description: "Test4",
+        dueValue: "Overdue",
+        typId: "4"),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    formatter = DateFormat('MMMMd').format(today);
+    List<TaskListObject> overdueTasks =
+        tasks.where((task) => task.dueValue == 'Overdue').toList();
+    List<TaskListObject> dueTodayTasks =
+        tasks.where((task) => task.dueValue == 'Due Today').toList();
+    List<TaskListObject> dueThisWeekTasks =
+        tasks.where((task) => task.dueValue == 'Due This Week').toList();
+
     return PageBackground(
         topic: 'Tasks',
         showPlusIcon: false,
@@ -21,90 +68,128 @@ class TodoListScreen extends StatelessWidget {
             const SizedBox(
               height: 40,
             ),
-            Text(
-              'Overdue',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
+            if (overdueTasks.isNotEmpty) ...[
+              Text(
+                'Overdue',
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
                     color: LightStandardTheme.colorOverdue,
                     fontSize: 14,
-                    fontWeight: FontWeight.w600),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(height: 15),
-            Center(
-                child: TodoListBox("Matheaufgaben erledigen", "Mathematik II",
-                    "Oct 17", LightStandardTheme.colorClassThree, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SingleTaskScreen();
-                  },
-                ),
-              );
-            })),
-            const SizedBox(height: 15),
-            Center(
-                child: TodoListBox(
-                    "Letzte Vorlesung nacharbeiten",
-                    "Rechnerarchitektur",
-                    "Oct 17",
-                    LightStandardTheme.colorClassThree, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SingleTaskScreen();
-                  },
-                ),
-              );
-            })),
-            const SizedBox(height: 15),
-            Text(
-              'Due Today',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
+              const SizedBox(height: 15),
+              for (var task in overdueTasks)
+                Column(
+                  children: [
+                    Center(
+                      child: TodoListBox(
+                        task.taskname ?? '-',
+                        task.subject ?? '-',
+                        task.time != null
+                            ? DateFormat('MMMMd').format(task.time!)
+                            : '-',
+                        LightStandardTheme.colorClassThree,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return SingleTaskScreen(
+                                    typeId: task.typId ?? '-');
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 15)
+                  ],
+                )
+            ],
+            if (dueTodayTasks.isNotEmpty) ...[
+              Text(
+                'Due Today',
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
                     color: LightStandardTheme.colorDueToday,
                     fontSize: 14,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Center(
-                child: TodoListBox("Typ3-grammatik lernen", "Formale Sprachen",
-                    "Nov 21", LightStandardTheme.colorClassTwo, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SingleTaskScreen();
-                  },
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              );
-            })),
-            const SizedBox(height: 15),
-            Text(
-              'Due This Week',
-              style: GoogleFonts.montserrat(
-                textStyle: const TextStyle(
+              ),
+              const SizedBox(height: 15),
+              for (var task in dueTodayTasks)
+                Column(
+                  children: [
+                    Center(
+                      child: TodoListBox(
+                        task.taskname ?? '-',
+                        task.subject ?? '-',
+                        task.time != null
+                            ? DateFormat('MMMMd').format(task.time!)
+                            : '-',
+                        LightStandardTheme.colorClassTwo,
+                        () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return SingleTaskScreen(
+                                    typeId: task.typId ?? '-');
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 15)
+                  ],
+                ),
+            ],
+            if (dueThisWeekTasks.isNotEmpty) ...[
+              Text(
+                'Due This Week',
+                style: GoogleFonts.montserrat(
+                  textStyle: const TextStyle(
                     color: LightStandardTheme.colorDueThisWeek,
                     fontSize: 14,
-                    fontWeight: FontWeight.w600),
-              ),
-            ),
-            const SizedBox(height: 15),
-            Center(
-                child: TodoListBox("Project", "Software Enineering", "Nov 25",
-                    LightStandardTheme.colorClassOne, () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return const SingleTaskScreen();
-                  },
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              );
-            })),
+              ),
+              const SizedBox(height: 15),
+              for (var task in dueThisWeekTasks)
+                Column(
+                  children: [
+                    Center(
+                      child: TodoListBox(
+                        task.taskname ?? '-',
+                        task.subject ?? '-',
+                        task.time != null
+                            ? DateFormat('MMMMd').format(task.time!)
+                            : '-',
+                        LightStandardTheme.colorClassOne,
+                        () {
+                          if (task.dueValue != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return SingleTaskScreen(
+                                      typeId: task.typId ?? '-');
+                                },
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 15)
+                  ],
+                )
+            ],
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
