@@ -20,8 +20,6 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-//TODO: add on taps to each widget
-
 class _MainScreenState extends State<MainScreen> {
   final user = UserPreferences.user;
   List<TaskListObject> tasks = [

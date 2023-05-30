@@ -6,15 +6,15 @@ class HowToEiBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageBackground(
+    return const PageBackground(
         topic: 'How to eiBoard',
         child: Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 30),
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 30),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     SizedBox(
                       height: 30,
                     ),
