@@ -1,10 +1,10 @@
-import 'package:eiboard_flutter/pages/components/page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../themes/light_standard_theme.dart';
 import 'components/button.dart';
 import 'components/custom_date_picker.dart';
+import 'components/page.dart';
 import 'components/task_list_object.dart';
 
 class SingleTaskScreen extends StatefulWidget {

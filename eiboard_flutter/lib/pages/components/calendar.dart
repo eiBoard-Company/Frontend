@@ -1,3 +1,4 @@
+import '../single_event_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -179,6 +180,10 @@ class _CustomCalendarState extends State<CustomCalendar> {
   }
 
   void calendarTapped(CalendarTapDetails calendarTapDetails) {
+    if (calendarTapDetails.targetElement == CalendarElement.appointment) {
+      Appointment appointment = calendarTapDetails.appointments![0];
+      SingleEventScreen.showAppointmentDialog(context, appointment);
+    }
     if (_calendarController.view == CalendarView.month &&
         calendarTapDetails.targetElement == CalendarElement.calendarCell) {
       _calendarController.view = CalendarView.day;
