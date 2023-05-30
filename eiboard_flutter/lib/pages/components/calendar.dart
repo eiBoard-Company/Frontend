@@ -22,6 +22,40 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double fontSize = 12.0;
+    double fontSizeSubject = 15.0;
+    double iconSize = 14.0;
+    double paddingOfEventBox = 15.0;
+
+    if (screenWidth < 200 && _calendarController.view == CalendarView.day) {
+      fontSize = 8.0;
+      iconSize = 10.0;
+      fontSizeSubject = 11.0;
+    } else if (screenWidth < 620 &&
+        _calendarController.view == CalendarView.week) {
+      fontSize = 5.0;
+      iconSize = 7.0;
+      fontSizeSubject = 7.0;
+      paddingOfEventBox = 9.0;
+    } else if (screenWidth < 700 &&
+        _calendarController.view == CalendarView.week) {
+      fontSize = 6.0;
+      iconSize = 8.0;
+      fontSizeSubject = 7.0;
+      paddingOfEventBox = 9.0;
+    } else if (screenWidth < 900 &&
+        _calendarController.view == CalendarView.week) {
+      fontSize = 6.0;
+      iconSize = 8.0;
+      fontSizeSubject = 9.0;
+    } else if (screenWidth < 1150 &&
+        _calendarController.view == CalendarView.week) {
+      fontSize = 8.0;
+      iconSize = 10.0;
+      fontSizeSubject = 11.0;
+    }
+
     return SizedBox(
         height: widget.heightOfCalendar,
         child: SfCalendar(
@@ -51,7 +85,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
           appointmentBuilder: (context, CalendarAppointmentDetails details) {
             final Appointment meeting = details.appointments.first;
             return Container(
-                padding: const EdgeInsets.all(15),
+                padding: EdgeInsets.only(
+                    bottom: 15,
+                    top: 15,
+                    left: paddingOfEventBox,
+                    right: paddingOfEventBox),
                 height: 50,
                 alignment: Alignment.topLeft,
                 decoration: BoxDecoration(
@@ -63,75 +101,56 @@ class _CustomCalendarState extends State<CustomCalendar> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        double screenWidth = constraints.maxWidth;
-                        double fontSizeRow = 12.0; // Default font size
-                        double iconSize = 14.0;
-
-                        if (screenWidth < 100 &&
-                            _calendarController.view == CalendarView.day) {
-                          fontSizeRow = 8.0;
-                          iconSize = 10.0;
-                          //add 2 stages for week view
-                        } else if (screenWidth < 120 &&
-                            _calendarController.view == CalendarView.week) {
-                          fontSizeRow = 5.0;
-                          iconSize = 5.0;
-                        }
-
-                        return Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    meeting.notes.toString(),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                    style: GoogleFonts.montserrat(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: fontSizeRow,
-                                    ),
-                                  ),
+                    Expanded(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                meeting.notes.toString(),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: GoogleFonts.montserrat(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: fontSize,
                                 ),
                               ),
-                              Expanded(
-                                child: Align(
-                                  alignment: Alignment.topRight,
-                                  child: RichText(
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    text: TextSpan(
-                                      children: [
-                                        WidgetSpan(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 4.0),
-                                            child: Icon(
-                                              Icons.location_on,
-                                              color: Colors.black,
-                                              size: iconSize,
-                                            ),
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: "${meeting.location}",
-                                          style: GoogleFonts.montserrat(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: fontSizeRow,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        );
-                      },
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: RichText(
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                text: TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 4.0),
+                                        child: Icon(
+                                          Icons.location_on,
+                                          color: Colors.black,
+                                          size: iconSize,
+                                        ),
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "${meeting.location}",
+                                      style: GoogleFonts.montserrat(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: fontSize,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const Spacer(),
                     Text(
@@ -140,7 +159,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       maxLines: 1,
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w600,
-                        fontSize: 15.0,
+                        fontSize: fontSizeSubject,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -150,7 +169,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
                       maxLines: 1,
                       style: GoogleFonts.montserrat(
                         fontWeight: FontWeight.w500,
-                        fontSize: 12.0,
+                        fontSize: fontSize,
                       ),
                     ),
                   ],
