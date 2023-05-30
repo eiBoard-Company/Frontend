@@ -59,7 +59,7 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
 
     TaskListObject task = tasks.firstWhere((task) => task.typId == typeId);
     double sliderValue = task.completeValue ?? 0.0;
-    Color _getColorForDueValue(String? dueValue) {
+    Color getColorForDueValue(String? dueValue) {
       switch (dueValue) {
         case 'Due Today':
           return LightStandardTheme.colorDueToday;
@@ -119,7 +119,7 @@ class _SingleTaskScreen extends State<SingleTaskScreen> {
                     Text(
                       task.dueValue ?? '-',
                       style: TextStyle(
-                        color: _getColorForDueValue(task.dueValue),
+                        color: getColorForDueValue(task.dueValue),
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
                       ),
