@@ -187,8 +187,8 @@ String getTime(CalendarAppointmentDetails details) {
 _AppointmentDataSource _getCalendarData() {
   List<Appointment> classes = <Appointment>[];
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-18 08:30:00Z'),
-    endTime: DateTime.parse('2023-04-18 12:30:00Z'),
+    startTime: DateTime.parse('2023-06-01 08:30:00Z'),
+    endTime: DateTime.parse('2023-06-01 12:30:00Z'),
     subject: 'Software Engineering',
     notes: 'Lecture',
     location: 'F492',
@@ -196,8 +196,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-18 13:00:00Z'),
-    endTime: DateTime.parse('2023-04-18 16:15:00Z'),
+    startTime: DateTime.parse('2023-06-01 13:00:00Z'),
+    endTime: DateTime.parse('2023-06-01 16:15:00Z'),
     subject: 'Formale Sprachen',
     notes: 'Lecture',
     location: 'F492',
@@ -205,8 +205,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-19 08:30:00Z'),
-    endTime: DateTime.parse('2023-04-19 11:00:00Z'),
+    startTime: DateTime.parse('2023-05-28 08:30:00Z'),
+    endTime: DateTime.parse('2023-05-28 11:00:00Z'),
     subject: 'Rechnerarchitektur I',
     notes: 'Lecture',
     location: 'F492',
@@ -214,8 +214,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-20 12:00:00Z'),
-    endTime: DateTime.parse('2023-04-20 14:30:00Z'),
+    startTime: DateTime.parse('2023-05-29 12:00:00Z'),
+    endTime: DateTime.parse('2023-05-29 14:30:00Z'),
     subject: 'Betriebssysteme',
     notes: 'Lecture',
     location: 'F492',
@@ -223,8 +223,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-21 08:30:00Z'),
-    endTime: DateTime.parse('2023-04-21 11:45:00Z'),
+    startTime: DateTime.parse('2023-05-30 08:30:00Z'),
+    endTime: DateTime.parse('2023-05-30 11:45:00Z'),
     subject: 'Mathematik II',
     notes: 'Lecture',
     location: 'F492',
@@ -232,8 +232,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-21 12:30:00Z'),
-    endTime: DateTime.parse('2023-04-21 15:45:00Z'),
+    startTime: DateTime.parse('2023-05-30 12:30:00Z'),
+    endTime: DateTime.parse('2023-05-30 15:45:00Z'),
     subject: 'Datenbanken I',
     notes: 'Lecture',
     location: 'F492',
@@ -241,8 +241,8 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-04-22 08:45:00Z'),
-    endTime: DateTime.parse('2023-04-22 12:00:00Z'),
+    startTime: DateTime.parse('2023-05-31 08:45:00Z'),
+    endTime: DateTime.parse('2023-05-31 12:00:00Z'),
     subject: 'Webengineering II',
     notes: 'Lecture',
     location: 'F492',
