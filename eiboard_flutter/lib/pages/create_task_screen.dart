@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'components/button.dart';
 
 import 'components/custom_date_picker.dart';
+import 'components/custom_text_form_field.dart';
 import 'components/custom_time_picker.dart';
 import 'todo_list_screen.dart';
 
@@ -33,129 +34,147 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return PageBackground(
-      topic: 'Create New Task',
-      child: Column(children: [
-        const SizedBox(
-          height: 30,
-        ),
-        SizedBox(
-          width: 337,
-          child: TextFormField(
-            decoration: const InputDecoration(
-                border: UnderlineInputBorder(), labelText: 'Title'),
-          ),
-        ),
-        CustomDatePicker(controller: _dateController, labelText: 'Date'),
-        CustomTimePicker(
-            controller: _endTimeController, labelText: 'End Time', width: 337),
-        SizedBox(
-          width: 337,
-          child: TextFormField(
-            decoration: const InputDecoration(
-                border: UnderlineInputBorder(), labelText: 'Description'),
-            keyboardType: TextInputType.multiline,
-            minLines: 1,
-            maxLines: 4,
-          ),
-        ),
-        const SizedBox(height: 15),
-        SizedBox(
-          width: 337,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text('Category'),
-              const SizedBox(height: 10.0),
-              Wrap(
-                spacing: 5.0,
-                runSpacing: 7.0,
-                children: List<Widget>.generate(
-                  tags.length,
-                  (index) => ChoiceChip(
-                    label: Text(tags[index]),
-                    selected: tag1 == index,
-                    selectedColor: LightStandardTheme.colorDueToday,
-                    backgroundColor: LightStandardTheme.colorDarkFont,
-                    labelStyle: TextStyle(
-                      color: tag1 == index
-                          ? Colors.white
-                          : LightStandardTheme.colorLightFont,
-                    ),
-                    shape: RoundedRectangleBorder(
-                        side: BorderSide(
+        topic: 'Create New Task',
+        child: Form(
+          key: formKey,
+          child: Column(children: [
+            const SizedBox(
+              height: 30,
+            ),
+            CustomTextFormField(
+              labelText: 'Title',
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field can not be empty';
+                }
+                return null;
+              },
+            ),
+            CustomDatePicker(controller: _dateController, labelText: 'Date'),
+            CustomTimePicker(
+              controller: _endTimeController,
+              labelText: 'End Time',
+              width: 337,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field can not be empty';
+                }
+                const pattern = r'^\d{1,2}:\d{2} [AP]M$';
+                final regex = RegExp(pattern);
+                if (!regex.hasMatch(value)) {
+                  return 'Use HH:MM AM/PM format';
+                }
+                return null;
+              },
+            ),
+            const CustomTextFormField(
+              labelText: 'Description',
+              keyboardType: TextInputType.multiline,
+              minLines: 1,
+              maxLines: 4,
+            ),
+            const SizedBox(height: 15),
+            SizedBox(
+              width: 337,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  const Text('Category'),
+                  const SizedBox(height: 10.0),
+                  Wrap(
+                    spacing: 5.0,
+                    runSpacing: 7.0,
+                    children: List<Widget>.generate(
+                      tags.length,
+                      (index) => ChoiceChip(
+                        label: Text(tags[index]),
+                        selected: tag1 == index,
+                        selectedColor: LightStandardTheme.colorDueToday,
+                        backgroundColor: LightStandardTheme.colorDarkFont,
+                        labelStyle: TextStyle(
                           color: tag1 == index
-                              ? LightStandardTheme.colorDueToday
-                              : LightStandardTheme.tagBorder,
+                              ? Colors.white
+                              : LightStandardTheme.colorLightFont,
                         ),
-                        borderRadius: BorderRadius.circular(15)),
-                    onSelected: (bool selected) {
+                        shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: tag1 == index
+                                  ? LightStandardTheme.colorDueToday
+                                  : LightStandardTheme.tagBorder,
+                            ),
+                            borderRadius: BorderRadius.circular(15)),
+                        onSelected: (bool selected) {
+                          setState(() {
+                            tag1 = (selected ? index : null)!;
+                          });
+                        },
+                      ),
+                    ).toList(),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 337,
+              child: Row(children: [
+                SizedBox(
+                  width: 100,
+                  child: TextField(
+                    cursorColor: LightStandardTheme.colorPrimary,
+                    controller: _chipController,
+                    decoration: const InputDecoration(
+                      hintText: 'New Category',
+                      border: InputBorder.none,
+                    ),
+                    onChanged: (value) => setState(() => newTag = value),
+                    onSubmitted: (value) {
+                      _chipController.clear();
                       setState(() {
-                        tag1 = (selected ? index : null)!;
+                        tags.add(newTag);
+                        newTag = '';
                       });
                     },
                   ),
-                ).toList(),
-              ),
-            ],
-          ),
-        ),
-        SizedBox(
-          width: 337,
-          child: Row(children: [
-            SizedBox(
-              width: 100,
-              child: TextField(
-                controller: _chipController,
-                decoration: const InputDecoration(
-                  hintText: 'New Category',
-                  border: InputBorder.none,
                 ),
-                onChanged: (value) => setState(() => newTag = value),
-                onSubmitted: (value) {
-                  _chipController.clear();
-                  setState(() {
-                    tags.add(newTag);
-                    newTag = '';
-                  });
-                },
-              ),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    _chipController.clear();
+                    setState(() {
+                      tags.add(newTag);
+                      newTag = '';
+                    });
+                  },
+                ),
+              ]),
             ),
-            IconButton(
-              icon: const Icon(Icons.add),
-              onPressed: () {
-                _chipController.clear();
-                setState(() {
-                  tags.add(newTag);
-                  newTag = '';
-                });
-              },
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20, top: 20),
+                  child: Button(
+                    'Create Task',
+                    () {
+                      if (formKey.currentState!.validate()) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return TodoListScreen();
+                            },
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                ),
+              ),
             ),
           ]),
-        ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 20, top: 20),
-              child: Button(
-                'Create Task',
-                () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return TodoListScreen();
-                      },
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ),
-      ]),
-    );
+        ));
   }
 }

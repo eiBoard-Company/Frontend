@@ -9,7 +9,6 @@ class CustomDatePicker extends StatefulWidget {
   final String labelText;
   final bool disabled;
   final DateTime? initialDate;
-  final String? Function(String?)? validator;
 
   const CustomDatePicker({
     Key? key,
@@ -17,7 +16,6 @@ class CustomDatePicker extends StatefulWidget {
     required this.labelText,
     this.disabled = false,
     this.initialDate,
-    this.validator,
   }) : super(key: key);
 
   @override
@@ -77,7 +75,17 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           ),
           labelText: widget.labelText,
         ),
-        validator: widget.validator,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'This field can not be empty';
+          }
+          const pattern = r'^[A-Z][a-z]{2,8} \d{1,2}, \d{4}$';
+          final regex = RegExp(pattern);
+          if (!regex.hasMatch(value)) {
+            return 'Use Month Day, Year format (e.g. \'May 22, 2023\')';
+          }
+          return null;
+        },
         onTap: () async {
           DateTime? pickedDate = await showDatePicker(
             context: context,

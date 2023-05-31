@@ -53,17 +53,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             CustomDatePicker(
               controller: _dateController,
               labelText: 'Date',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'This field can not be empty';
-                }
-                const pattern = r'^[A-Z][a-z]{2,8} \d{1,2}, \d{4}$';
-                final regex = RegExp(pattern);
-                if (!regex.hasMatch(value)) {
-                  return 'Use Month Day, Year format (e.g. \'May 22, 2023\')';
-                }
-                return null;
-              },
             ),
             SizedBox(
                 width: 337,
@@ -91,6 +80,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     controller: _endTimeController,
                     labelText: 'End Time',
                     width: 155,
+                    //TODO: end time can not be before start time
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'This field can not be empty';
