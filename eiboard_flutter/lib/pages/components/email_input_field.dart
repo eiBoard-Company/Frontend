@@ -18,13 +18,6 @@ class _EMailInputFieldState extends State<EMailInputField> {
     focusNode.addListener(_onFocusChange);
   }
 
-  @override
-  void dispose() {
-    focusNode.removeListener(_onFocusChange);
-    focusNode.dispose();
-    super.dispose();
-  }
-
   void _onFocusChange() {
     setState(() {});
   }
@@ -35,6 +28,7 @@ class _EMailInputFieldState extends State<EMailInputField> {
       width: 302,
       height: 69,
       child: TextFormField(
+        cursorColor: LightStandardTheme.colorPrimary,
         focusNode: focusNode,
         decoration: InputDecoration(
           labelText: "Enter E-Mail",
