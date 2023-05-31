@@ -1,12 +1,10 @@
 import '/../pages/components/button.dart';
-import '/../pages/components/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'components/custom_drawer.dart';
 import 'components/email_input_field.dart';
 import 'components/password_input_field.dart';
 import 'login_screen.dart';
-
-//TODO: navigate to another page
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
