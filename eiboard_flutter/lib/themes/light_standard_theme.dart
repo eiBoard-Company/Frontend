@@ -8,6 +8,7 @@ class LightStandardTheme {
   static const Color colorLightFont = Color(0xFF000000);
   static const Color colorDarkFont = Color(0xFFFFFFFF);
   static const Color colorLines = Color(0xFFD1D1D1);
+  static const Color colorGrey = Color.fromARGB(255, 134, 134, 134);
 
   //Error Color
   static const Color colorError = Color(0xFFB90000);
