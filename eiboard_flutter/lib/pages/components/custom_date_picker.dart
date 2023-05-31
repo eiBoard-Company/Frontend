@@ -7,15 +7,17 @@ import '../../themes/light_standard_theme.dart';
 class CustomDatePicker extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
-  final bool disabled; // Neue Variable zur Bestimmung des Bearbeitungszustands
-  final DateTime? initialDate; // Optionaler initialer Wert
+  final bool disabled;
+  final DateTime? initialDate;
+  final String? Function(String?)? validator;
 
   const CustomDatePicker({
     Key? key,
     required this.controller,
     required this.labelText,
-    this.disabled = false, // Standardwert auf false setze
+    this.disabled = false,
     this.initialDate,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -24,14 +26,20 @@ class CustomDatePicker extends StatefulWidget {
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
   final DateFormat _dateFormat = DateFormat('MMMM d, y');
+  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+    focusNode = FocusNode();
+    focusNode.addListener(_onFocusChange);
     if (widget.initialDate != null) {
-      // Initialen Wert im TextEditingController setzen
       widget.controller.text = _dateFormat.format(widget.initialDate!);
     }
+  }
+
+  void _onFocusChange() {
+    setState(() {});
   }
 
   @override
@@ -39,9 +47,14 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     return SizedBox(
       width: 337,
       child: TextFormField(
+        cursorColor: LightStandardTheme.colorPrimary,
+        focusNode: focusNode,
         controller: widget.controller,
         enabled: !widget.disabled,
         decoration: InputDecoration(
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: LightStandardTheme.colorPrimary),
+          ),
           suffixIcon: Container(
             width: 20,
             height: 20,
@@ -54,9 +67,17 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
               color: Colors.white,
             ),
           ),
-          border: const UnderlineInputBorder(),
+          labelStyle: TextStyle(
+              color: focusNode.hasFocus
+                  ? LightStandardTheme.colorPrimary
+                  : LightStandardTheme.colorGrey),
+          errorStyle: const TextStyle(color: LightStandardTheme.colorError),
+          errorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: LightStandardTheme.colorError),
+          ),
           labelText: widget.labelText,
         ),
+        validator: widget.validator,
         onTap: () async {
           DateTime? pickedDate = await showDatePicker(
             context: context,

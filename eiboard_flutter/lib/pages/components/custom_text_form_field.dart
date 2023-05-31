@@ -6,11 +6,19 @@ class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final String? initialValue;
   final String? Function(String?)? validator;
+  final double width;
+  final TextInputType? keyboardType;
+  final int? minLines;
+  final int? maxLines;
   const CustomTextFormField({
     Key? key,
     required this.labelText,
     this.initialValue,
     this.validator,
+    this.width = 337,
+    this.keyboardType,
+    this.maxLines = 1,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -33,8 +41,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 337,
+      width: widget.width,
       child: TextFormField(
+          keyboardType: widget.keyboardType,
+          minLines: widget.minLines,
+          maxLines: widget.maxLines,
           cursorColor: LightStandardTheme.colorPrimary,
           focusNode: focusNode,
           initialValue: widget.initialValue,
