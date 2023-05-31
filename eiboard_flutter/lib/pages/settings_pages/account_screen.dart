@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../utils/user_preferences.dart';
 import '../components/button.dart';
 import '../components/custom_drawer.dart';
+import '../components/custom_password_field_for_account.dart';
+import '../components/custom_text_form_field.dart';
 import '../components/profile_widget.dart';
 import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
@@ -12,99 +14,74 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     final user = UserPreferences.user;
     return PageBackground(
-      topic: 'My Account',
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 30,
-          ),
-          ProfileWidget(imagePath: user.imagePath, onClicked: () async {}),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              initialValue: user.firstName,
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'First Name'),
-            ),
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              initialValue: user.lastName,
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Last Name'),
-            ),
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              initialValue: user.email,
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'E-Mail'),
-            ),
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              initialValue: user.raplaURL,
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Rapla URL'),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Text('Create New Password',
-              style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'Old Password'),
-            ),
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'New Password'),
-            ),
-          ),
-          SizedBox(
-            width: 337,
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  border: UnderlineInputBorder(), labelText: 'New Password'),
-            ),
-          ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 20, top: 20),
-                child: Button(
-                  'Save',
-                  () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const CustomDrawer();
-                        },
-                      ),
-                    );
-                  },
+        topic: 'My Account',
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 30,
+              ),
+              ProfileWidget(imagePath: user.imagePath, onClicked: () async {}),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
+                  labelText: 'First Name', initialValue: user.firstName),
+              CustomTextFormField(
+                  labelText: 'Last Name', initialValue: user.lastName),
+              CustomTextFormField(
+                labelText: 'E-Mail',
+                initialValue: user.email,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'This field can not be empty';
+                  }
+                  final emailRegex = RegExp(
+                      r'^[\w-]+(\.[\w-]+)*@[a-zA-Z\d-]+(\.[a-zA-Z\d-]+)*\.[a-zA-Z\d]{2,}$');
+                  if (!emailRegex.hasMatch(value)) {
+                    return 'Invalid email format';
+                  }
+                  return null;
+                },
+              ),
+              CustomTextFormField(
+                  labelText: 'Rapla URL', initialValue: user.raplaURL),
+              const SizedBox(
+                height: 30,
+              ),
+              Text('Create New Password',
+                  style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
+              const CustomTextFormField(labelText: 'Old Password'),
+              const PasswordInputFieldAccount(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20, top: 20),
+                    child: Button(
+                      'Save',
+                      () {
+                        if (formKey.currentState!.validate()) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return const CustomDrawer();
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }

@@ -40,6 +40,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
         width: 302,
         height: 69,
         child: TextFormField(
+          cursorColor: LightStandardTheme.colorPrimary,
           focusNode: focusNode1,
           controller: passwordController,
           decoration: InputDecoration(
@@ -96,6 +97,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           width: 302,
           height: 69,
           child: TextFormField(
+            cursorColor: LightStandardTheme.colorPrimary,
             focusNode: focusNode2,
             decoration: InputDecoration(
               labelText: 'Repeat Password',
