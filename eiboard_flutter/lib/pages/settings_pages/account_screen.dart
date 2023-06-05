@@ -16,6 +16,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     final user = UserPreferences.user;
+    //TODO: make possible to change user data without changing password
     return PageBackground(
         topic: 'My Account',
         child: Form(
