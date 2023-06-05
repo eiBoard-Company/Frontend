@@ -9,19 +9,32 @@ import '../components/profile_widget.dart';
 import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
   @override
+  State<AccountScreen> createState() => _AccountScreenState();
+}
+
+class _AccountScreenState extends State<AccountScreen> {
+  final formKey = GlobalKey<FormState>();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _raplaURLController = TextEditingController();
+
+  void createEvent() {
+    final String firstName = _firstNameController.text;
+    final String lastName = _lastNameController.text;
+    final String eMail = _emailController.text;
+    final String raplaURL = _raplaURLController.text;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final firstNameController = TextEditingController();
-    final lastNameController = TextEditingController();
-    final emailController = TextEditingController();
-    final raplaURLController = TextEditingController();
-    final oldPasswordController = TextEditingController();
     final user = UserPreferences.user;
     //TODO: make possible to change user data without changing password
+    //TODO: fix problem with controllers, appear to be null and not correctly initalized
     return PageBackground(
         topic: 'My Account',
         child: Form(
@@ -38,16 +51,16 @@ class AccountScreen extends StatelessWidget {
               CustomTextFormField(
                 labelText: 'First Name',
                 initialValue: user.firstName,
-                controller: firstNameController,
+                //controller: firstNameController,
               ),
               CustomTextFormField(
                 labelText: 'Last Name',
                 initialValue: user.lastName,
-                controller: lastNameController,
+                //controller: lastNameController,
               ),
               CustomTextFormField(
                 labelText: 'E-Mail',
-                controller: emailController,
+                //controller: emailController,
                 initialValue: user.email,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -63,16 +76,15 @@ class AccountScreen extends StatelessWidget {
               ),
               CustomTextFormField(
                   labelText: 'Rapla URL',
-                  controller: raplaURLController,
+                  // controller: _raplaURLController,
                   initialValue: user.raplaURL),
               const SizedBox(
                 height: 30,
               ),
               Text('Create New Password',
                   style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
-              CustomTextFormField(
+              const CustomTextFormField(
                 labelText: 'Old Password',
-                controller: oldPasswordController,
               ),
               const PasswordInputFieldAccount(),
               Expanded(

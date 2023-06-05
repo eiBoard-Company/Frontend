@@ -10,7 +10,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final int? minLines;
   final int? maxLines;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   const CustomTextFormField({
     Key? key,
     required this.labelText,
@@ -20,7 +20,7 @@ class CustomTextFormField extends StatefulWidget {
     this.keyboardType,
     this.maxLines = 1,
     this.minLines,
-    required this.controller,
+    this.controller,
   }) : super(key: key);
 
   @override
