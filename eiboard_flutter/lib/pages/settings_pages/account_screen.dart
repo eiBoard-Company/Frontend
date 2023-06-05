@@ -18,17 +18,8 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final formKey = GlobalKey<FormState>();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _raplaURLController = TextEditingController();
 
-  void createEvent() {
-    final String firstName = _firstNameController.text;
-    final String lastName = _lastNameController.text;
-    final String eMail = _emailController.text;
-    final String raplaURL = _raplaURLController.text;
-  }
+  void updateUserCredentials() {}
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +42,13 @@ class _AccountScreenState extends State<AccountScreen> {
               CustomTextFormField(
                 labelText: 'First Name',
                 initialValue: user.firstName,
-                //controller: firstNameController,
               ),
               CustomTextFormField(
                 labelText: 'Last Name',
                 initialValue: user.lastName,
-                //controller: lastNameController,
               ),
               CustomTextFormField(
                 labelText: 'E-Mail',
-                //controller: emailController,
                 initialValue: user.email,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -75,9 +63,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
               ),
               CustomTextFormField(
-                  labelText: 'Rapla URL',
-                  // controller: _raplaURLController,
-                  initialValue: user.raplaURL),
+                  labelText: 'Rapla URL', initialValue: user.raplaURL),
               const SizedBox(
                 height: 30,
               ),
