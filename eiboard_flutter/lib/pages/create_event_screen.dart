@@ -34,7 +34,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final _chipController = TextEditingController();
   final _titleController = TextEditingController();
   final _locationController = TextEditingController();
-  final _descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   void createEvent() {
@@ -43,7 +42,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     final String startTime = _startTimeController.text;
     final String endTime = _endTimeController.text;
     final String location = _locationController.text;
-    final String description = _descriptionController.text;
     final String category = tags[tag1];
 
     Appointment event = Appointment(
@@ -120,13 +118,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             CustomTextFormField(
               labelText: 'Location',
               controller: _locationController,
-            ),
-            CustomTextFormField(
-              labelText: 'Description',
-              keyboardType: TextInputType.multiline,
-              minLines: 1,
-              maxLines: 4,
-              controller: _descriptionController,
             ),
             const SizedBox(height: 15),
             SizedBox(
