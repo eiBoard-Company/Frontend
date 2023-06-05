@@ -1,3 +1,4 @@
+import '../model/date_time_formatter.dart';
 import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'components/button.dart';
 import 'components/custom_date_picker.dart';
 import 'components/custom_text_form_field.dart';
 import 'components/custom_time_picker.dart';
+import 'components/task_list_object.dart';
 import 'todo_list_screen.dart';
 
 class CreateTaskScreen extends StatefulWidget {
@@ -31,6 +33,23 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   final _chipController = TextEditingController();
   final _dateController = TextEditingController();
   final _endTimeController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  void createTask() {
+    final String title = _titleController.text;
+    final String date = _dateController.text;
+    final String endTime = _endTimeController.text;
+    final String description = _descriptionController.text;
+    final String category = tags[tag1];
+
+    TaskListObject task = TaskListObject(
+      taskname: title,
+      subject: category,
+      description: description,
+      time: DateTimeFormatter.formatDateTime(date, endTime),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +64,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
             ),
             CustomTextFormField(
               labelText: 'Title',
+              controller: _titleController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'This field can not be empty';
@@ -69,11 +89,12 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                 return null;
               },
             ),
-            const CustomTextFormField(
+            CustomTextFormField(
               labelText: 'Description',
               keyboardType: TextInputType.multiline,
               minLines: 1,
               maxLines: 4,
+              controller: _descriptionController,
             ),
             const SizedBox(height: 15),
             SizedBox(
@@ -160,6 +181,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                     'Create Task',
                     () {
                       if (formKey.currentState!.validate()) {
+                        createTask();
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

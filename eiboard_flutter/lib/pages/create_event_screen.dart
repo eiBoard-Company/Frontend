@@ -1,3 +1,6 @@
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import '../model/date_time_formatter.dart';
 import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +32,31 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final _startTimeController = TextEditingController();
   final _endTimeController = TextEditingController();
   final _chipController = TextEditingController();
+  final _titleController = TextEditingController();
+  final _locationController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  void createEvent() {
+    final String title = _titleController.text;
+    final String date = _dateController.text;
+    final String startTime = _startTimeController.text;
+    final String endTime = _endTimeController.text;
+    final String location = _locationController.text;
+    final String description = _descriptionController.text;
+    final String category = tags[tag1];
+
+    Appointment event = Appointment(
+        subject: title,
+        location: location,
+        notes: category,
+        startTime: DateTimeFormatter.formatDateTime(date, startTime),
+        endTime: DateTimeFormatter.formatDateTime(date, endTime),
+        color: LightStandardTheme.colorClassFive);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return PageBackground(
         topic: 'Create New Event',
         child: Form(
@@ -43,6 +67,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
             ),
             CustomTextFormField(
               labelText: 'Title',
+              controller: _titleController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'This field can not be empty';
@@ -89,26 +114,19 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                         if (!regex.hasMatch(value)) {
                           return 'Use HH:MM AM/PM format';
                         }
-                        final startTime = _startTimeController.text;
-                        final endTime = value;
-                        if (startTime.isNotEmpty) {
-                          final startDateTime =
-                              DateTime.parse("2023-06-05 $startTime");
-                          final endDateTime =
-                              DateTime.parse("2023-06-05 $endTime");
-                          if (endDateTime.isBefore(startDateTime)) {
-                            return 'End can\'t be before start';
-                          }
-                        }
                         return null;
                       }),
                 ])),
-            const CustomTextFormField(labelText: 'Location'),
-            const CustomTextFormField(
+            CustomTextFormField(
+              labelText: 'Location',
+              controller: _locationController,
+            ),
+            CustomTextFormField(
               labelText: 'Description',
               keyboardType: TextInputType.multiline,
               minLines: 1,
               maxLines: 4,
+              controller: _descriptionController,
             ),
             const SizedBox(height: 15),
             SizedBox(
@@ -195,6 +213,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     'Create Event',
                     () {
                       if (formKey.currentState!.validate()) {
+                        createEvent();
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

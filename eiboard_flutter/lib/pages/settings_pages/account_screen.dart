@@ -15,6 +15,11 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    final firstNameController = TextEditingController();
+    final lastNameController = TextEditingController();
+    final emailController = TextEditingController();
+    final raplaURLController = TextEditingController();
+    final oldPasswordController = TextEditingController();
     final user = UserPreferences.user;
     //TODO: make possible to change user data without changing password
     return PageBackground(
@@ -31,11 +36,18 @@ class AccountScreen extends StatelessWidget {
                 height: 20,
               ),
               CustomTextFormField(
-                  labelText: 'First Name', initialValue: user.firstName),
+                labelText: 'First Name',
+                initialValue: user.firstName,
+                controller: firstNameController,
+              ),
               CustomTextFormField(
-                  labelText: 'Last Name', initialValue: user.lastName),
+                labelText: 'Last Name',
+                initialValue: user.lastName,
+                controller: lastNameController,
+              ),
               CustomTextFormField(
                 labelText: 'E-Mail',
+                controller: emailController,
                 initialValue: user.email,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -50,13 +62,18 @@ class AccountScreen extends StatelessWidget {
                 },
               ),
               CustomTextFormField(
-                  labelText: 'Rapla URL', initialValue: user.raplaURL),
+                  labelText: 'Rapla URL',
+                  controller: raplaURLController,
+                  initialValue: user.raplaURL),
               const SizedBox(
                 height: 30,
               ),
               Text('Create New Password',
                   style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
-              const CustomTextFormField(labelText: 'Old Password'),
+              CustomTextFormField(
+                labelText: 'Old Password',
+                controller: oldPasswordController,
+              ),
               const PasswordInputFieldAccount(),
               Expanded(
                 child: Align(
