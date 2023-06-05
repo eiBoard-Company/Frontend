@@ -77,22 +77,31 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                     width: 27,
                   ),
                   CustomTimePicker(
-                    controller: _endTimeController,
-                    labelText: 'End Time',
-                    width: 155,
-                    //TODO: end time can not be before start time
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'This field can not be empty';
-                      }
-                      const pattern = r'^\d{1,2}:\d{2} [AP]M$';
-                      final regex = RegExp(pattern);
-                      if (!regex.hasMatch(value)) {
-                        return 'Use HH:MM AM/PM format';
-                      }
-                      return null;
-                    },
-                  ),
+                      controller: _endTimeController,
+                      labelText: 'End Time',
+                      width: 155,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'This field can not be empty';
+                        }
+                        const pattern = r'^\d{1,2}:\d{2} [AP]M$';
+                        final regex = RegExp(pattern);
+                        if (!regex.hasMatch(value)) {
+                          return 'Use HH:MM AM/PM format';
+                        }
+                        final startTime = _startTimeController.text;
+                        final endTime = value;
+                        if (startTime.isNotEmpty) {
+                          final startDateTime =
+                              DateTime.parse("2023-06-05 $startTime");
+                          final endDateTime =
+                              DateTime.parse("2023-06-05 $endTime");
+                          if (endDateTime.isBefore(startDateTime)) {
+                            return 'End can\'t be before start';
+                          }
+                          return null;
+                        }
+                      }),
                 ])),
             const CustomTextFormField(labelText: 'Location'),
             const CustomTextFormField(
