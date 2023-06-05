@@ -99,8 +99,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                           if (endDateTime.isBefore(startDateTime)) {
                             return 'End can\'t be before start';
                           }
-                          return null;
                         }
+                        return null;
                       }),
                 ])),
             const CustomTextFormField(labelText: 'Location'),
