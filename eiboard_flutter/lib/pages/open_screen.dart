@@ -78,6 +78,7 @@ class OpenScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
+              key: const Key('LogInButton'),
               onPressed: () {
                 Navigator.push(
                   context,
