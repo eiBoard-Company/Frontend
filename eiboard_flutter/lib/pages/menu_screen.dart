@@ -63,6 +63,8 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
+  //TODO: change from AssetImage to general image
+
   buildHeader(
       {required String profileImage,
       required String name,

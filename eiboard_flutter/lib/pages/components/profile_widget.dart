@@ -2,12 +2,12 @@ import 'package:eiboard_flutter/themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final String imagePath;
+  final Widget? image;
   final VoidCallback onClicked;
 
   const ProfileWidget({
     Key? key,
-    required this.imagePath,
+    required this.image,
     required this.onClicked,
   }) : super(key: key);
 
@@ -27,19 +27,10 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = AssetImage(imagePath);
-
     return InkWell(
         onTap: onClicked,
-        child: ClipOval(
-            child: Material(
-                color: Colors.transparent,
-                child: Image(
-                  image: image,
-                  fit: BoxFit.cover,
-                  width: 110,
-                  height: 110,
-                ))));
+        child:
+            ClipOval(child: Material(color: Colors.transparent, child: image)));
   }
 
   Widget buildEditIcon(Color color) {

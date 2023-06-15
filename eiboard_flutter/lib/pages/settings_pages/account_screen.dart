@@ -1,5 +1,8 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../themes/light_standard_theme.dart';
 import '../../utils/user_preferences.dart';
 import '../change_password_screen.dart';
 import '../components/button.dart';
@@ -8,6 +11,7 @@ import '../components/custom_text_form_field.dart';
 import '../components/profile_widget.dart';
 import '/../pages/components/page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -22,6 +26,8 @@ class _AccountScreenState extends State<AccountScreen> {
   final _emailController = TextEditingController();
   final _raplaURLController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final ImagePicker imagePicker = ImagePicker();
+  File? image;
 
   void updateUserCredentials() {
     final String firstName = _firstNameController.text;
@@ -38,7 +44,8 @@ class _AccountScreenState extends State<AccountScreen> {
     _emailController.text = user.email;
     _raplaURLController.text = user.raplaURL;
     TextDecoration textDecoration = TextDecoration.none;
-    //TODO: add possibility for profile picture
+    //image = AssetImage(user.imagePath);
+    //TODO: change Standard from Asset Image to whatever Matteo is using
     return PageBackground(
         topic: 'My Account',
         child: Form(
@@ -48,7 +55,23 @@ class _AccountScreenState extends State<AccountScreen> {
               const SizedBox(
                 height: 30,
               ),
-              ProfileWidget(imagePath: user.imagePath, onClicked: () async {}),
+              ProfileWidget(
+                  image: image != null
+                      ? Image.network(
+                          image!.path,
+                          fit: BoxFit.cover,
+                          width: 110,
+                          height: 110,
+                        )
+                      : Image(
+                          image: AssetImage(user.imagePath),
+                          fit: BoxFit.cover,
+                          width: 110,
+                          height: 110,
+                        ),
+                  onClicked: () async {
+                    openImagePicker();
+                  }),
               const SizedBox(
                 height: 20,
               ),
@@ -144,5 +167,53 @@ class _AccountScreenState extends State<AccountScreen> {
             ],
           ),
         ));
+  }
+
+  Future pickImage() async {
+    try {
+      final image = await imagePicker.pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+
+      final imageTemporary = File(image.path);
+      setState(() {
+        this.image = imageTemporary;
+      });
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
+
+  void openImagePicker() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              content: SizedBox(
+                height: MediaQuery.of(context).size.height / 10,
+                child: Center(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: LightStandardTheme.colorPrimary,
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        textStyle: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Upload Image',
+                      style: GoogleFonts.montserrat(
+                        textStyle: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      pickImage();
+                    },
+                  ),
+                ),
+              ));
+        });
   }
 }
