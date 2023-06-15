@@ -1,9 +1,9 @@
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/user_preferences.dart';
+import '../change_password_screen.dart';
 import '../components/button.dart';
 import '../components/custom_drawer.dart';
-import '../components/custom_password_field_for_account.dart';
 import '../components/custom_text_form_field.dart';
 import '../components/profile_widget.dart';
 import '/../pages/components/page.dart';
@@ -17,24 +17,28 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  /*final _lastNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _firstNameController = TextEditingController();
   final _emailController = TextEditingController();
-  final _raplaURLController = TextEditingController();*/
+  final _raplaURLController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   void updateUserCredentials() {
-    /*final String firstName = _firstNameController.text;
+    final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
     final String eMail = _emailController.text;
-    final String raplaURL = _raplaURLController.text;*/
+    final String raplaURL = _raplaURLController.text;
   }
 
   @override
   Widget build(BuildContext context) {
     final user = UserPreferences.user;
-    //TODO: make possible to change user data without changing password
-    //TODO: fix problem with controllers, appear to be null and not correctly initalized
+    _lastNameController.text = user.lastName;
+    _firstNameController.text = user.firstName;
+    _emailController.text = user.email;
+    _raplaURLController.text = user.raplaURL;
+    TextDecoration textDecoration = TextDecoration.none;
+    //TODO: add possibility for profile picture
     return PageBackground(
         topic: 'My Account',
         child: Form(
@@ -50,15 +54,15 @@ class _AccountScreenState extends State<AccountScreen> {
               ),
               CustomTextFormField(
                 labelText: 'First Name',
-                initialValue: user.firstName,
+                controller: _firstNameController,
               ),
               CustomTextFormField(
                 labelText: 'Last Name',
-                initialValue: user.lastName,
+                controller: _lastNameController,
               ),
               CustomTextFormField(
                 labelText: 'E-Mail',
-                initialValue: user.email,
+                controller: _emailController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'This field can not be empty';
@@ -72,16 +76,48 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
               ),
               CustomTextFormField(
-                  labelText: 'Rapla URL', initialValue: user.raplaURL),
+                labelText: 'Rapla URL',
+                controller: _raplaURLController,
+              ),
               const SizedBox(
                 height: 30,
               ),
-              Text('Create New Password',
-                  style: GoogleFonts.karla(fontWeight: FontWeight.w600)),
-              const CustomTextFormField(
-                labelText: 'Old Password',
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  textStyle: TextStyle(
+                    fontSize: 12,
+                    decoration: textDecoration,
+                  ),
+                ),
+                onHover: (hasHover) {
+                  if (hasHover == true) {
+                    setState(() {
+                      textDecoration = TextDecoration.underline;
+                    });
+                  } else {
+                    setState(() {
+                      textDecoration = TextDecoration.none;
+                    });
+                  }
+                },
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const ChangePasswordScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Text(
+                  "Change Password",
+                  style: GoogleFonts.karla(
+                      fontWeight: FontWeight.w700,
+                      textStyle: const TextStyle(fontSize: 18)),
+                ),
               ),
-              const PasswordInputFieldAccount(),
               Expanded(
                 child: Align(
                   alignment: Alignment.bottomCenter,

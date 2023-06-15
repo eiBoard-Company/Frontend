@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '../../themes/light_standard_theme.dart';
 
 class PasswordInputFieldAccount extends StatefulWidget {
-  const PasswordInputFieldAccount({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const PasswordInputFieldAccount({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   State<PasswordInputFieldAccount> createState() =>
@@ -54,6 +56,13 @@ class _PasswordInputFieldAccountState extends State<PasswordInputFieldAccount> {
             errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: LightStandardTheme.colorError),
             ),
+            suffixIcon: GestureDetector(
+              onTap: togglePasswordVisibility,
+              child: Icon(
+                showPassword ? Icons.visibility_off : Icons.visibility,
+                color: LightStandardTheme.colorGrey,
+              ),
+            ),
           ),
           keyboardType: TextInputType.emailAddress,
           obscureText: !showPassword,
@@ -76,6 +85,7 @@ class _PasswordInputFieldAccountState extends State<PasswordInputFieldAccount> {
       SizedBox(
         width: 337,
         child: TextFormField(
+          controller: widget.controller,
           cursorColor: LightStandardTheme.colorPrimary,
           focusNode: focusNode2,
           decoration: InputDecoration(
@@ -90,6 +100,13 @@ class _PasswordInputFieldAccountState extends State<PasswordInputFieldAccount> {
             errorStyle: const TextStyle(color: LightStandardTheme.colorError),
             errorBorder: const UnderlineInputBorder(
               borderSide: BorderSide(color: LightStandardTheme.colorError),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: togglePasswordVisibility,
+              child: Icon(
+                showPassword ? Icons.visibility_off : Icons.visibility,
+                color: LightStandardTheme.colorGrey,
+              ),
             ),
           ),
           keyboardType: TextInputType.emailAddress,
