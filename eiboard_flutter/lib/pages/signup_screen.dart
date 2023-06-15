@@ -14,7 +14,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   TextDecoration textDecoration = TextDecoration.none;
   @override
   Widget build(BuildContext context) {
@@ -45,9 +48,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           image: AssetImage('images/logoEiBoard.png'),
                         ),
                         const SizedBox(height: 20),
-                        const EMailInputField(),
+                        EMailInputField(
+                          controller: _emailController,
+                        ),
                         const SizedBox(height: 15),
-                        const PasswordInputField(repeatPassword: true),
+                        PasswordInputField(
+                          repeatPassword: true,
+                          controller: _passwordController,
+                        ),
                         const SizedBox(height: 20),
                         Button(
                           "SIGN UP",
@@ -57,7 +65,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return const SecondSignUpScreen();
+                                    return SecondSignUpScreen(
+                                        userEmail: _emailController.text);
                                   },
                                 ),
                               );

@@ -17,6 +17,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   TextDecoration textDecoration = TextDecoration.none;
   @override
@@ -49,9 +51,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           image: AssetImage('images/logoEiBoard.png'),
                         ),
                         const SizedBox(height: 30),
-                        const EMailInputField(),
+                        EMailInputField(
+                          controller: _emailController,
+                        ),
                         const SizedBox(height: 15),
-                        const PasswordInputField(repeatPassword: false),
+                        PasswordInputField(
+                          repeatPassword: false,
+                          controller: _passwordController,
+                        ),
                         const SizedBox(height: 20),
                         Button(
                           "LOGIN",

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../themes/light_standard_theme.dart';
 
 class PasswordInputField extends StatefulWidget {
+  final TextEditingController? controller;
   final bool repeatPassword;
-  const PasswordInputField({Key? key, required this.repeatPassword})
+  const PasswordInputField(
+      {Key? key, required this.repeatPassword, this.controller})
       : super(key: key);
 
   @override
@@ -97,6 +99,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           width: 302,
           height: 69,
           child: TextFormField(
+            controller: widget.controller,
             cursorColor: LightStandardTheme.colorPrimary,
             focusNode: focusNode2,
             decoration: InputDecoration(

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../themes/light_standard_theme.dart';
 
 class EMailInputField extends StatefulWidget {
-  const EMailInputField({Key? key}) : super(key: key);
+  final TextEditingController? controller;
+  const EMailInputField({Key? key, this.controller}) : super(key: key);
 
   @override
   State<EMailInputField> createState() => _EMailInputFieldState();
@@ -28,6 +29,7 @@ class _EMailInputFieldState extends State<EMailInputField> {
       width: 302,
       height: 69,
       child: TextFormField(
+        controller: widget.controller,
         cursorColor: LightStandardTheme.colorPrimary,
         focusNode: focusNode,
         decoration: InputDecoration(

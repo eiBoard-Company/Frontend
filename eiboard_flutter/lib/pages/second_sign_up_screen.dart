@@ -5,7 +5,9 @@ import 'components/custom_drawer.dart';
 import 'components/sign_up_text_form_field.dart';
 
 class SecondSignUpScreen extends StatefulWidget {
-  const SecondSignUpScreen({Key? key}) : super(key: key);
+  final String userEmail;
+  const SecondSignUpScreen({Key? key, required this.userEmail})
+      : super(key: key);
 
   @override
   State<SecondSignUpScreen> createState() => _SecondSignUpScreenState();
@@ -19,6 +21,7 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
   void createUser() {
     final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
+    final String email = widget.userEmail;
   }
 
   @override
@@ -91,6 +94,7 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                           "GET STARTED",
                           () {
                             if (_formKey.currentState!.validate()) {
+                              createUser();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
