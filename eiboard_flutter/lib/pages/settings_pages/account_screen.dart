@@ -17,9 +17,18 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  final formKey = GlobalKey<FormState>();
+  /*final _lastNameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _raplaURLController = TextEditingController();*/
+  final _formKey = GlobalKey<FormState>();
 
-  void updateUserCredentials() {}
+  void updateUserCredentials() {
+    /*final String firstName = _firstNameController.text;
+    final String lastName = _lastNameController.text;
+    final String eMail = _emailController.text;
+    final String raplaURL = _raplaURLController.text;*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +38,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return PageBackground(
         topic: 'My Account',
         child: Form(
-          key: formKey,
+          key: _formKey,
           child: Column(
             children: [
               const SizedBox(
@@ -81,7 +90,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     child: Button(
                       'Save',
                       () {
-                        if (formKey.currentState!.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(

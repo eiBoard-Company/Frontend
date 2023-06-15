@@ -34,7 +34,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final _chipController = TextEditingController();
   final _titleController = TextEditingController();
   final _locationController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   void createEvent() {
     final String title = _titleController.text;
@@ -58,7 +58,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     return PageBackground(
         topic: 'Create New Event',
         child: Form(
-          key: formKey,
+          key: _formKey,
           child: Column(children: [
             const SizedBox(
               height: 30,
@@ -203,7 +203,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                   child: Button(
                     'Create Event',
                     () {
-                      if (formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         createEvent();
                         Navigator.pushReplacement(
                           context,

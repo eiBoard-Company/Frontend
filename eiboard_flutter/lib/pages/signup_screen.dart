@@ -1,10 +1,10 @@
 import '/../pages/components/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'components/custom_drawer.dart';
 import 'components/email_input_field.dart';
 import 'components/password_input_field.dart';
 import 'login_screen.dart';
+import 'second_sign_up_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -57,7 +57,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return const CustomDrawer();
+                                    return const SecondSignUpScreen();
                                   },
                                 ),
                               );
