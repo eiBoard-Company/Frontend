@@ -6,11 +6,12 @@ class User {
   final String lastName;
   final String firstName;
   final String email;
+  final String? password;
   final String? imagePath;
   final String raplaURL;
   final List<Task>? tasks;
   final List<Event>? events;
 
-  User(this.id, this.lastName, this.firstName, this.email, this.imagePath,
-      this.raplaURL, this.tasks, this.events);
+  User(this.id, this.lastName, this.firstName, this.email, this.password,
+      this.imagePath, this.raplaURL, this.tasks, this.events);
 }

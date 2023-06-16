@@ -7,6 +7,7 @@ class UserPreferences {
       'Chicken',
       'chicken.ei@ei.com',
       null,
+      null,
       'https://rapla.dhbw-karlsruhe.de/rapla?page=calendar&user=eisenbiegler&file=TINF21B4',
       null,
       null);
