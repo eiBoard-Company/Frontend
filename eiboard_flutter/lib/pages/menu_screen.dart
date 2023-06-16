@@ -1,4 +1,5 @@
 import '../utils/user_preferences.dart';
+import 'dart:convert';
 import '/../pages/settings_pages/account_screen.dart';
 import '/../pages/calendar_screen.dart';
 import 'todo_list_screen.dart';
@@ -25,6 +26,7 @@ class _MenuScreenState extends State<MenuScreen> {
       body: ListView(padding: const EdgeInsets.only(left: 15), children: [
         const SizedBox(height: 50),
         buildHeader(
+          //TODO: change from AssetImage to general image, add user, see account screen
           profileImage: user.imagePath,
           name: "${user.firstName} ${user.lastName}",
           email: user.email,
@@ -63,10 +65,8 @@ class _MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  //TODO: change from AssetImage to general image
-
   buildHeader(
-      {required String profileImage,
+      {required String? profileImage,
       required String name,
       required String email,
       required Widget page}) {
@@ -87,7 +87,12 @@ class _MenuScreenState extends State<MenuScreen> {
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage(profileImage),
+                backgroundColor: Colors.white,
+                backgroundImage: user.imagePath != null
+                    ? MemoryImage(
+                        base64Decode(user.imagePath!),
+                      )
+                    : Image.asset('images/profilePicture.jpg').image,
               ),
               const SizedBox(width: 10),
               Expanded(

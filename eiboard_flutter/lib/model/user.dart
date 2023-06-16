@@ -1,5 +1,5 @@
 class User {
-  final String imagePath;
+  final String? imagePath;
   final String firstName;
   final String lastName;
   final String email;
