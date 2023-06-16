@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../themes/light_standard_theme.dart';
-import 'components/button.dart';
-import 'components/custom_date_picker.dart';
-import 'components/page.dart';
-import 'components/task_list_object.dart';
+import '/../pages/components/button.dart';
+import '/../pages/components/custom_date_picker.dart';
+import '/../pages/components/page.dart';
+import '/../pages/components/task_list_object.dart';
 
 class SingleTaskScreen extends StatefulWidget {
   final String typeId;
