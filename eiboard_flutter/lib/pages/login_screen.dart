@@ -1,9 +1,9 @@
-import 'package:http/http.dart';
+import 'package:provider/provider.dart';
 
+import '../utils/auth_provider.dart';
 import '/../pages/components/button.dart';
 import '/../pages/components/custom_drawer.dart';
 import '/../pages/signup_screen.dart';
-import 'components/backend_rapla.dart';
 import 'components/email_input_field.dart';
 import 'components/password_input_field.dart';
 import 'package:flutter/material.dart';
@@ -68,9 +68,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    Future<Response> fs = HttpRequest.fetchData(
-                                        HttpRequest.url + HttpRequest.user);
-                                    fs.then((value) => print(value.body));
                                     return const CustomDrawer();
                                   },
                                 ),
@@ -99,6 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                           },
                           onPressed: () {
+                            String? bearerToken = Provider.of<AuthProvider>(
+                                    context,
+                                    listen: false)
+                                .bearerToken;
+                            print('Test:$bearerToken');
                             Navigator.push(
                               context,
                               MaterialPageRoute(

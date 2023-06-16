@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/open_screen.dart';
+import 'utils/auth_provider.dart';
 
 void main() {
-  runApp(const EiBoard());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AuthProvider(), child: const EiBoard()));
 }
 
 class EiBoard extends StatelessWidget {

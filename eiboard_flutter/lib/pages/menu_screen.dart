@@ -26,7 +26,6 @@ class _MenuScreenState extends State<MenuScreen> {
       body: ListView(padding: const EdgeInsets.only(left: 15), children: [
         const SizedBox(height: 50),
         buildHeader(
-          //TODO: change from AssetImage to general image, add user, see account screen
           profileImage: user.imagePath,
           name: "${user.firstName} ${user.lastName}",
           email: user.email,
