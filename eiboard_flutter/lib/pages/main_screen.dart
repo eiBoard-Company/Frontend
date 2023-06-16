@@ -175,7 +175,7 @@ class _MainScreenState extends State<MainScreen> {
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
-                "Hello ${user.firstName.isNotEmpty ? user.firstName : 'You'}!",
+                "Hello ${user.firstName!.isNotEmpty ? user.firstName : 'You'}!",
                 style: const TextStyle(
                     fontSize: 28.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,

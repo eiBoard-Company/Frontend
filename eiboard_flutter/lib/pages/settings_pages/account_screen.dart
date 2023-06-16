@@ -43,10 +43,10 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     final user = UserPreferences.user;
-    _lastNameController.text = user.lastName;
-    _firstNameController.text = user.firstName;
-    _emailController.text = user.email;
-    _raplaURLController.text = user.raplaURL;
+    _lastNameController.text = user.lastName!;
+    _firstNameController.text = user.firstName!;
+    _emailController.text = user.email!;
+    _raplaURLController.text = user.raplaURL!;
     TextDecoration textDecoration = TextDecoration.none;
 
     return PageBackground(

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/auth_provider.dart';
@@ -54,10 +55,19 @@ class HttpRequest {
       String responseString = await response.stream.bytesToString();
       var jsonMap = json.decode(responseString);
       var accessToken = jsonMap['access_token'];
+      bool hasExpired = JwtDecoder.isExpired(accessToken);
       // ignore: use_build_context_synchronously
       Provider.of<AuthProvider>(context, listen: false).bearerToken =
           accessToken;
-      print(responseString);
+      // ignore: use_build_context_synchronously
+      Provider.of<AuthProvider>(context, listen: false).hasExpired = hasExpired;
+      Map<String, dynamic> decodedToken = JwtDecoder.decode(accessToken);
+      var userID = decodedToken['userID'];
+      // ignore: use_build_context_synchronously
+      Provider.of<AuthProvider>(context, listen: false).userID = userID;
+      print(accessToken);
+      print(decodedToken);
+      print(userID);
     } else {
       print(response.reasonPhrase);
     }

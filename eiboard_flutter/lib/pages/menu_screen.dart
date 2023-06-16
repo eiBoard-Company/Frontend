@@ -28,7 +28,7 @@ class _MenuScreenState extends State<MenuScreen> {
         buildHeader(
           profileImage: user.imagePath,
           name: "${user.firstName} ${user.lastName}",
-          email: user.email,
+          email: user.email!,
           page: const AccountScreen(),
         ),
         buildMenuItem(
