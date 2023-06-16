@@ -3,12 +3,12 @@ import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'components/button.dart';
+import '/../pages/components/button.dart';
 
-import 'components/custom_date_picker.dart';
-import 'components/custom_text_form_field.dart';
-import 'components/custom_time_picker.dart';
-import 'components/task_list_object.dart';
+import '/../pages/components/custom_date_picker.dart';
+import '/../pages/components/custom_text_form_field.dart';
+import '/../pages/components/custom_time_picker.dart';
+import '/../pages/components/task_list_object.dart';
 import 'todo_list_screen.dart';
 
 class CreateTaskScreen extends StatefulWidget {
