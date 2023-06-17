@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import '../themes/light_standard_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'components/backend_rapla.dart';
-
 class OpenScreen extends StatelessWidget {
   const OpenScreen({Key? key}) : super(key: key);
 
@@ -70,7 +68,6 @@ class OpenScreen extends StatelessWidget {
                         Button(
                           "LOGIN",
                           () {
-                            HttpRequest.sendTokenRequest(context);
                             Navigator.push(
                               context,
                               MaterialPageRoute(

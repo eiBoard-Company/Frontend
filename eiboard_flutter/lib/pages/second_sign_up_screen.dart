@@ -1,12 +1,15 @@
 import '/../pages/components/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'components/backend_rapla.dart';
 import 'components/custom_drawer.dart';
 import 'components/sign_up_text_form_field.dart';
 
 class SecondSignUpScreen extends StatefulWidget {
   final String userEmail;
-  const SecondSignUpScreen({Key? key, required this.userEmail})
+  final String userPassword;
+  const SecondSignUpScreen(
+      {Key? key, required this.userEmail, required this.userPassword})
       : super(key: key);
 
   @override
@@ -22,6 +25,9 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
     final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
     final String email = widget.userEmail;
+    final String password = widget.userPassword;
+
+    HttpRequest.registerUser(lastName, firstName, email, password, context);
   }
 
   @override
@@ -95,14 +101,6 @@ class _SecondSignUpScreenState extends State<SecondSignUpScreen> {
                           () {
                             if (_formKey.currentState!.validate()) {
                               createUser();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return const CustomDrawer();
-                                  },
-                                ),
-                              );
                             }
                           },
                         ),

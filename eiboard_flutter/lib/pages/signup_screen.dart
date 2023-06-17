@@ -66,7 +66,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 MaterialPageRoute(
                                   builder: (context) {
                                     return SecondSignUpScreen(
-                                        userEmail: _emailController.text);
+                                      userEmail: _emailController.text,
+                                      userPassword: _passwordController.text,
+                                    );
                                   },
                                 ),
                               );

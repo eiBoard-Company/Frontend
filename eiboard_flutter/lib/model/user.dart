@@ -7,13 +7,13 @@ class User extends ChangeNotifier {
   String? _lastName;
   String? _firstName;
   String? _email;
-  String? password;
+  String? _password;
   String? _imagePath;
   String? _raplaURL;
   List<Task>? tasks;
   List<Event>? events;
 
-  User(this._id, this._lastName, this._firstName, this._email, this.password,
+  User(this._id, this._lastName, this._firstName, this._email, this._password,
       this._imagePath, this._raplaURL, this.tasks, this.events);
 
   int? get id => _id;
@@ -22,6 +22,7 @@ class User extends ChangeNotifier {
   String? get email => _email;
   String? get imagePath => _imagePath;
   String? get raplaURL => _raplaURL;
+  String? get password => _password;
 
   set iD(int? id) {
     _id = id;
@@ -50,6 +51,11 @@ class User extends ChangeNotifier {
 
   set imagePath(String? imagePath) {
     _imagePath = imagePath;
+    notifyListeners();
+  }
+
+  set password(String? password) {
+    _password = password;
     notifyListeners();
   }
 }
