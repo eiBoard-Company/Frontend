@@ -1,12 +1,15 @@
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-import '../utils/user_preferences.dart';
+import '../model/user.dart';
+import '../utils/auth_provider.dart';
 import '/../pages/components/calendar.dart';
 import '/../pages/components/cards_main_screen.dart';
 import '/../pages/components/custom_app_bar.dart';
 import '/../pages/components/todo_box_main.dart';
 import '/../pages/components/todo_list_box.dart';
 import '/../pages/components/task_List_Object.dart';
+import 'components/backend_rapla.dart';
 import 'singletask_screen.dart';
 import 'todo_list_screen.dart';
 import '/../themes/light_standard_theme.dart';
@@ -21,7 +24,25 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final user = UserPreferences.user;
+  User? user;
+
+//TODO: maybe change to customDrawer
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final String? userID = authProvider.userID;
+    final String? bearerToken = authProvider.bearerToken;
+
+    if (userID != null && bearerToken != null) {
+      HttpRequest.getUser(userID, bearerToken, context).then((retrievedUser) {
+        setState(() {
+          user = retrievedUser;
+        });
+      });
+    }
+  }
+
   List<TaskListObject> tasks = [
     TaskListObject(
         taskname: "Matheaufgaben erledigen",
@@ -175,7 +196,7 @@ class _MainScreenState extends State<MainScreen> {
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
-                "Hello ${user.firstName.isNotEmpty ? user.firstName : 'You'}!",
+                "Hello ${user!.firstName!.isNotEmpty ? user!.firstName : 'You'}!",
                 style: const TextStyle(
                     fontSize: 28.0, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,

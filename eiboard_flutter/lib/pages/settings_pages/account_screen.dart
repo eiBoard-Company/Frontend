@@ -1,9 +1,15 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
+import '../../model/user.dart';
 import '../../themes/light_standard_theme.dart';
-import '../../utils/user_preferences.dart';
+import '../../utils/auth_provider.dart';
+import '../components/backend_rapla.dart';
 import '../change_password_screen.dart';
 import '../components/button.dart';
 import '../components/custom_drawer.dart';
@@ -28,24 +34,41 @@ class _AccountScreenState extends State<AccountScreen> {
   final _formKey = GlobalKey<FormState>();
   final ImagePicker imagePicker = ImagePicker();
   File? image;
+  String? imageBase64;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final String? userID = authProvider.userID;
+    final String? bearerToken = authProvider.bearerToken;
+
+    if (userID != null && bearerToken != null) {
+      HttpRequest.getUser(userID, bearerToken, context).then((retrievedUser) {
+        setState(() {
+          user = retrievedUser;
+          _lastNameController.text = user!.lastName!;
+          _firstNameController.text = user!.firstName!;
+          _emailController.text = user!.email!;
+          _raplaURLController.text = user!.raplaURL!;
+        });
+      });
+    }
+  }
 
   void updateUserCredentials() {
     final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
     final String eMail = _emailController.text;
     final String raplaURL = _raplaURLController.text;
+    final String? imagePath = imageBase64;
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.user;
-    _lastNameController.text = user.lastName;
-    _firstNameController.text = user.firstName;
-    _emailController.text = user.email;
-    _raplaURLController.text = user.raplaURL;
     TextDecoration textDecoration = TextDecoration.none;
-    //image = AssetImage(user.imagePath);
-    //TODO: change Standard from Asset Image to whatever Matteo is using
+
     return PageBackground(
         topic: 'My Account',
         child: Form(
@@ -63,12 +86,19 @@ class _AccountScreenState extends State<AccountScreen> {
                           width: 110,
                           height: 110,
                         )
-                      : Image(
-                          image: AssetImage(user.imagePath),
-                          fit: BoxFit.cover,
-                          width: 110,
-                          height: 110,
-                        ),
+                      : (user!.imagePath != null
+                          ? Image.memory(
+                              base64Decode(user!.imagePath!),
+                              fit: BoxFit.cover,
+                              width: 110,
+                              height: 110,
+                            )
+                          : Image.asset(
+                              'images/profilePicture.jpg',
+                              fit: BoxFit.cover,
+                              width: 110,
+                              height: 110,
+                            )),
                   onClicked: () async {
                     openImagePicker();
                   }),
@@ -150,6 +180,7 @@ class _AccountScreenState extends State<AccountScreen> {
                       'Save',
                       () {
                         if (_formKey.currentState!.validate()) {
+                          updateUserCredentials();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -177,9 +208,24 @@ class _AccountScreenState extends State<AccountScreen> {
       final imageTemporary = File(image.path);
       setState(() {
         this.image = imageTemporary;
+        getImageBase64(imageTemporary);
       });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
+    }
+  }
+
+  void getImageBase64(File imageTemp) async {
+    final response = await http.get(Uri.parse(imageTemp.path));
+
+    if (response.statusCode == 200) {
+      List<int> imageBytes = response.bodyBytes;
+      String base64Image = base64.encode(imageBytes);
+      setState(() {
+        imageBase64 = base64Image;
+      });
+    } else {
+      print('Failed to fetch image: ${response.statusCode}');
     }
   }
 
