@@ -60,7 +60,7 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void updateUserCredentials() {
-    /*final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
     final String eMail = _emailController.text;
@@ -76,7 +76,7 @@ class _AccountScreenState extends State<AccountScreen> {
         'firstName': firstName,
         'lastName': lastName,
         'email': eMail,
-        'raplaURL': raplaURL,
+        'raplaURL': raplaURL
       };
     } else {
       userData = {
@@ -85,13 +85,13 @@ class _AccountScreenState extends State<AccountScreen> {
         'lastName': lastName,
         'email': eMail,
         'raplaURL': raplaURL,
-        'picture': imagePath,
+        'picture': imagePath
       };
     }
 
     final String? token = authProvider.bearerToken;
 
-    HttpRequest.updateUser(token!, context, userData);*/
+    HttpRequest.updateUser(token!, context, userData);
   }
 
   @override

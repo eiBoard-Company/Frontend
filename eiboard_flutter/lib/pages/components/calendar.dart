@@ -222,47 +222,27 @@ String getTime(CalendarAppointmentDetails details) {
   return "$startTime - $endTime";
 }
 
+List<Appointment> classes = [];
 _AppointmentDataSource _getCalendarData(
     BuildContext context, String token, String userID) {
   String startDate = _formatDate(DateTime(2023, 04, 01));
   String endDate = _formatDate(DateTime(2023, 06, 30));
-  List<Appointment> classes = [];
-
-  HttpRequest.getLectures(
-          false, _formatDate(DateTime(2023, 06, 19)), token, context)
-      .then((response) {
-    if (response.statusCode == 200) {
-      List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
-
-      for (var lecture in data[0]['lectureList']) {
-        classes.add(Appointment(
-          startTime: DateTime.parse(lecture['start']),
-          endTime: DateTime.parse(lecture['end']),
-          subject: lecture['lecture'],
-          notes: 'Lecture',
-          location: lecture['room'],
-          color: getRandomColor(),
-        ));
-      }
-    } else {
-      throw Exception('Failed to fetch lectures');
-    }
-  });
 
   HttpRequest.getLecturesAll(startDate, endDate, token, context)
       .then((response) {
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
-
-      for (var lecture in data[0]['lectureList']) {
-        classes.add(Appointment(
-          startTime: DateTime.parse(lecture['start']),
-          endTime: DateTime.parse(lecture['end']),
-          subject: lecture['lecture'],
-          notes: 'Lecture',
-          location: lecture['room'],
-          color: getRandomColor(),
-        ));
+      for (var i = 0; i < data.length; i++) {
+        for (var lecture in data[i]['lectureList']) {
+          classes.add(Appointment(
+            startTime: DateTime.parse(lecture['start']),
+            endTime: DateTime.parse(lecture['end']),
+            subject: lecture['lecture'],
+            notes: 'Lecture',
+            location: lecture['room'],
+            color: getRandomColor(),
+          ));
+        }
       }
     } else {
       throw Exception('Failed to fetch lectures');
@@ -288,7 +268,10 @@ _AppointmentDataSource _getCalendarData(
     }
   });
 
-  return _AppointmentDataSource(classes);
+  _AppointmentDataSource apscr = _AppointmentDataSource(classes);
+  apscr.notifyListeners(CalendarDataSourceAction.add, classes);
+
+  return apscr;
 }
 
 String _formatDate(DateTime date) {
