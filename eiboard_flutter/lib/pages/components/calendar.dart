@@ -214,28 +214,22 @@ class _CustomCalendarState extends State<CustomCalendar> {
 
 String getTime(CalendarAppointmentDetails details) {
   final Appointment meeting = details.appointments.first;
+  final String startTime =
+      "${meeting.startTime.hour.toString().padLeft(2, '0')}:${meeting.startTime.minute.toString().padLeft(2, '0')}";
+  final String endTime =
+      "${meeting.endTime.hour.toString().padLeft(2, '0')}:${meeting.endTime.minute.toString().padLeft(2, '0')}";
 
-  if (meeting.startTime.minute < 2 && meeting.endTime.minute < 2) {
-    return "${meeting.startTime.hour}:${meeting.startTime.minute}0 - ${meeting.endTime.hour}:${meeting.endTime.minute}0";
-  } else if (meeting.startTime.minute < 2) {
-    return "${meeting.startTime.hour}:${meeting.startTime.minute}0 - ${meeting.endTime.hour}:${meeting.endTime.minute}";
-  } else if (meeting.endTime.minute < 2) {
-    return "${meeting.startTime.hour}:${meeting.startTime.minute} - ${meeting.endTime.hour}:${meeting.endTime.minute}0";
-  } else {
-    return "${meeting.startTime.hour}:${meeting.startTime.minute} - ${meeting.endTime.hour}:${meeting.endTime.minute}";
-  }
+  return "$startTime - $endTime";
 }
 
 _AppointmentDataSource _getCalendarData(
     BuildContext context, String token, String userID) {
-  //TODO: wird geändert zu Anfangsdatum und Enddatum
-  String formattedDate = _formatDate(DateTime(2023, 06, 18));
+  String startDate = _formatDate(DateTime(2023, 04, 01));
+  String endDate = _formatDate(DateTime(2023, 06, 30));
   List<Appointment> classes = [];
 
-//TODO: events
-  HttpRequest.getEvents(userID, token, context);
-
-  HttpRequest.getLectures(false, formattedDate, token, context)
+  HttpRequest.getLectures(
+          false, _formatDate(DateTime(2023, 06, 19)), token, context)
       .then((response) {
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
@@ -250,10 +244,47 @@ _AppointmentDataSource _getCalendarData(
           color: getRandomColor(),
         ));
       }
-
-      return _AppointmentDataSource(classes);
     } else {
       throw Exception('Failed to fetch lectures');
+    }
+  });
+
+  HttpRequest.getLecturesAll(startDate, endDate, token, context)
+      .then((response) {
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
+
+      for (var lecture in data[0]['lectureList']) {
+        classes.add(Appointment(
+          startTime: DateTime.parse(lecture['start']),
+          endTime: DateTime.parse(lecture['end']),
+          subject: lecture['lecture'],
+          notes: 'Lecture',
+          location: lecture['room'],
+          color: getRandomColor(),
+        ));
+      }
+    } else {
+      throw Exception('Failed to fetch lectures');
+    }
+  });
+
+  HttpRequest.getEvents(userID, token, context).then((response) {
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
+
+      for (var event in data) {
+        classes.add(Appointment(
+          startTime: DateTime.parse(event['startDate']),
+          endTime: DateTime.parse(event['endDate']),
+          subject: event['titel'],
+          notes: event['category'],
+          location: event['location'],
+          color: getRandomColor(),
+        ));
+      }
+    } else {
+      throw Exception('Failed to fetch events');
     }
   });
 

@@ -196,6 +196,12 @@ class HttpRequest {
     return newAccessToken!;
   }
 
+  static Future<http.Response> getLecturesAll(
+      String startDate, String endDate, String token, BuildContext context) {
+    String endpoint = 'lectures/$startDate/$endDate/all';
+    return fetchData(endpoint, token, context);
+  }
+
   static Future<http.Response> getLectures(
       bool day, String date, String token, BuildContext context) {
     String baseString = 'lectures/$date';
