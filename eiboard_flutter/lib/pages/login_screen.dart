@@ -3,9 +3,10 @@ import '/../pages/components/button.dart';
 import '/../pages/signup_screen.dart';
 import 'components/backend_rapla.dart';
 import 'components/email_input_field.dart';
-import 'components/password_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'components/login_password_input_field.dart';
 
 class LoginScreen extends StatefulWidget {
   final bool userAlreadyExists;
@@ -99,8 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _emailController,
                         ),
                         const SizedBox(height: 15),
-                        PasswordInputField(
-                          repeatPassword: false,
+                        LoginPasswordInputField(
                           controller: _passwordController,
                         ),
                         const SizedBox(height: 20),
@@ -115,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   context,
                                   _emailController.text,
                                   _passwordController.text);
+                              //TODO: fix, this is visible even if correct credentials
                               setState(() {
                                 wrongEmailOrPassword = true;
                               });

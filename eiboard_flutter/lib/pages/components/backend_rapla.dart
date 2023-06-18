@@ -91,6 +91,7 @@ class HttpRequest {
       'grant_type': 'password',
       'client_secret': 'iJur3UqVPUMj9VCpK8uh1gP9djoRMJpN'
     };
+
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
@@ -118,7 +119,6 @@ class HttpRequest {
         ),
       );
     } else {
-      //TODO: wrong user or password
       print(response.reasonPhrase);
     }
   }
