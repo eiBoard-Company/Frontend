@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'dart:convert';
 
@@ -67,7 +67,6 @@ class HttpRequest {
     );
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('executed');
       return response;
     } else if (response.statusCode == 401) {
       String? newToken = await refreshToken(token, context);
@@ -119,10 +118,8 @@ class HttpRequest {
       );
 
       if (response.statusCode == 201) {
-        print('Registration successful!');
         sendTokenRequest(context, email, password);
       } else if (response.statusCode == 409) {
-        print('Email already exists!');
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -179,6 +176,7 @@ class HttpRequest {
           },
         ),
       );
+      print(response.reasonPhrase);
       return response;
     } else {
       print(response.reasonPhrase);
@@ -206,6 +204,13 @@ class HttpRequest {
       return fetchData(endpoint, token, context);
     }
     String endpoint = '$baseString/week';
+    return fetchData(endpoint, token, context);
+  }
+
+  static Future<http.Response> getEvents(
+      String userID, String token, BuildContext context) {
+    String endpoint = 'user/$userID/events';
+
     return fetchData(endpoint, token, context);
   }
 }

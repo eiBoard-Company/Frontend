@@ -112,12 +112,16 @@ class _LoginScreenState extends State<LoginScreen> {
                             });
                             if (_formKey.currentState!.validate()) {
                               HttpRequest.sendTokenRequest(
-                                  context,
-                                  _emailController.text,
-                                  _passwordController.text);
-                              //TODO: fix, this is visible even if correct credentials
-                              setState(() {
-                                wrongEmailOrPassword = true;
+                                      context,
+                                      _emailController.text,
+                                      _passwordController.text)
+                                  .then((response) {
+                                final statusCode = response?.statusCode;
+                                if (statusCode != 200) {
+                                  setState(() {
+                                    wrongEmailOrPassword = true;
+                                  });
+                                }
                               });
                             }
                           },

@@ -67,7 +67,6 @@ class User extends ChangeNotifier {
     _email = json['email'];
     _imagePath = json['picture'];
     _raplaURL = json['raplaLink'];
-    //TODO: Parse and assign tasks and events if needed
     notifyListeners();
   }
 }

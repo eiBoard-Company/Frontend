@@ -212,21 +212,16 @@ class _MainScreenState extends State<MainScreen> {
                       children: <Widget>[
                         CardOnMainScreen(
                           textInCardTop: 'Upcoming',
-                          textInCardMiddle: '2',
+                          textInCardMiddle: '3',
                           textInCardBottom: 'Exams',
                           colorOfCard: LightStandardTheme.colorPrimary,
                           widthOfCard: 117,
                           heightOfCard: 121,
                           colorOfText: Colors.white,
-                          onTap: () {
-                            /*Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return const CalendarScreen();
-                              },
-                            ));*/
-                          },
+                          onTap: () {},
                         ),
                         const SizedBox(height: 17),
+                        //TODO @NiklasGep hier noch die Prozentzahl ändern, wenn möglich oder irgendeinen anderen Scheiß reinmachen
                         CardOnMainScreen(
                           textInCardTop: 'Assignments',
                           textInCardMiddle: '21%',

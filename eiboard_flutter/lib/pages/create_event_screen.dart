@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../model/date_time_formatter.dart';
 import '../utils/auth_provider.dart';
@@ -63,8 +62,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
         DateTimeFormatter.formatDateTime(date, startTime);
     final DateTime endDateTime =
         DateTimeFormatter.formatDateTime(date, endTime);
-
-    print(startDateTime.toIso8601String());
 
     final event = {
       'description': '',

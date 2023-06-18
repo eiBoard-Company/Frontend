@@ -95,7 +95,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             ),
           ),
           todayHighlightColor: LightStandardTheme.colorSecondary,
-          dataSource: _getCalendarData(context, bearerToken!),
+          dataSource: _getCalendarData(context, bearerToken!, userID!),
           initialDisplayDate: DateTime.now(),
           onTap: calendarTapped,
           monthViewSettings: const MonthViewSettings(
@@ -226,10 +226,14 @@ String getTime(CalendarAppointmentDetails details) {
   }
 }
 
-_AppointmentDataSource _getCalendarData(BuildContext context, String token) {
-  //TODO: wird geändert zu Anfangsdtum und Enddatum
+_AppointmentDataSource _getCalendarData(
+    BuildContext context, String token, String userID) {
+  //TODO: wird geändert zu Anfangsdatum und Enddatum
   String formattedDate = _formatDate(DateTime(2023, 06, 18));
   List<Appointment> classes = [];
+
+//TODO: events
+  HttpRequest.getEvents(userID, token, context);
 
   HttpRequest.getLectures(false, formattedDate, token, context)
       .then((response) {
