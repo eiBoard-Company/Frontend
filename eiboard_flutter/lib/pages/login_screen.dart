@@ -49,12 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           image: AssetImage('images/logoEiBoard.png'),
                         ),
                         const SizedBox(height: 30),
-                        const EMailInputField(),
+                        const EMailInputField(
+                          key: Key('EmailInput'),
+                        ),
                         const SizedBox(height: 15),
-                        const PasswordInputField(repeatPassword: false),
+                        const PasswordInputField(
+                          repeatPassword: false,
+                          key: Key('PasswordInput1'),
+                        ),
                         const SizedBox(height: 20),
                         Button(
                           "LOGIN",
+                          key: const Key('LogIntoApp'),
                           () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.push(

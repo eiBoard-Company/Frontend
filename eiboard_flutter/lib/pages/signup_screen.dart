@@ -45,12 +45,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           image: AssetImage('images/logoEiBoard.png'),
                         ),
                         const SizedBox(height: 20),
-                        const EMailInputField(),
+                        const EMailInputField(
+                          key: Key('EmailInput'),
+                        ),
                         const SizedBox(height: 15),
-                        const PasswordInputField(repeatPassword: true),
+                        const PasswordInputField(
+                          repeatPassword: true,
+                        ),
                         const SizedBox(height: 20),
                         Button(
                           "SIGN UP",
+                          key: const Key('LogIntoApp'),
                           () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.push(

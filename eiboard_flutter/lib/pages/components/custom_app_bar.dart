@@ -14,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: LightStandardTheme.colorMain,
       elevation: 0.0,
       leading: IconButton(
+        key: const Key('MenuButton'),
         icon: const Icon(Icons.menu),
         color: Colors.black,
         iconSize: 28.0,

@@ -40,6 +40,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
         width: 302,
         height: 69,
         child: TextFormField(
+          key: const Key('passwordInput1'),
           cursorColor: LightStandardTheme.colorPrimary,
           focusNode: focusNode1,
           controller: passwordController,
@@ -97,6 +98,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           width: 302,
           height: 69,
           child: TextFormField(
+            key: const Key('PasswordInput2'),
             cursorColor: LightStandardTheme.colorPrimary,
             focusNode: focusNode2,
             decoration: InputDecoration(

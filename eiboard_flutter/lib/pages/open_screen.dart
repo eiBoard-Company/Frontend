@@ -65,6 +65,7 @@ class OpenScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Button(
               "LOGIN",
+              key: const Key('LogInButton'),
               () {
                 Navigator.push(
                   context,
@@ -78,7 +79,7 @@ class OpenScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              key: const Key('LogInButton'),
+              key: const Key('SignUp'),
               onPressed: () {
                 Navigator.push(
                   context,
