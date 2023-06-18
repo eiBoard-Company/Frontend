@@ -1,11 +1,16 @@
+import 'dart:convert';
+
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../model/date_time_formatter.dart';
+import '../utils/auth_provider.dart';
 import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'calendar_screen.dart';
+import 'components/backend_rapla.dart';
 import 'components/button.dart';
 
 import 'components/custom_date_picker.dart';
@@ -35,6 +40,16 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final _titleController = TextEditingController();
   final _locationController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? userID;
+  String? bearerToken;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    userID = authProvider.userID;
+    bearerToken = authProvider.bearerToken;
+  }
 
   void createEvent() {
     final String title = _titleController.text;
@@ -44,13 +59,26 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
     final String location = _locationController.text;
     final String category = tags[tag1];
 
-    Appointment event = Appointment(
-        subject: title,
-        location: location,
-        notes: category,
-        startTime: DateTimeFormatter.formatDateTime(date, startTime),
-        endTime: DateTimeFormatter.formatDateTime(date, endTime),
-        color: LightStandardTheme.colorClassFive);
+    final DateTime startDateTime =
+        DateTimeFormatter.formatDateTime(date, startTime);
+    final DateTime endDateTime =
+        DateTimeFormatter.formatDateTime(date, endTime);
+
+    print(startDateTime.toIso8601String());
+
+    final event = {
+      'description': '',
+      'startDate': startDateTime.toIso8601String(),
+      'endDate': endDateTime.toIso8601String(),
+      'location': location,
+      'category': category,
+      'personId': int.parse(userID!),
+      'titel': title,
+    };
+
+    final eventJson = jsonEncode(event);
+
+    HttpRequest.createEvent(bearerToken!, context, eventJson);
   }
 
   @override

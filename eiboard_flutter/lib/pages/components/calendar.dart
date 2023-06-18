@@ -1,8 +1,16 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:provider/provider.dart';
+
+import '../../utils/auth_provider.dart';
 import '../single_event_screen.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import 'backend_rapla.dart';
 
 class CustomCalendar extends StatefulWidget {
   final double heightOfCalendar;
@@ -20,6 +28,16 @@ class CustomCalendar extends StatefulWidget {
 
 class _CustomCalendarState extends State<CustomCalendar> {
   final CalendarController _calendarController = CalendarController();
+  String? userID;
+  String? bearerToken;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    userID = authProvider.userID;
+    bearerToken = authProvider.bearerToken;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +95,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
             ),
           ),
           todayHighlightColor: LightStandardTheme.colorSecondary,
-          dataSource: _getCalendarData(),
+          dataSource: _getCalendarData(context, bearerToken!),
           initialDisplayDate: DateTime.now(),
           onTap: calendarTapped,
           monthViewSettings: const MonthViewSettings(
@@ -208,72 +226,58 @@ String getTime(CalendarAppointmentDetails details) {
   }
 }
 
-_AppointmentDataSource _getCalendarData() {
-  List<Appointment> classes = <Appointment>[];
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-06-01 08:30:00Z'),
-    endTime: DateTime.parse('2023-06-01 12:30:00Z'),
-    subject: 'Software Engineering',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassOne,
-  ));
+_AppointmentDataSource _getCalendarData(BuildContext context, String token) {
+  //TODO: wird geändert zu Anfangsdtum und Enddatum
+  String formattedDate = _formatDate(DateTime(2023, 06, 18));
+  List<Appointment> classes = [];
 
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-06-01 13:00:00Z'),
-    endTime: DateTime.parse('2023-06-01 16:15:00Z'),
-    subject: 'Formale Sprachen',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassTwo,
-  ));
+  HttpRequest.getLectures(false, formattedDate, token, context)
+      .then((response) {
+    if (response.statusCode == 200) {
+      List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
 
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-28 08:30:00Z'),
-    endTime: DateTime.parse('2023-05-28 11:00:00Z'),
-    subject: 'Rechnerarchitektur I',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassThree,
-  ));
+      for (var lecture in data[0]['lectureList']) {
+        classes.add(Appointment(
+          startTime: DateTime.parse(lecture['start']),
+          endTime: DateTime.parse(lecture['end']),
+          subject: lecture['lecture'],
+          notes: 'Lecture',
+          location: lecture['room'],
+          color: getRandomColor(),
+        ));
+      }
 
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-29 12:00:00Z'),
-    endTime: DateTime.parse('2023-05-29 14:30:00Z'),
-    subject: 'Betriebssysteme',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassFour,
-  ));
-
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-30 08:30:00Z'),
-    endTime: DateTime.parse('2023-05-30 11:45:00Z'),
-    subject: 'Mathematik II',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassFive,
-  ));
-
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-30 12:30:00Z'),
-    endTime: DateTime.parse('2023-05-30 15:45:00Z'),
-    subject: 'Datenbanken I',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassSix,
-  ));
-
-  classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-31 08:45:00Z'),
-    endTime: DateTime.parse('2023-05-31 12:00:00Z'),
-    subject: 'Webengineering II',
-    notes: 'Lecture',
-    location: 'F492',
-    color: LightStandardTheme.colorClassSeven,
-  ));
+      return _AppointmentDataSource(classes);
+    } else {
+      throw Exception('Failed to fetch lectures');
+    }
+  });
 
   return _AppointmentDataSource(classes);
+}
+
+String _formatDate(DateTime date) {
+  String year = date.year.toString();
+  String month = date.month.toString().padLeft(2, '0');
+  String day = date.day.toString().padLeft(2, '0');
+  return '$year-$month-$day';
+}
+
+Color getRandomColor() {
+  final colors = [
+    LightStandardTheme.colorClassOne,
+    LightStandardTheme.colorClassTwo,
+    LightStandardTheme.colorClassThree,
+    LightStandardTheme.colorClassFour,
+    LightStandardTheme.colorClassFive,
+    LightStandardTheme.colorClassSix,
+    LightStandardTheme.colorClassSeven,
+    LightStandardTheme.colorClassEight,
+  ];
+
+  final random = Random();
+  final index = random.nextInt(colors.length);
+  return colors[index];
 }
 
 class _AppointmentDataSource extends CalendarDataSource {

@@ -15,8 +15,8 @@ import 'custom_drawer.dart';
 class HttpRequest {
   static const String baseUrl = 'http://eiboard.de:8090/';
   static const String userEndpoint = 'user/';
-  static const String entryEndpoint = 'entry/';
-  static const String entriesEndpoint = 'entries/';
+  static const String eventEndpoint = 'Event/';
+  static const String taskEndpoint = 'task/';
 
   static Future<http.Response> fetchData(
       String endpoint, String token, BuildContext context) async {
@@ -77,6 +77,11 @@ class HttpRequest {
     return response;
   }
 
+  static Future<void> createEvent(
+      String token, BuildContext context, dynamic data) async {
+    postData(eventEndpoint, token, data, context);
+  }
+
   static Future<User> getUser(
       String userID, String token, BuildContext context) async {
     final user = User(null, null, null, null, null, null, null, null);
@@ -90,7 +95,6 @@ class HttpRequest {
     return user;
   }
 
-  //TODO
   static void updateUser(
       String token, BuildContext context, Map<String, dynamic> data) async {
     await updateData(userEndpoint, token, data, context);
@@ -187,21 +191,21 @@ class HttpRequest {
 
     final String? email = authProvider.email;
     final String? password = authProvider.password;
-    print('Old Token: $token');
 
     await sendTokenRequest(context, email!, password!);
 
     final String? newAccessToken = authProvider.bearerToken;
-    print('New Token: $newAccessToken');
     return newAccessToken!;
   }
 
-  //TODO: see if needed
-  static String getLectureString(bool day, DateTime date) {
+  static Future<http.Response> getLectures(
+      bool day, String date, String token, BuildContext context) {
     String baseString = 'lectures/$date';
     if (day) {
-      return '$baseString/day';
+      String endpoint = '$baseString/day';
+      return fetchData(endpoint, token, context);
     }
-    return '$baseString/week';
+    String endpoint = '$baseString/week';
+    return fetchData(endpoint, token, context);
   }
 }
