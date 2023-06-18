@@ -58,11 +58,38 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   void updateUserCredentials() {
+    /*final authProvider = Provider.of<AuthProvider>(context, listen: false);
     final String firstName = _firstNameController.text;
     final String lastName = _lastNameController.text;
     final String eMail = _emailController.text;
     final String raplaURL = _raplaURLController.text;
     final String? imagePath = imageBase64;
+    int? userId = user!.id;
+
+    Map<String, dynamic> userData;
+
+    if (imagePath == null) {
+      userData = {
+        'id': userId,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': eMail,
+        'raplaURL': raplaURL,
+      };
+    } else {
+      userData = {
+        'id': userId,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': eMail,
+        'raplaURL': raplaURL,
+        'picture': imagePath,
+      };
+    }
+
+    final String? token = authProvider.bearerToken;
+
+    HttpRequest.updateUser(token!, context, userData);*/
   }
 
   @override

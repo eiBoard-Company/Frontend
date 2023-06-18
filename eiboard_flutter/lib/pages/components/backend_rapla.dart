@@ -34,19 +34,6 @@ class HttpRequest {
     return response;
   }
 
-  static Future<User> getUser(
-      String userID, String token, BuildContext context) async {
-    final user = User(null, null, null, null, null, null, null, null);
-
-    http.Response response =
-        await fetchData(userEndpoint + userID, token, context);
-    String responseString = response.body;
-    var jsonMap = json.decode(responseString);
-    user.fromJson(jsonMap);
-
-    return user;
-  }
-
   static Future<http.Response> postData(
       String endpoint, String token, dynamic data, BuildContext context) async {
     final response = await http.post(
@@ -64,6 +51,49 @@ class HttpRequest {
       return postData(endpoint, newToken, data, context);
     }
     return response;
+  }
+
+  static Future<http.Response> updateData(String endpoint, String token,
+      Map<String, dynamic> data, BuildContext context) async {
+    final headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
+
+    final response = await http.put(
+      Uri.parse(baseUrl + endpoint),
+      headers: headers,
+      body: jsonEncode(data),
+    );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print('executed');
+      return response;
+    } else if (response.statusCode == 401) {
+      String? newToken = await refreshToken(token, context);
+      return updateData(endpoint, newToken, data, context);
+    }
+
+    return response;
+  }
+
+  static Future<User> getUser(
+      String userID, String token, BuildContext context) async {
+    final user = User(null, null, null, null, null, null, null, null);
+
+    http.Response response =
+        await fetchData(userEndpoint + userID, token, context);
+    String responseString = response.body;
+    var jsonMap = json.decode(responseString);
+    user.fromJson(jsonMap);
+
+    return user;
+  }
+
+  //TODO
+  static void updateUser(
+      String token, BuildContext context, Map<String, dynamic> data) async {
+    await updateData(userEndpoint, token, data, context);
   }
 
   static Future<void> registerUser(String lastName, String firstName,
