@@ -7,14 +7,21 @@ class User extends ChangeNotifier {
   String? _lastName;
   String? _firstName;
   String? _email;
-  String? _password;
   String? _imagePath;
   String? _raplaURL;
   List<Task>? tasks;
   List<Event>? events;
 
-  User(this._id, this._lastName, this._firstName, this._email, this._password,
-      this._imagePath, this._raplaURL, this.tasks, this.events);
+  User(
+    this._id,
+    this._lastName,
+    this._firstName,
+    this._email,
+    this._imagePath,
+    this._raplaURL,
+    this.tasks,
+    this.events,
+  );
 
   int? get id => _id;
   String? get lastName => _lastName;
@@ -22,9 +29,8 @@ class User extends ChangeNotifier {
   String? get email => _email;
   String? get imagePath => _imagePath;
   String? get raplaURL => _raplaURL;
-  String? get password => _password;
 
-  set iD(int? id) {
+  set id(int? id) {
     _id = id;
     notifyListeners();
   }
@@ -54,8 +60,14 @@ class User extends ChangeNotifier {
     notifyListeners();
   }
 
-  set password(String? password) {
-    _password = password;
+  void fromJson(Map<String, dynamic> json) {
+    _id = json['id'];
+    _lastName = json['lastName'];
+    _firstName = json['firstName'];
+    _email = json['email'];
+    _imagePath = json['picture'];
+    _raplaURL = json['raplaLink'];
+    //TODO: Parse and assign tasks and events if needed
     notifyListeners();
   }
 }

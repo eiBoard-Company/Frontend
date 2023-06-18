@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:provider/provider.dart';
 
+import '../../model/user.dart';
 import '../../utils/auth_provider.dart';
 import '../login_screen.dart';
 import 'custom_drawer.dart';
@@ -17,16 +18,37 @@ class HttpRequest {
   static const String entryEndpoint = 'entry/';
   static const String entriesEndpoint = 'entries/';
 
-  static Future<http.Response> fetchData(String endpoint, String token) async {
+  static Future<http.Response> fetchData(
+      String endpoint, String token, BuildContext context) async {
     final response = await http.get(
       Uri.parse(baseUrl + endpoint),
       headers: {'Authorization': 'Bearer $token'},
     );
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response;
+    } else if (response.statusCode == 401) {
+      String? newToken = await refreshToken(token, context);
+      return fetchData(endpoint, newToken, context);
+    }
     return response;
   }
 
+  static Future<User> getUser(
+      String userID, String token, BuildContext context) async {
+    final user = User(null, null, null, null, null, null, null, null);
+
+    http.Response response =
+        await fetchData(userEndpoint + userID, token, context);
+    String responseString = response.body;
+    var jsonMap = json.decode(responseString);
+    user.fromJson(jsonMap);
+
+    return user;
+  }
+
   static Future<http.Response> postData(
-      String endpoint, String token, dynamic data) async {
+      String endpoint, String token, dynamic data, BuildContext context) async {
     final response = await http.post(
       Uri.parse(baseUrl + endpoint),
       headers: {
@@ -35,6 +57,12 @@ class HttpRequest {
       },
       body: data,
     );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return response;
+    } else if (response.statusCode == 401) {
+      String? newToken = await refreshToken(token, context);
+      return postData(endpoint, newToken, data, context);
+    }
     return response;
   }
 
@@ -77,7 +105,7 @@ class HttpRequest {
     }
   }
 
-  static void sendTokenRequest(
+  static Future<http.StreamedResponse?> sendTokenRequest(
       BuildContext context, String email, String password) async {
     var headers = {'Content-Type': 'application/x-www-form-urlencoded'};
     var request = http.Request(
@@ -100,16 +128,15 @@ class HttpRequest {
       String responseString = await response.stream.bytesToString();
       var jsonMap = json.decode(responseString);
       var accessToken = jsonMap['access_token'];
-      bool hasExpired = JwtDecoder.isExpired(accessToken);
       Provider.of<AuthProvider>(context, listen: false).bearerToken =
           accessToken;
-      Provider.of<AuthProvider>(context, listen: false).hasExpired = hasExpired;
+      Provider.of<AuthProvider>(context, listen: false).email = email;
+      Provider.of<AuthProvider>(context, listen: false).password = password;
       Map<String, dynamic> decodedToken = JwtDecoder.decode(accessToken);
       var userID = decodedToken['userID'];
       Provider.of<AuthProvider>(context, listen: false).userID = userID;
-      print(accessToken);
-      print(decodedToken);
-      print(userID);
+
+      getUser(userID, accessToken, context);
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -118,9 +145,25 @@ class HttpRequest {
           },
         ),
       );
+      return response;
     } else {
       print(response.reasonPhrase);
+      return null;
     }
+  }
+
+  static Future<String> refreshToken(String token, BuildContext context) async {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final String? email = authProvider.email;
+    final String? password = authProvider.password;
+    print('Old Token: $token');
+
+    await sendTokenRequest(context, email!, password!);
+
+    final String? newAccessToken = authProvider.bearerToken;
+    print('New Token: $newAccessToken');
+    return newAccessToken!;
   }
 
   //TODO: see if needed

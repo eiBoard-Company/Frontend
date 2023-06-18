@@ -1,7 +1,11 @@
-import '../utils/user_preferences.dart';
+import 'package:provider/provider.dart';
+
+import '../model/user.dart';
 import 'dart:convert';
+import '../utils/auth_provider.dart';
 import '/../pages/settings_pages/account_screen.dart';
 import '/../pages/calendar_screen.dart';
+import 'components/backend_rapla.dart';
 import 'todo_list_screen.dart';
 import '/../pages/open_screen.dart';
 import '/../pages/settings_pages/settings_screen.dart';
@@ -18,7 +22,24 @@ class MenuScreen extends StatefulWidget {
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  final user = UserPreferences.user;
+  User? user;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    final String? userID = authProvider.userID;
+    final String? bearerToken = authProvider.bearerToken;
+
+    if (userID != null && bearerToken != null) {
+      HttpRequest.getUser(userID, bearerToken, context).then((retrievedUser) {
+        setState(() {
+          user = retrievedUser;
+        });
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,9 +47,9 @@ class _MenuScreenState extends State<MenuScreen> {
       body: ListView(padding: const EdgeInsets.only(left: 15), children: [
         const SizedBox(height: 50),
         buildHeader(
-          profileImage: user.imagePath,
-          name: "${user.firstName} ${user.lastName}",
-          email: user.email!,
+          profileImage: user!.imagePath,
+          name: "${user!.firstName} ${user!.lastName}",
+          email: user!.email!,
           page: const AccountScreen(),
         ),
         buildMenuItem(
@@ -87,9 +108,9 @@ class _MenuScreenState extends State<MenuScreen> {
               CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.white,
-                backgroundImage: user.imagePath != null
+                backgroundImage: user!.imagePath != null
                     ? MemoryImage(
-                        base64Decode(user.imagePath!),
+                        base64Decode(user!.imagePath!),
                       )
                     : Image.asset('images/profilePicture.jpg').image,
               ),

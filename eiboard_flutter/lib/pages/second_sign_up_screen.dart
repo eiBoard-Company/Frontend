@@ -2,7 +2,6 @@ import '/../pages/components/button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'components/backend_rapla.dart';
-import 'components/custom_drawer.dart';
 import 'components/sign_up_text_form_field.dart';
 
 class SecondSignUpScreen extends StatefulWidget {
