@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:eiboard_flutter/pages/components/backend_rapla.dart';
+import 'package:provider/provider.dart';
+
 import '../model/date_time_formatter.dart';
+import '../utils/auth_provider.dart';
 import '/../pages/components/page.dart';
 import '/../themes/light_standard_theme.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +14,6 @@ import '/../pages/components/button.dart';
 import '/../pages/components/custom_date_picker.dart';
 import '/../pages/components/custom_text_form_field.dart';
 import '/../pages/components/custom_time_picker.dart';
-import '/../pages/components/task_List_Object.dart';
 import 'todo_list_screen.dart';
 
 class CreateTaskScreen extends StatefulWidget {
@@ -35,6 +40,16 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   final _endTimeController = TextEditingController();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  String? userID;
+  String? bearerToken;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    userID = authProvider.userID;
+    bearerToken = authProvider.bearerToken;
+  }
 
   void createTask() {
     final String title = _titleController.text;
@@ -43,12 +58,18 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
     final String description = _descriptionController.text;
     final String category = tags[tag1];
 
-    TaskListObject task = TaskListObject(
-      taskname: title,
-      subject: category,
-      description: description,
-      time: DateTimeFormatter.formatDateTime(date, endTime),
-    );
+    final taskObject = {
+      'taskname': title,
+      'description': description,
+      'time': DateTimeFormatter.formatDateTime(date, endTime).toIso8601String(),
+      'subject': category,
+      'completeValue': 0.0,
+      'personId': int.parse(userID!),
+    };
+
+    final taskjson = jsonEncode(taskObject);
+
+    HttpRequest.createTask(bearerToken!, context, taskjson);
   }
 
   @override
@@ -186,7 +207,7 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return TodoListScreen();
+                              return const TodoListScreen();
                             },
                           ),
                         );

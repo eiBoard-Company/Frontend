@@ -81,6 +81,11 @@ class HttpRequest {
     postData(eventEndpoint, token, data, context);
   }
 
+  static Future<void> createTask(
+      String token, BuildContext context, dynamic data) async {
+    postData(taskEndpoint, token, data, context);
+  }
+
   static Future<User> getUser(
       String userID, String token, BuildContext context) async {
     final user = User(null, null, null, null, null, null, null, null);
@@ -216,6 +221,13 @@ class HttpRequest {
   static Future<http.Response> getEvents(
       String userID, String token, BuildContext context) {
     String endpoint = 'user/$userID/events';
+
+    return fetchData(endpoint, token, context);
+  }
+
+  static Future<http.Response> getTasks(
+      String userID, String token, BuildContext context) {
+    String endpoint = 'user/$userID/tasks';
 
     return fetchData(endpoint, token, context);
   }

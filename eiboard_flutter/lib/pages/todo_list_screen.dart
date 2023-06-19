@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:eiboard_flutter/pages/components/backend_rapla.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import '../utils/auth_provider.dart';
 import '/../pages/components/button.dart';
 import '/../pages/components/page.dart';
 import '/../pages/components/todo_list_box.dart';
@@ -11,44 +16,50 @@ import '/../pages/components/task_List_Object.dart';
 import 'singletask_screen.dart';
 
 // ignore: must_be_immutable
-class TodoListScreen extends StatelessWidget {
-  TodoListScreen({Key? key}) : super(key: key);
+class TodoListScreen extends StatefulWidget {
+  const TodoListScreen({Key? key}) : super(key: key);
+  @override
+  State<TodoListScreen> createState() => _TodoListScreenState();
+}
+
+class _TodoListScreenState extends State<TodoListScreen> {
   var today = DateTime.now();
   String formatter = '';
-  List<TaskListObject> tasks = [
-    TaskListObject(
-        taskname: "Matheaufgaben erledigen",
-        subject: "Mathematik II",
-        time: DateTime.now(),
-        completeValue: 0.0,
-        description: "Test",
-        dueValue: "Overdue",
-        typId: "1"),
-    TaskListObject(
-        taskname: "Project",
-        subject: "Software Engineering",
-        time: DateTime.now(),
-        completeValue: 0.0,
-        description: "Test2",
-        dueValue: "Due This Week",
-        typId: "2"),
-    TaskListObject(
-        taskname: "Type3-Grammatik lernen",
-        subject: "Formale Sprachen",
-        time: DateTime.now(),
-        completeValue: 0.0,
-        description: "Test3",
-        dueValue: "Due Today",
-        typId: "3"),
-    TaskListObject(
-        taskname: "Datenbanken lernen",
-        subject: "Datenbanken",
-        time: DateTime.now(),
-        completeValue: 0.0,
-        description: "Test4",
-        dueValue: "Overdue",
-        typId: "4"),
-  ];
+  String? userID;
+  String? bearerToken;
+
+  @override
+  void initState() {
+    addTasks();
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    userID = authProvider.userID;
+    bearerToken = authProvider.bearerToken;
+  }
+
+  List<TaskListObject> tasks = [];
+
+  void addTasks() {
+    HttpRequest.getTasks(userID!, bearerToken!, context).then((response) {
+      if (response.statusCode == 200) {
+        List<dynamic> data = jsonDecode(utf8.decode(response.body.codeUnits));
+        for (var task in data) {
+          tasks.add(TaskListObject(
+            taskname: task['taskname'],
+            subject: task['subject'],
+            time: DateTime.parse(task['time']),
+            completeValue: task['completeValue'],
+            description: task['description'],
+            dueValue: task['dueValue'],
+            typId: task['id'],
+          ));
+        }
+        ;
+      } else {
+        throw Exception('Failed to fetch tasks');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

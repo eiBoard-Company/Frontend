@@ -233,7 +233,7 @@ class _MainScreenState extends State<MainScreen> {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return TodoListScreen();
+                                return const TodoListScreen();
                               },
                             ));
                           },
@@ -244,7 +244,7 @@ class _MainScreenState extends State<MainScreen> {
                     TodoBoxMainScreen(
                       textInCardTop: 'Tasks',
                       todos: todoBoxes,
-                      page: TodoListScreen(),
+                      page: const TodoListScreen(),
                     )
                   ],
                 ),
