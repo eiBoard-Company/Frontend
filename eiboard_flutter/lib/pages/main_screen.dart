@@ -24,35 +24,27 @@ class _MainScreenState extends State<MainScreen> {
   final user = UserPreferences.user;
   List<TaskListObject> tasks = [
     TaskListObject(
-        taskname: "Matheaufgaben erledigen",
-        subject: "Mathematik II",
-        time: DateTime.now(),
-        completeValue: 0.0,
-        description: "Test",
-        dueValue: "Overdue",
-        typId: "1"),
-    TaskListObject(
         taskname: "Project",
         subject: "Software Engineering",
-        time: DateTime.now(),
+        time: DateTime(2023, 06, 19),
         completeValue: 0.0,
-        description: "Test2",
-        dueValue: "Due This Week",
+        description: "Präsentation vorbereiten",
+        dueValue: "Due Today",
         typId: "2"),
     TaskListObject(
-        taskname: "Type3-Grammatik lernen",
-        subject: "Formale Sprachen",
-        time: DateTime.now(),
+        taskname: "Netztechnik lernen",
+        subject: "Netztechnik",
+        time: DateTime(2023, 06, 21),
         completeValue: 0.0,
-        description: "Test3",
-        dueValue: "Due Today",
+        description: "lernen",
+        dueValue: "Due This Week",
         typId: "3"),
     TaskListObject(
         taskname: "Datenbanken lernen",
         subject: "Datenbanken",
-        time: DateTime.now(),
+        time: DateTime(2023, 06, 12),
         completeValue: 0.0,
-        description: "Test4",
+        description: "",
         dueValue: "Overdue",
         typId: "4"),
   ];
@@ -191,7 +183,7 @@ class _MainScreenState extends State<MainScreen> {
                       children: <Widget>[
                         CardOnMainScreen(
                           textInCardTop: 'Upcoming',
-                          textInCardMiddle: '2',
+                          textInCardMiddle: '3',
                           textInCardBottom: 'Exams',
                           colorOfCard: LightStandardTheme.colorPrimary,
                           widthOfCard: 117,
@@ -208,7 +200,7 @@ class _MainScreenState extends State<MainScreen> {
                         const SizedBox(height: 17),
                         CardOnMainScreen(
                           textInCardTop: 'Assignments',
-                          textInCardMiddle: '21%',
+                          textInCardMiddle: '0%',
                           textInCardBottom: 'completed',
                           colorOfCard: LightStandardTheme.colorMain,
                           widthOfCard: 117,
