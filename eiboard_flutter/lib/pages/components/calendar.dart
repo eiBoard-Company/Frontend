@@ -211,8 +211,8 @@ String getTime(CalendarAppointmentDetails details) {
 _AppointmentDataSource _getCalendarData() {
   List<Appointment> classes = <Appointment>[];
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-06-01 08:30:00Z'),
-    endTime: DateTime.parse('2023-06-01 12:30:00Z'),
+    startTime: DateTime.parse('2023-06-19 13:00:00Z'),
+    endTime: DateTime.parse('2023-06-19 17:00:00Z'),
     subject: 'Software Engineering',
     notes: 'Lecture',
     location: 'F492',
@@ -220,57 +220,66 @@ _AppointmentDataSource _getCalendarData() {
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-06-01 13:00:00Z'),
-    endTime: DateTime.parse('2023-06-01 16:15:00Z'),
-    subject: 'Formale Sprachen',
+    startTime: DateTime.parse('2023-06-20 09:00:00Z'),
+    endTime: DateTime.parse('2023-06-20 12:15:00Z'),
+    subject: 'Statistik',
     notes: 'Lecture',
     location: 'F492',
     color: LightStandardTheme.colorClassTwo,
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-28 08:30:00Z'),
-    endTime: DateTime.parse('2023-05-28 11:00:00Z'),
-    subject: 'Rechnerarchitektur I',
+    startTime: DateTime.parse('2023-06-20 13:00:00Z'),
+    endTime: DateTime.parse('2023-06-20 16:15:00Z'),
+    subject: 'Kommunikations- und Netztechnik',
     notes: 'Lecture',
     location: 'F492',
     color: LightStandardTheme.colorClassThree,
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-29 12:00:00Z'),
-    endTime: DateTime.parse('2023-05-29 14:30:00Z'),
-    subject: 'Betriebssysteme',
+    startTime: DateTime.parse('2023-06-21 09:00:00Z'),
+    endTime: DateTime.parse('2023-06-21 12:15:00Z'),
+    subject: 'Compilerbau',
     notes: 'Lecture',
     location: 'F492',
     color: LightStandardTheme.colorClassFour,
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-30 08:30:00Z'),
-    endTime: DateTime.parse('2023-05-30 11:45:00Z'),
-    subject: 'Mathematik II',
+    startTime: DateTime.parse('2023-06-23 09:00:00Z'),
+    endTime: DateTime.parse('2023-06-23 12:15:00Z'),
+    subject: 'Workflow',
     notes: 'Lecture',
     location: 'F492',
     color: LightStandardTheme.colorClassFive,
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-30 12:30:00Z'),
-    endTime: DateTime.parse('2023-05-30 15:45:00Z'),
-    subject: 'Datenbanken I',
-    notes: 'Lecture',
+    startTime: DateTime.parse('2023-06-22 09:00:00Z'),
+    endTime: DateTime.parse('2023-06-22 12:00:00Z'),
+    subject: 'Klausur Netzwerktechnik (90min)',
+    notes: 'Exam',
     location: 'F492',
     color: LightStandardTheme.colorClassSix,
   ));
 
   classes.add(Appointment(
-    startTime: DateTime.parse('2023-05-31 08:45:00Z'),
-    endTime: DateTime.parse('2023-05-31 12:00:00Z'),
-    subject: 'Webengineering II',
-    notes: 'Lecture',
-    location: 'F492',
+    startTime: DateTime.parse('2023-06-24 18:00:00Z'),
+    endTime: DateTime.parse('2023-06-24 22:00:00Z'),
+    subject: 'Meeting with team eiBoard',
+    notes: 'Private',
+    location: 'My Heart Beats vegan',
     color: LightStandardTheme.colorClassSeven,
+  ));
+
+  classes.add(Appointment(
+    startTime: DateTime.parse('2023-06-19 09:00:00Z'),
+    endTime: DateTime.parse('2023-06-19 12:00:00Z'),
+    subject: 'Software Eng Präsi prep',
+    notes: 'Uni',
+    location: 'At home',
+    color: LightStandardTheme.colorClassEight,
   ));
 
   return _AppointmentDataSource(classes);
